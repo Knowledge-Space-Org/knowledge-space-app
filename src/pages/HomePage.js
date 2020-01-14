@@ -19,6 +19,7 @@ import hbp from 'imgs/hbp-logo.png';
 import nif from 'imgs/nif-logo.png';
 import incf from 'imgs/incf-logo.svg';
 
+import ebrains from 'imgs/partners/ebrains.png';
 import brainmaps from 'imgs/partners/brainmaps.png';
 import neuromorpho from 'imgs/partners/neuromorpho.png';
 import opensourcebrain from 'imgs/partners/opensourcebrain.png';
@@ -33,7 +34,7 @@ import bbp from 'imgs/partners/bbp.png';
 import cli from 'imgs/partners/cli.png';
 import allen from 'imgs/partners/allen.png';
 
-const logos = [
+const partner_logos = [
   { href: 'http://portal.brain-map.org/',
     name: 'Allen Brain Map',
     src: allen  },
@@ -72,8 +73,20 @@ const logos = [
     src: cli },
   { href: 'http://brainmap.org/',
     name: 'BrainMaps',
-    src: brainmaps }
+    src: brainmaps },
+    { href: 'https://kg.ebrains.eu/',
+    name: 'EBRAINS',
+    src: ebrains }
 ];
+
+const sortLogos = (logos) => {
+  return logos.sort((c1, c2) => {
+    return c1.name.toLowerCase() > c2.name.toLowerCase() ? 1 : -1;
+  });
+}
+
+const logos = sortLogos(partner_logos);
+
 
 const styles = theme => ({
   title: {

@@ -17,7 +17,6 @@ import Menu from '@material-ui/core/Menu';
 import { fade } from '@material-ui/core/styles/colorManipulator';
 import { withStyles } from '@material-ui/core/styles';
 import Link from '@material-ui/core/Link';
-import logoImage from '../../imgs/new_logo.png';
 
 import MenuIcon from '@material-ui/icons/Menu';
 import SearchIcon from '@material-ui/icons/Search';
@@ -38,8 +37,7 @@ const styles = theme => ({
     padding: 4, 
     backgroundColor: theme.palette.primary.main,
     '&:hover': {
-      backgroundColor: theme.palette.primary.main,
-      borderRadius:'initial !important',
+      backgroundColor: theme.palette.primary.dark,
     },
   },
   title: {
@@ -212,7 +210,7 @@ class Nav extends React.Component {
         <MenuItem onClick={ () => window.open('https://www.humanbrainproject.eu/en/explore-the-brain/search/?facet_type[0]=Dataset') }>
                   HBP Knowledge Graph
         </MenuItem>
-        <MenuItem onClick={ () => window.open('https://ebrains.eu/services/atlases/')}>
+        <MenuItem onClick={ () => window.open('https://www.humanbrainproject.eu/en/explore-the-brain/use-data/')}>
                  HBP Atlas and analytical tools
         </MenuItem>
       </Menu>
@@ -259,14 +257,13 @@ class Nav extends React.Component {
               color="inherit"
               onClick={this.handleLogoClick}
               aria-label="Go To Frontpage">
-              {/* <Logo />  */}
-              <img src={logoImage}/>
+              <Logo /> 
             </IconButton> 
-            {/* <Typography className={classes.title} variant="h6" color="inherit" noWrap>
+            <Typography className={classes.title} variant="h6" color="inherit" noWrap>
               <RouterLink className={classes.title} to='/'>
                 Knowledge Space 
               </RouterLink>
-            </Typography> */}
+            </Typography>
             <div className={classes.grow} /> 
             { !isHome && <NavSearch /> } 
 						<div className={classes.sectionDesktop}>

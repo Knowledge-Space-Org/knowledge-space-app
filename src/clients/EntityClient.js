@@ -1,23 +1,32 @@
-import {toString, omitBy, isEmpty, has, map, flatten, head} from 'lodash'
-import {esclient} from './ESClient'
-import {filterBuilder, combineAggsAndFilters} from './utils'
+import { toString, omitBy, isEmpty, has, map, flatten, head } from 'lodash'
+import { esclient, API_END_POINT } from './ESClient'
+import { filterBuilder, combineAggsAndFilters } from './utils'
+import axios from 'axios';
 
 const ENTITY_RESULTS_PER_PAGE = 25
 
 export const findSlugByCurie = curie => {
-  if ( typeof curie === 'undefined' ) { 
-    return null; 
+  if (typeof curie === 'undefined') {
+    return null;
   }
   const queryFilters = { curies: [curie] };
-  const body = { query: { bool: { filter:  filterBuilder(queryFilters) } } };
-  return esclient.search({
-    index: 'scigraph',
-    type: 'entities',
-    body
-  }).then(response =>  {
+  const body = { query: { bool: { filter: filterBuilder(queryFilters) } } };
+  // return esclient.search({
+  //   index: 'scigraph',
+  //   type: 'entities',
+  //   body
+  // }).then(response =>  {
+  //   const hit = head(response.hits.hits);
+  //   return hit._id;
+  // })
+  return axios.get(API_END_POINT + '/find-slug-by-curie', { params: { body } }).then(res => {
+    console.debug("response return from server find-slug-by-curie");
+    console.debug(res.data);
+    const response = res.data;
     const hit = head(response.hits.hits);
     return hit._id;
-  })
+  });
+
 }
 
 
@@ -52,7 +61,7 @@ const queryBuilder = query => {
         must: {
           multi_match: {
             query,
-            fields: [ 'title^99', 'labels^10', 'definitions.text', 'synonyms^8', 'abbreviations^8']
+            fields: ['title^99', 'labels^10', 'definitions.text', 'synonyms^8', 'abbreviations^8']
           }
         },
       }
@@ -60,7 +69,7 @@ const queryBuilder = query => {
   )
 }
 
-export const search = ({page = 1, q = '', filters = {}}) => {
+export const search = ({ page = 1, q = '', filters = {} }) => {
   // Start with the aggs we alway use.
   const body = aggsParams()
 
@@ -77,21 +86,27 @@ export const search = ({page = 1, q = '', filters = {}}) => {
   const queryFilters = omitBy(filters, isEmpty)
   if (!isEmpty(queryFilters)) {
     if (!has(body, 'query.bool')) {
-      body.query = {bool: {}}
+      body.query = { bool: {} }
     }
     body.query.bool.filter = filterBuilder(queryFilters)
   }
 
-  return esclient.search({
-    index: 'scigraph',
-    type: 'entities',
-    body
-  }).then(response => ({
-    results: response.hits,
-    facets: combineAggsAndFilters(response.aggregations, filters),
-    page,
-    q,
-    filters
-  })
-  )
+  // return esclient.search({
+  //   index: 'scigraph',
+  //   type: 'entities',
+  //   body
+  // }).then(response => ({
+  //   results: response.hits,
+  //   facets: combineAggsAndFilters(response.aggregations, filters),
+  //   page,
+  //   q,
+  //   filters
+  // })
+  // )
+
+  axios.get(API_END_POINT + '/search', { body }).then(res => {
+    console.debug("response return from server");
+    console.debug(res.data);
+  });
+
 }
