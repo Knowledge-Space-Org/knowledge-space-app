@@ -20,7 +20,7 @@ app.use(express.static(path.join(__dirname, 'build')));
 // api routes
 const custom = require('./routes/other-routes.js');
 const client_routes = require('./routes/client-routes.js');
-app.use('/custom/', custom);
+app.use('/graph/', custom);
 app.use('/api/', client_routes);
 
 

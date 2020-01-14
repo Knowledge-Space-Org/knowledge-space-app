@@ -9,12 +9,30 @@ const instance = new Neode('bolt+routing://7374876f.databases.neo4j.io',
 // for more information about neode visit
 // https://medium.com/neo4j/interacting-with-neo4j-in-nodejs-using-the-neode-object-mapper-3d99cb324546
 
+
 // run a cypher
-instance.cypher(
-    'MATCH (p:ns4__prefixIRI {rdfs__label: {name}}) RETURN p', { name: "notochord" })
-    .then(res => {
-        console.log("check record")
-        console.log(res.records.length);
-    })
+
+async function queryNeo4j(native_cell) {
+    let result = [];
+    await instance.cypher(
+        'MATCH (n)-[:rdfs__subClassOf]->(p)-[:rdfs__subClassOf]->(q) where p.rdfs__label = ' + native_cell + ' RETURN n.rdfs__label, p.rdfs__label, q.rdfs__label LIMIT 5'
+    )
+        .then(async res => {
+            console.log("check record")
+            console.log(res.records);
+            result = res.records;
+        })
+    return result;
+}
+
+
+router.get('/get-parents', async function (req, res) {
+    console.debug("check query");
+    console.debug(req.query);
+    const data = await queryNeo4j(req.query.term);
+    console.log("returend data");
+    console.log(data);
+    res.send(data);
+});
 
 module.exports = router;
