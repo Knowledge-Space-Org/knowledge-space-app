@@ -32,7 +32,7 @@
     "redux-saga": "^0.16.0"
   },
   "scripts": {
-    "server": "node src/server/server.js",
+    "server": "npx nodemon src/server/server.js",
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
@@ -47,5 +47,8 @@
     "not ie <= 11",
     "not op_mini all"
   ],
-  "proxy": "http://localhost:8081"
+  "proxy": "http://localhost:8081",
+  "devDependencies": {
+    "nodemon": "^2.0.2"
+  }
 }
