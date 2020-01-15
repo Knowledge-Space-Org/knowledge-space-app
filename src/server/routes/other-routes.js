@@ -12,10 +12,15 @@ const instance = new Neode('bolt+routing://7374876f.databases.neo4j.io',
 
 // run a cypher
 
-async function queryNeo4j(native_cell) {
+async function queryNeo4j(search_term) {
     let result = [];
     await instance.cypher(
-        'MATCH (n)-[:rdfs__subClassOf]->(p)-[:rdfs__subClassOf]->(q) where p.rdfs__label = ' + native_cell + ' RETURN n.rdfs__label, p.rdfs__label, q.rdfs__label LIMIT 5'
+      'WITH '+search_term+' as term '+
+      'MATCH (n)-[:rdfs__subClassOf]->(p)-[:rdfs__subClassOf]->(q) '+
+      'where p.rdfs__label = term '+
+      'and n.rdfs__label is not null '+
+      'and q.rdfs__label is not null '+
+      'RETURN distinct { child: {label:n.rdfs__label, id:n.skos__notation}, term: {label:p.rdfs__label, id:p.skos__notation}, parent:{label: q.rdfs__label,id:q.skos__notation } }'
     )
         .then(async res => {
             console.log("check record")
