@@ -15,7 +15,10 @@ const instance = new Neode('bolt+routing://7374876f.databases.neo4j.io',
 async function queryNeo4j(native_cell) {
     let result = [];
     await instance.cypher(
-        'MATCH (n)-[:rdfs__subClassOf]->(p)-[:rdfs__subClassOf]->(q) where p.rdfs__label = ' + native_cell + ' RETURN n.rdfs__label, p.rdfs__label, q.rdfs__label LIMIT 5'
+        'MATCH (n)-[:rdfs__subClassOf]->(p)-[:rdfs__subClassOf]->(q) where p.rdfs__label = '+native_cell+
+        ' and n.rdfs__label is not null '+
+        ' and q.rdfs__label is not null '+
+        ' RETURN distinct n.rdfs__label as child, p.rdfs__label as term, q.rdfs__label as parent'
     )
         .then(async res => {
             console.log("check record")
@@ -30,7 +33,7 @@ router.get('/get-parents', async function (req, res) {
     console.debug("check query");
     console.debug(req.query);
     const data = await queryNeo4j(req.query.term);
-    console.log("returend data");
+    console.log("returned data");
     console.log(data);
     res.send(data);
 });
