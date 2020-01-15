@@ -21,12 +21,6 @@ async function queryNeo4j(search_term) {
       'and n.rdfs__label is not null '+
       'and q.rdfs__label is not null '+
       'RETURN distinct { child: {label:n.rdfs__label, id:n.skos__notation}, term: {label:p.rdfs__label, id:p.skos__notation}, parent:{label: q.rdfs__label,id:q.skos__notation } }'
-    )
-        .then(async res => {
-        'MATCH (n)-[:rdfs__subClassOf]->(p)-[:rdfs__subClassOf]->(q) where p.rdfs__label = '+native_cell+
-        ' and n.rdfs__label is not null '+
-        ' and q.rdfs__label is not null '+
-        ' RETURN distinct n.rdfs__label as child, p.rdfs__label as term, q.rdfs__label as parent'
     ).then(async res => {
             console.log("check record")
             console.log(res.records);
