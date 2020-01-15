@@ -19,8 +19,7 @@ async function queryNeo4j(native_cell) {
         ' and n.rdfs__label is not null '+
         ' and q.rdfs__label is not null '+
         ' RETURN distinct n.rdfs__label as child, p.rdfs__label as term, q.rdfs__label as parent'
-    )
-        .then(async res => {
+    ).then(async res => {
             console.log("check record")
             console.log(res.records);
             result = res.records;
@@ -30,7 +29,7 @@ async function queryNeo4j(native_cell) {
 
 
 router.get('/get-parents', async function (req, res) {
-    console.debug("check query");
+    console.debug("check query2");
     console.debug(req.query);
     const data = await queryNeo4j(req.query.term);
     console.log("returned data");
