@@ -32,7 +32,7 @@ router.get('/get-parents', async function (req, res) {
     console.debug("check query2");
     console.debug(req.query);
     const data = await queryNeo4j(req.query.term);
-    console.log("returend data");
+    console.log("returned data");
     console.log(data);
     res.send(data);
 });
