@@ -11,6 +11,7 @@ import AboutPage from 'pages/AboutPage'
 import WikiPage from 'pages/WikiPage'
 import ContactPage from 'pages/ContactPage'
 import DocumentationPage from 'pages/DocumentationPage'
+import GraphPage from '../../pages/GraphPage'
 
 const styles = theme => ({
   root: {
@@ -36,6 +37,7 @@ const Main = props => {
         <Route exact path="/t/:slug/dataspace/:source" component={DataSpacePage}/>
         <Route exact path="/t/:slug/literature" component={LiteraturePage}/>
         <Route exact path="/wiki/:curie" component={WikiPage}/>
+        <Route exact path="/terms" component={GraphPage}/>
       </Switch>
     </main>
   )

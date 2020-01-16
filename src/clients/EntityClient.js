@@ -19,7 +19,7 @@ export const findSlugByCurie = curie => {
   //   const hit = head(response.hits.hits);
   //   return hit._id;
   // })
-  return axios.get(API_END_POINT + '/find-slug-by-curie', { params: { body } }).then(res => {
+  return axios.get(API_END_POINT + 'entity/find-slug-by-curie', { params: { body } }).then(res => {
     console.debug("response return from server find-slug-by-curie");
     console.debug(res.data);
     const response = res.data;

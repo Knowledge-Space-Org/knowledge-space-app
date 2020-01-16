@@ -15,26 +15,30 @@ const instance = new Neode('bolt+routing://7374876f.databases.neo4j.io',
 async function queryNeo4j(native_cell) {
     let result = [];
     await instance.cypher(
-        'MATCH (n)-[:rdfs__subClassOf]->(p)-[:rdfs__subClassOf]->(q) where p.rdfs__label = '+native_cell+
-        ' and n.rdfs__label is not null '+
-        ' and q.rdfs__label is not null '+
-        ' RETURN distinct n.rdfs__label as child, p.rdfs__label as term, q.rdfs__label as parent'
+        "MATCH (n)-[:rdfs__subClassOf]->(p)-[:rdfs__subClassOf]->(q) where p.rdfs__label = '" + native_cell +"'"+
+        " and n.rdfs__label is not null " +
+        " and q.rdfs__label is not null " +
+        " RETURN distinct n.rdfs__label as child, p.rdfs__label as term, q.rdfs__label as parent"
     ).then(async res => {
-            console.log("check record")
-            console.log(res.records);
-            result = res.records;
-        })
+        console.log("check record")
+        console.log(res.records);
+        result = res.records;
+    })
     return result;
 }
 
 
-router.get('/get-parents', async function (req, res) {
+router.get('/get-brain-region-relations', async function (req, res) {
     console.debug("check query2");
     console.debug(req.query);
-    const data = await queryNeo4j(req.query.term);
-    console.log("returend data");
-    console.log(data);
-    res.send(data);
+    if (req.query.term) {
+        const data = await queryNeo4j(req.query.term.toString());
+        console.log("returend data");
+        console.log(data);
+        res.send(data);
+    } else {
+        res.send([]);
+    }
 });
 
 module.exports = router;

@@ -29,7 +29,7 @@ export const search = ({ q = '' }) => {
   //   return { q, suggestions }
   // })
 
-  return axios.get(API_END_POINT + 'auto-suggest', { params: { body } }).then(res => {
+  return axios.get(API_END_POINT + 'entity/auto-suggest', { params: { body } }).then(res => {
     console.debug("response return from server");
     console.debug(res);
     const response = res.data;

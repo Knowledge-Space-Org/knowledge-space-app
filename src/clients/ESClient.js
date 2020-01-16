@@ -5,4 +5,4 @@ export const esclient = new elasticsearch.Client({
   // Log: 'trace'
 })
 
-export const API_END_POINT = 'http://localhost:8081/api/';
+export const API_END_POINT = 'http://localhost:8081/';

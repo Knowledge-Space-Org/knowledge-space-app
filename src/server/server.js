@@ -21,7 +21,7 @@ app.use(express.static(path.join(__dirname, 'build')));
 const custom = require('./routes/other-routes.js');
 const client_routes = require('./routes/client-routes.js');
 app.use('/graph/', custom);
-app.use('/api/', client_routes);
+app.use('/entity/', client_routes);
 
 
 // eveything else will be served to the client
