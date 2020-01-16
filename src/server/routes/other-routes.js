@@ -12,7 +12,7 @@ const instance = new Neode('bolt+routing://7374876f.databases.neo4j.io',
 
 // run a cypher
 
-async function queryNeo4j(native_cell) {
+async function queryNeo4j(search_term) {
     let result = [];
     await instance.cypher(
         "MATCH (n)-[:rdfs__subClassOf]->(p)-[:rdfs__subClassOf]->(q) where p.rdfs__label = '" + native_cell +"'"+
