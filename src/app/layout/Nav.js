@@ -197,10 +197,7 @@ class Nav extends React.Component {
         </MenuItem>
         <MenuItem onClick={() => window.open('https://github.com/OpenKnowledgeSpace/KnowledgeSpace')}>
           Technical Documentation
-        </MenuItem>
-        <MenuItem onClick={() => this.props.history.push('/terms')}>
-          View Graph1
-        </MenuItem>
+        </MenuItem>        
       </Menu>
     );
 
@@ -217,6 +214,9 @@ class Nav extends React.Component {
         </MenuItem>
         <MenuItem onClick={() => window.open('https://ebrains.eu/services/atlases/')}>
           HBP Atlas and analytical tools
+        </MenuItem>
+        <MenuItem onClick={() => this.props.history.push('/brain-regions')}>
+          View Brain Regions
         </MenuItem>
        
       </Menu>

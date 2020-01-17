@@ -1,3 +1,26 @@
-.brain-region-graph g rect{
-    fill: wheat;
-}
+
+text {
+    font-weight: 300;
+    font-family: "Helvetica Neue", Helvetica, Arial, sans-serf;
+    font-size: 14px;
+    cursor: pointer;
+  }
+  
+  .node rect {
+    stroke: #333;
+    fill: #fff;
+    stroke-width: 1.5px;
+    cursor: pointer;
+  }
+  
+  .edgePath path.path {
+    stroke: #333;
+    fill: none;
+    stroke-width: 1.5px;
+  }
+  
+  .arrowhead {
+   stroke: blue;
+   fill: blue;
+   stroke-width: 1.5px;
+  }

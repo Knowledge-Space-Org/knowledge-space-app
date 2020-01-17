@@ -15,7 +15,7 @@ const instance = new Neode('bolt+routing://7374876f.databases.neo4j.io',
 async function queryNeo4j(search_term) {
     let result = [];
     await instance.cypher(
-        "MATCH (n)-[:rdfs__subClassOf]->(p)-[:rdfs__subClassOf]->(q) where p.rdfs__label = '" + native_cell +"'"+
+        "MATCH (n)-[:rdfs__subClassOf]->(p)-[:rdfs__subClassOf]->(q) where p.rdfs__label = '" + search_term +"'"+
         " and n.rdfs__label is not null " +
         " and q.rdfs__label is not null " +
         " RETURN distinct n.rdfs__label as child, p.rdfs__label as term, q.rdfs__label as parent"

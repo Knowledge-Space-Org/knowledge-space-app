@@ -1,10 +1,9 @@
 import React, { Component } from 'react';
-import { withStyles } from '@material-ui/core/styles';
-import DagreGraph from 'dagre-d3-react'
 import { Input, Button } from '@material-ui/core';
 import { submitBrainRegionSearch } from '../features/brainRegion/brainRegionSearchActions';
 import { connect } from 'react-redux';
 import '../features/brainRegion/brainRegionSearch.css';
+import DagreGraph from '../common/components/dagre-graph/dagre-graph';
 
 
 class GraphPage extends Component {
@@ -59,7 +58,7 @@ class GraphPage extends Component {
             value={this.state.searchText}
             inputRef={ref => {
               this.inputRef = ref;
-            }}            
+            }}
           />
           <Button onClick={this.handleSearchClick}>Search</Button>
         </div>
@@ -67,11 +66,15 @@ class GraphPage extends Component {
           nodes={this.props.graphData.nodes}
           links={this.props.graphData.links}
           rankdir='LR'
-          width='800'
-          height='500'
+          width='1250'
+          height='700'
           animate={2000}
           shape='rect'
-          zoomable={false}
+          nodesep = {50}
+          edgesep = {30}
+          ranksep = {100}
+          zoomable={true}
+          fitBoundaries
           className="brain-region-graph"
           onNodeClick={this.handleBrainRegionClick}
           onRelationshipClick={e => console.log(e)}
