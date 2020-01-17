@@ -5,4 +5,4 @@ export const esclient = new elasticsearch.Client({
   // Log: 'trace'
 })
 
-export const API_END_POINT =  'http://ks-dev.incf.org:8081'; // 'http://localhost:8081/';
+export const API_END_POINT =  'http://ks-dev.incf.org:8081/'; // 'http://localhost:8081/';

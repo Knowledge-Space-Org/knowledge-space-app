@@ -10,6 +10,9 @@ export const searchBrainRegion = payload => {
     const response = {};
     response.graphData = res.data;
     return response;
-  });
+  }).catch(exp => {
+    console.error("error in get");
+    console.error(exp);
+  })
 
 }
