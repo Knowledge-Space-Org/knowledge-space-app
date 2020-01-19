@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Input, Button } from '@material-ui/core';
+import { Input, Button, TextField } from '@material-ui/core';
 import { submitBrainRegionSearch } from '../features/brainRegion/brainRegionSearchActions';
 import { connect } from 'react-redux';
 import '../features/brainRegion/brainRegionSearch.css';
@@ -23,8 +23,8 @@ class GraphPage extends Component {
   }
 
   handleSearchClick = () => {
-    if (this.state.searchText) {
-      this.props.dispatch(submitBrainRegionSearch({ searchText: this.state.searchText }))
+    if (this.inputRef.value) {
+      this.props.dispatch(submitBrainRegionSearch({ searchText: this.inputRef.value }))
     }
   }
 
@@ -32,54 +32,62 @@ class GraphPage extends Component {
     const nodeData = e.original;
     console.debug("check node data");
     console.debug(nodeData);
+    this.inputRef.value = nodeData.id;
     this.setState({
       ...this.state,
       searchText: nodeData.id,
+      lastUpdatedSearchText: nodeData.id
     })
     this.props.dispatch(submitBrainRegionSearch({ searchText: nodeData.id }))
   }
 
-  handleSearchChange = (e) => {
-    this.setState({
-      ...this.state,
-      searchText: e.target.value,
-    })
-  }
+  // shouldComponentUpdate = (props,state) => {
+  //   debugger;
+  //   if(!this.state.lastUpdatedSearchText || this.state.lastUpdatedSearchText != state.lastUpdatedSearchText){
+  //     return true;
+  //   }
+  //   else{
+  //     return false;
+  //   }
+  // } 
 
   render() {
     const { classes } = this.props
     return (
-      <React.Fragment>
-        <div>
-          <Input
+      <div>
+        <div className="search-box-wrapper">
+          <TextField
             placeholder="Enter a term..."
             id="docsearch-input"
             onChange={this.handleSearchChange}
-            value={this.state.searchText}
             inputRef={ref => {
               this.inputRef = ref;
             }}
           />
-          <Button onClick={this.handleSearchClick}>Search</Button>
+          <Button variant="contained" color="primary" onClick={this.handleSearchClick}>Search</Button>
         </div>
-        {this.props.graphData.nodes.length && <DagreGraph
-          nodes={this.props.graphData.nodes}
-          links={this.props.graphData.links}
-          rankdir='LR'
-          width='1250'
-          height='700'
-          animate={2000}
-          shape='rect'
-          nodesep = {50}
-          edgesep = {30}
-          ranksep = {100}
-          zoomable={true}
-          fitBoundaries
-          className="brain-region-graph"
-          onNodeClick={this.handleBrainRegionClick}
-          onRelationshipClick={e => console.log(e)}
-        />}
-      </React.Fragment>
+        <div className="graph-parent-wrapper">
+          {this.props.graphData.nodes.length > 0 ? <DagreGraph
+            nodes={this.props.graphData.nodes}
+            links={this.props.graphData.links}
+            rankdir='LR'
+            width='1500'
+            x='0'
+            y='0'
+            height='650'
+            animate={2000}
+            shape='rect'
+            nodesep={50}
+            edgesep={30}
+            ranksep={100}
+            zoomable={true}
+            fitBoundaries
+            className="brain-region-graph"
+            onNodeClick={this.handleBrainRegionClick}
+            onRelationshipClick={e => console.log(e)}
+          /> : <div className="no-results">No relation present</div>}
+        </div>
+      </div>
     )
   }
 }

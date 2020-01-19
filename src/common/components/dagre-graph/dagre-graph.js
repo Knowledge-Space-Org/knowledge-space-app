@@ -11,15 +11,16 @@ class DagreGraph extends Component {
 		rankdir: 'TB',
 		zoomable: false,
 		fitBoundaries: false,
-        className: 'dagre-d3-react',
-        nodesep:50,
-        edgesep:10,
-        ranksep:50,
+		className: 'dagre-d3-react',
+		nodesep: 50,
+		edgesep: 10,
+		ranksep: 50,
 	}
 	componentDidMount() {
 		this._drawChart()
 	}
 	componentDidUpdate() {
+		this._resetChart();
 		this._drawChart()
 	}
 
@@ -27,16 +28,81 @@ class DagreGraph extends Component {
 		return this.props.nodes.find(node => node.id === id)
 	}
 
+	_resetChart() {
+		const root = d3.select(this.svg.current);
+		const innerG = d3.select(this.innerG.current);
+		innerG.selectAll('g').remove();
+		root.transition().call(this.zoom.transform,
+			d3.zoomIdentity
+				.translate(0, 0)
+				.scale(1)
+		);
+	}
+
+	getGraphBounds = () => {
+		let x = Number.POSITIVE_INFINITY;
+		let X = Number.NEGATIVE_INFINITY;
+		let y = Number.POSITIVE_INFINITY;
+		let Y = Number.NEGATIVE_INFINITY;
+		let root = d3.select(this.svg.current)
+		root.selectAll("g.node").each(function (id) {
+			const bbox = this.getBBox();
+			const element = d3.select(this);
+			const string = element.attr("transform");
+			const b = string.substring(string.indexOf("(") + 1, string.indexOf(")")).split(",");
+			const v = b.map(function (item) {
+				return parseInt(item, 10);
+			});
+			x = Math.min(x, v[0] - bbox.width / 2);
+			X = Math.max(X, v[0] + bbox.width / 2);
+			y = Math.min(y, v[1] - bbox.height / 2);
+			Y = Math.max(Y, v[1] + bbox.height / 2);
+		});
+		return { x: x, X: X, y: y, Y: Y };
+	}
+
+	_zoomFit(paddingPercent = null, transitionDuration = null) {
+		// let svg = d3.select(this.svg.current)
+		let root = d3.select(this.svg.current)
+		const parentBBox = this.svg.current.getBBox();
+		console.debug(parentBBox);
+		const b = this.getGraphBounds();
+		console.debug("check graph bounds");
+		console.debug(b);
+		console.debug(parentBBox);
+		const w = b.X - b.x, h = b.Y - b.y;
+		const cw = 1200;//Number(parentBBox.width);
+		const ch = 500//Number(parentBBox.height);
+		let s = Math.min(cw / w, ch / h);
+		if (s < 0.5) {
+			// do nothing
+			s = 0.5;
+		}
+		const tx = (-b.x * s + (cw / s - w) * s / 2), ty = (-b.y * s + (ch / s - h) * s / 2);
+		// zoom.translate([tx, ty]).scale(s);
+		console.debug("final");
+		console.debug([tx, ty]);
+		console.debug(s);
+		root.transition()
+			.duration(750)
+			.call(this.zoom.transform,
+				d3.zoomIdentity
+					.translate(tx, ty)
+					.scale(s)
+			);
+	}
+
+
 	_drawChart = () => {
 		let {
 			nodes,
 			links,
 			zoomable,
 			fitBoundaries,
-            rankdir,
-            nodesep,
-            edgesep,
-            ranksep,
+			rankdir,
+			nodesep,
+			edgesep,
+			ranksep,
 			animate,
 			shape,
 			onNodeClick,
@@ -46,7 +112,7 @@ class DagreGraph extends Component {
 			onRelationshipRightClick,
 			onRelationshipDoubleClick
 		} = this.props
-		let g = new dagreD3.graphlib.Graph().setGraph({ rankdir,nodesep,edgesep,ranksep})
+		let g = new dagreD3.graphlib.Graph().setGraph({ rankdir, nodesep, edgesep, ranksep })
 
 		nodes.forEach(node =>
 			g.setNode(node.id, { label: node.label, class: node.class || '', labelType: node.labelType || 'string' })
@@ -62,8 +128,15 @@ class DagreGraph extends Component {
 		let svg = d3.select(this.svg.current)
 		let inner = d3.select(this.innerG.current)
 
-		let zoom = d3.zoom().on('zoom', () => inner.attr('transform', d3.event.transform))
-
+		let zoom = d3.zoom().on('zoom', () => {
+			// console.debug("check d3 event after zoom");
+			// console.debug(d3.event.transform);
+			inner.attr('transform', d3.event.transform)
+		})
+		this.zoom = zoom;
+		// console.debug("check zoom");
+		// console.debug(this.zoom);
+		// debugger;
 		if (zoomable) {
 			svg.call(zoom)
 		}
@@ -76,12 +149,13 @@ class DagreGraph extends Component {
 		render(inner, g)
 
 		if (fitBoundaries) {
-			let _initial_scale = 0.5
-			svg.call(
-				zoom.transform,
-				d3.zoomIdentity.translate((svg.attr('width') - g.graph().width * _initial_scale) / 2, 20).scale(_initial_scale)
-			)
-			svg.attr('height', g.graph().height * _initial_scale + 180)
+			// let _initial_scale = 0.5
+			// svg.call(
+			// 	zoom.transform,
+			// 	d3.zoomIdentity.translate((svg.attr('width') - g.graph().width * _initial_scale) / 2, 20).scale(_initial_scale)
+			// )
+			// svg.attr('height', g.graph().height * _initial_scale + 180)
+			this._zoomFit();
 		}
 
 		if (onNodeClick) {
