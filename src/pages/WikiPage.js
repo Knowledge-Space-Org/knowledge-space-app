@@ -11,8 +11,6 @@ export default class WikiPage extends Component {
     findSlugByCurie(curie).then( function(slug) { this.setState({slug, curie}) }.bind(this) );
   }
 
-
-
   render() { 
     const { curie } = this.props.match.params;
     const { slug } = this.state;

@@ -30,8 +30,6 @@ export const search = ({ q = '' }) => {
   // })
 
   return axios.get(API_END_POINT + 'entity/auto-suggest', { params: { body } }).then(res => {
-    console.debug("response return from server");
-    console.debug(res);
     const response = res.data;
     const suggestions = flatten(response.suggest.suggestions.map(suggestion => {
       return suggestion.options.map(o => ({ name: o.text, slug: o._id }))

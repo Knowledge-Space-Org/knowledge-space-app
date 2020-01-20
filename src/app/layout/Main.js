@@ -1,6 +1,6 @@
 import React from 'react'
-import {Switch, Route} from 'react-router-dom'
-import {withStyles} from '@material-ui/core/styles'
+import { Switch, Route } from 'react-router-dom'
+import { withStyles } from '@material-ui/core/styles'
 
 import HomePage from 'pages/HomePage'
 import EntityPage from 'pages/EntityPage'
@@ -24,20 +24,20 @@ const styles = theme => ({
 })
 
 const Main = props => {
-  const {classes} = props
+  const { classes } = props
   return (
     <main className={classes.root}>
       <Switch>
-        <Route exact path="/" component={HomePage}/>
-        <Route exact path="/about" component={AboutPage}/>
-        <Route exact path="/contact" component={ContactPage}/>
-        <Route exact path="/documentation" component={DocumentationPage}/>
-        <Route exact path="/t/:slug" component={EntityPage}/>
-        <Route exact path="/search" component={SearchPage}/>
-        <Route exact path="/t/:slug/dataspace/:source" component={DataSpacePage}/>
-        <Route exact path="/t/:slug/literature" component={LiteraturePage}/>
-        <Route exact path="/wiki/:curie" component={WikiPage}/>
-        <Route exact path="/brain-regions" component={GraphPage}/>
+        <Route exact path="/" component={HomePage} />
+        <Route exact path="/about" component={AboutPage} />
+        <Route exact path="/contact" component={ContactPage} />
+        <Route exact path="/documentation" component={DocumentationPage} />
+        <Route exact path="/t/:slug" component={EntityPage} />
+        <Route exact path="/search" component={SearchPage} />
+        <Route exact path="/t/:slug/dataspace/:source" component={DataSpacePage} />
+        <Route exact path="/t/:slug/literature" component={LiteraturePage} />
+        <Route exact path="/wiki/:curie" component={WikiPage} />
+        <Route exact path="/brain-regions" component={GraphPage} />
       </Switch>
     </main>
   )

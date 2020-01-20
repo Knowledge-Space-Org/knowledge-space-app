@@ -34,11 +34,18 @@ export const findBySlug = slug => {
   if (typeof slug === 'undefined') {
     return {}
   }
-  return esclient.get({
-    index: 'scigraph',
-    type: 'entities',
-    id: slug
-  }).then(response => response._source)
+  // return esclient.get({
+  //   index: 'scigraph',
+  //   type: 'entities',
+  //   id: slug
+  // }).then(response => response._source)
+
+  return axios.get(API_END_POINT + 'entity/find-by-slug', { params: { id: slug } }).then(res => {
+    console.debug("response return from server find-by-slug");
+    console.debug(res.data);
+    const response = res.data;
+    return response._source
+  });
 }
 
 const aggsParams = () => (
@@ -91,6 +98,8 @@ export const search = ({ page = 1, q = '', filters = {} }) => {
     body.query.bool.filter = filterBuilder(queryFilters)
   }
 
+  console.error("In search API");
+
   // return esclient.search({
   //   index: 'scigraph',
   //   type: 'entities',
@@ -102,11 +111,18 @@ export const search = ({ page = 1, q = '', filters = {} }) => {
   //   q,
   //   filters
   // })
-  // )
 
-  axios.get(API_END_POINT + '/search', { body }).then(res => {
-    console.debug("response return from server");
+  return axios.get(API_END_POINT + 'entity/details', { params: { body } }).then(res => {
+    console.debug("response return from server find-slug-by-curie");
     console.debug(res.data);
+    const response = res.data;
+    return {
+      results: response.hits,
+      facets: combineAggsAndFilters(response.aggregations, filters),
+      page,
+      q,
+      filters
+    }
   });
 
 }

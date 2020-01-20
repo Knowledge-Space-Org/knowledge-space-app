@@ -114,15 +114,15 @@ const transformDataForLayout = (graphData) => {
   if (graphData && graphData.length) {
     for (const dataObj of graphData) {
       const details = dataObj._fields;
-      const nodeObj_child = prepareNodeObj(details[0]);
+      const nodeObj_child = prepareNodeObj(details[2]);
       allNodes.push(nodeObj_child);
       const nodeObj_term = prepareNodeObj(details[1]);
       allNodes.push(nodeObj_term);
-      const nodeObj_parent = prepareNodeObj(details[2]);
+      const nodeObj_parent = prepareNodeObj(details[0]);
       allNodes.push(nodeObj_parent);
-      const edge_child_term = prepareEdgeObj(details[0], details[1]);
+      const edge_child_term = prepareEdgeObj(details[2], details[1]);
       allEdges.push(edge_child_term);
-      const edge_term_parent = prepareEdgeObj(details[1], details[2]);
+      const edge_term_parent = prepareEdgeObj(details[1], details[0]);
       allEdges.push(edge_term_parent);
     }
   }
