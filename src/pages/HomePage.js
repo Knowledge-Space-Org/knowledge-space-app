@@ -19,7 +19,7 @@ import hbp from 'imgs/hbp-logo.png';
 import nif from 'imgs/nif-logo.png';
 import incf from 'imgs/incf-logo.svg';
 
-import ebrains from 'imgs/partners/ebrains.png';
+import ebrains from 'imgs/partners/ebrains.svg';
 import brainmaps from 'imgs/partners/brainmaps.png';
 import neuromorpho from 'imgs/partners/neuromorpho.png';
 import opensourcebrain from 'imgs/partners/opensourcebrain.png';
@@ -74,7 +74,7 @@ const partner_logos = [
   { href: 'http://brainmap.org/',
     name: 'BrainMaps',
     src: brainmaps },
-    { href: 'https://kg.ebrains.eu/',
+    { href: 'https://ebrains.eu/',
     name: 'EBRAINS',
     src: ebrains }
 ];

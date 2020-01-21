@@ -51,9 +51,9 @@ const styles = theme => ({
     overflow: 'hidden',
     textAlign: 'justify'
   },
-  descriptionText: {
-    fontSize: theme.typography.pxToRem(theme.typography.fontSize * 1.5),
-  },
+  // descriptionText: {
+  //   fontSize: theme.typography.pxToRem(theme.typography.fontSize),
+  // },
   expand: {
     transform: 'rotate(0deg)',
     transition: theme.transitions.create('transform', {
