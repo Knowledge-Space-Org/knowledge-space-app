@@ -73,7 +73,7 @@ class DataSpaceSearch extends Component {
           <Paper elevation={1}>
             <Typography variant="h3" classes={{root: classes.root}}>
               {label} Results:
-              <Link className={classes.entityLink} to={`/t/${slug}`}>
+              <Link className={classes.entityLink} to={`/wiki/#${slug}`}>
                 {name}
               </Link>
             </Typography>

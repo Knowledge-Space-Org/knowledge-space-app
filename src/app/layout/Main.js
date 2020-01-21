@@ -33,9 +33,11 @@ const Main = props => {
         <Route exact path="/contact" component={ContactPage} />
         <Route exact path="/documentation" component={DocumentationPage} />
         <Route exact path="/t/:slug" component={EntityPage} />
+        <Route exact path="/wiki/" component={WikiPage} />
+        <Route exact path="/wiki/:#slug" component={EntityPage} />
         <Route exact path="/search" component={SearchPage} />
-        <Route exact path="/t/:slug/dataspace/:source" component={DataSpacePage} />
-        <Route exact path="/t/:slug/literature" component={LiteraturePage} />
+        <Route exact path="/wiki/:slug/dataspace/:source" component={DataSpacePage} />
+        <Route exact path="/wiki/:slug/literature" component={LiteraturePage} />
         <Route exact path="/wiki/:curie" component={WikiPage} />
         <Route exact path="/brain-regions" component={GraphPage} />
       </Switch>

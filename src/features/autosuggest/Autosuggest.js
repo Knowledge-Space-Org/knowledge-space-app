@@ -33,7 +33,7 @@ class Autosuggest extends Component {
 
   renderSuggestion({suggestion, index, itemProps, highlightedIndex, selectedItem}) {
     const { name, slug } = suggestion;
-    const key = `/t/${slug}`; 
+    const key = `/wiki/#${slug}`; 
     const isHighlighted = highlightedIndex === index;
     const isSelected = (selectedItem || '').indexOf(key) > -1;
     
@@ -62,7 +62,7 @@ class Autosuggest extends Component {
   }
 
   onSelect(selectedItem) {
-    this.props.history.push({pathname: `/t/${selectedItem}`})
+    this.props.history.push({pathname: `/wiki/#${selectedItem}`})
   }
 
   render() {

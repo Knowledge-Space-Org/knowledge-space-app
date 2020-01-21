@@ -37,7 +37,7 @@ const Result = ({result, classes}) => {
   const {name, summary, slug} = result;
  return (
     <li>
-      <ListItem component={Link} to={`/t/${slug}`}>
+      <ListItem component={Link} to={`/wiki/#${slug}`}>
         <ListItemText primary={name} secondary={summary}/>
       </ListItem>
       <Divider light/>

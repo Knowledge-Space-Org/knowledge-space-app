@@ -14,6 +14,7 @@ const getSlugFromURLIfapplicable = (slug) => {
 }
 
 const EntityPage = props => {
+  console.debug("landed here??");
   const { slug } = props.match.params;
   const updatedSlug = getSlugFromURLIfapplicable(slug);
   console.debug("check params");

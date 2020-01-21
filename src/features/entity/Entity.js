@@ -104,7 +104,7 @@ class Entity extends Component {
       const lastSection = fullUrl.pop() || fullUrl.pop();
       // check if url is already updated
       const splittedSection = lastSection.split("#");
-      if (splittedSection && splittedSection.length && splittedSection[1]) {
+      if (splittedSection && splittedSection.length && splittedSection[0] && splittedSection[1]) {
         splittedSection[1] = slug;  // we already have the updated url
       } else {
         console.debug("check urls");
@@ -133,6 +133,8 @@ class Entity extends Component {
 
   componentDidMount() {
     const { slug } = this.props;
+    console.debug("check property");
+    console.debug(this.props);
     this.props.dispatch(updateSlug(this.splitSlugFromUrlIfApplicable(slug)));
   }
 
@@ -169,9 +171,9 @@ class Entity extends Component {
                     <Breadcrumbs aria-label="Breadcrumb" separator={<NavigateNextIcon fontSize="small" />}>
                       {isArray(linked_path) && linked_path.map((link, i) => {
                         if (linked_path.length == i + 1) {
-                          return (<Link key={i} color='textPrimary' aria-current='page' href={`/t/${link.slug}`}>{link.label}</Link>)
+                          return (<Link key={i} color='textPrimary' aria-current='page' href={`/wiki/#${link.slug}`}>{link.label}</Link>)
                         } else {
-                          return (<Link key={i} color='inherit' href={`/t/${link.slug}`}>{link.label}</Link>)
+                          return (<Link key={i} color='inherit' href={`/wiki/#${link.slug}`}>{link.label}</Link>)
                         }
                       })
                       }
