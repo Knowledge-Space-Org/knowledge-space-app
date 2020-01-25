@@ -95,9 +95,6 @@ class Entity extends Component {
   updateUrlIfApplicable = () => {
     const { slug, entity } = this.props;
     const { definitions } = entity;
-    console.debug("check definitions");
-    console.debug(definitions);
-    console.debug(slug);
     if (definitions && definitions.length && definitions[0].curie) {
       console.debug(definitions);
       const fullUrl = window.location.href.split('/');
@@ -107,9 +104,6 @@ class Entity extends Component {
       if (splittedSection && splittedSection.length && splittedSection[0] && splittedSection[1]) {
         splittedSection[1] = slug;  // we already have the updated url
       } else {
-        console.debug("check urls");
-        console.debug(lastSection);
-        console.debug(fullUrl);
         const updatedLastSection = definitions[0].curie + "#" + slug;
         fullUrl.push(updatedLastSection);
         const newUrl = fullUrl.join("/");

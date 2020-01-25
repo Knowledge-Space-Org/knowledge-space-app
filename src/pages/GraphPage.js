@@ -32,24 +32,13 @@ class GraphPage extends Component {
     const nodeData = e.original;
     console.debug("check node data");
     console.debug(nodeData);
-    this.inputRef.value = nodeData.id;
+    this.inputRef.value = nodeData.label;
     this.setState({
       ...this.state,
-      searchText: nodeData.id,
-      lastUpdatedSearchText: nodeData.id
+      searchText: nodeData.label,
     })
-    this.props.dispatch(submitBrainRegionSearch({ searchText: nodeData.id }))
+    this.props.dispatch(submitBrainRegionSearch({ searchText: nodeData.label }))
   }
-
-  // shouldComponentUpdate = (props,state) => {
-  //   debugger;
-  //   if(!this.state.lastUpdatedSearchText || this.state.lastUpdatedSearchText != state.lastUpdatedSearchText){
-  //     return true;
-  //   }
-  //   else{
-  //     return false;
-  //   }
-  // } 
 
   render() {
     const { classes } = this.props
@@ -94,8 +83,8 @@ class GraphPage extends Component {
 
 const prepareNodeObj = (nodeData) => {
   return {
-    id: nodeData,
-    label: nodeData
+    id: nodeData.id,
+    label: nodeData.label
   }
 }
 
@@ -108,26 +97,29 @@ const prepareEdgeObj = (sourceData, targetData) => {
 }
 
 const transformDataForLayout = (graphData) => {
+  console.debug("check data returned from graph");
+  console.debug(graphData);
   const finalData = { nodes: [], links: [] };
   const allNodes = [];
   const allEdges = [];
   if (graphData && graphData.length) {
     for (const dataObj of graphData) {
-      const details = dataObj._fields;
-      const nodeObj_child = prepareNodeObj(details[2]);
+      const details = dataObj._fields[0];
+      const nodeObj_child = prepareNodeObj(details.child);
       allNodes.push(nodeObj_child);
-      const nodeObj_term = prepareNodeObj(details[1]);
+      const nodeObj_term = prepareNodeObj(details.term);
       allNodes.push(nodeObj_term);
-      const nodeObj_parent = prepareNodeObj(details[0]);
+      const nodeObj_parent = prepareNodeObj(details.parent);
       allNodes.push(nodeObj_parent);
-      const edge_child_term = prepareEdgeObj(details[2], details[1]);
+      const edge_child_term = prepareEdgeObj(details.child.id, details.term.id);
       allEdges.push(edge_child_term);
-      const edge_term_parent = prepareEdgeObj(details[1], details[0]);
+      const edge_term_parent = prepareEdgeObj(details.term.id,details.parent.id);
       allEdges.push(edge_term_parent);
     }
   }
   finalData.nodes = allNodes;
   finalData.links = allEdges;
+  console.debug(finalData);
   return finalData;
 }
 

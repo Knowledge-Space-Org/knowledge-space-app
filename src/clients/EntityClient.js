@@ -9,22 +9,43 @@ export const findSlugByCurie = curie => {
   if (typeof curie === 'undefined') {
     return null;
   }
-  const queryFilters = { curies: [curie] };
-  const body = { query: { bool: { filter: filterBuilder(queryFilters) } } };
-  // return esclient.search({
-  //   index: 'scigraph',
-  //   type: 'entities',
-  //   body
-  // }).then(response =>  {
-  //   const hit = head(response.hits.hits);
-  //   return hit._id;
-  // })
-  return axios.get(API_END_POINT + 'entity/find-slug-by-curie', { params: { body } }).then(res => {
+  
+  return axios.get(API_END_POINT + 'entity/find-slug-by-curie', { params: { curie } }).then(res => {
     console.debug("response return from server find-slug-by-curie");
     console.debug(res.data);
     const response = res.data;
-    const hit = head(response.hits.hits);
-    return hit._id;
+    return response;
+  });
+
+}
+
+export const findCurieByExternalId = external_id => {
+  if (typeof external_id === 'undefined') {
+    return null;
+  }
+  return axios.get(API_END_POINT + 'graph/get-by-reference-id', { params: { external_id } }).then(res => {
+    console.debug("response return from server get-by-reference-id");
+    console.debug(res.data);
+    const response = res.data;
+    if(response && response.length){
+      if(response[0] && response[0]._fields){
+        return response[0]._fields[0]; // for curie
+      }
+    }
+    return null;
+  });
+
+}
+
+export const findDetailsByExternalId = (external_id,type) => {
+  if (typeof external_id === 'undefined') {
+    return null;
+  }
+  return axios.get(API_END_POINT + 'graph/get-all-by-reference-id', { params: { external_id,type } }).then(res => {
+    console.debug("response return from server get-all-by-reference-id");
+    console.debug(res.data);
+    const response = res.data;
+    return response;
   });
 
 }

@@ -5,7 +5,7 @@ import axios from 'axios';
 
 
 export const search = ({ q = '' }) => {
-
+  console.debug("coming in auto suggest");
   const body = {
     'suggest': {
       'suggestions': {
@@ -18,17 +18,7 @@ export const search = ({ q = '' }) => {
     }
   }
 
-  // return esclient.search({
-  //   index: 'scigraph',
-  //   type: 'entities',
-  //   body
-  // }).then(response => {
-  //   const suggestions = flatten(response.suggest.suggestions.map(suggestion => {
-  //     return suggestion.options.map( o => ({ name: o.text, slug: o._id }))
-  //   }));
-  //   return { q, suggestions }
-  // })
-
+  console.debug(API_END_POINT);
   return axios.get(API_END_POINT + 'entity/auto-suggest', { params: { body } }).then(res => {
     const response = res.data;
     const suggestions = flatten(response.suggest.suggestions.map(suggestion => {

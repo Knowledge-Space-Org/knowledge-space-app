@@ -85,6 +85,7 @@ class DataSpaceAggs extends Component {
                   />
                 </ListItem>
               )
+              return null;
             })
           }
         </List>
@@ -96,6 +97,9 @@ class DataSpaceAggs extends Component {
 // We take our bucket aggs coming in from ES and merge that with our
 // DataSpace source definitions.
 const mapStateToProps = ({dataSpaceAggs, entity}) => {
+  console.error("check detauks");
+  console.error(dataSpaceAggs);
+  console.error(entity);
   // First lets take our ES buckets and flatten them to a dictionary.
   // { source_id: 1 }
   const aggs = reduce(dataSpaceAggs, (memo, {key, doc_count}) => {

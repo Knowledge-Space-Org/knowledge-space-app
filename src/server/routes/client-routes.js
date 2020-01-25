@@ -1,15 +1,13 @@
 const app = require('express');
 const router = app.Router();
 
-const elasticsearch = require('elasticsearch')
+const esUtils = require('../utility/ES-utils');
 
-const esclient = new elasticsearch.Client({
-    host: 'https://knowledge-space.org/elasticsearch/',
-    // Log: 'trace'
-})
+const esclient = esUtils.getESClient();
 
 // autosuggest
 router.get('/auto-suggest', function (req, res) {
+    console.debug("In auto suggest");
     esclient.search({
         index: 'scigraph',
         type: 'entities',
@@ -20,25 +18,15 @@ router.get('/auto-suggest', function (req, res) {
 });
 
 // entity-search
-router.get('/find-slug-by-curie', function (req, res) {
-    esclient.search({
-        index: 'scigraph',
-        type: 'entities',
-        body: req.query.body
-    }).then(response => {
-        res.send(response)
-    })
+router.get('/find-slug-by-curie', async function (req, res) {
+    const slug = await esUtils.findSlugByCurie(req.query.curie);
+    res.send(slug);
 });
 
 
-router.get('/find-by-slug', function (req, res) {
-    esclient.get({
-        index: 'scigraph',
-        type: 'entities',
-        id: req.query.id
-    }).then(response => {
-        res.send(response)
-    })
+router.get('/find-by-slug', async function (req, res) {
+    const slugDetails = await esUtils.findBySlug(req.query.id);
+    res.send(slugDetails);
 });
 
 router.get('/details', function (req, res) {
@@ -65,7 +53,7 @@ router.get('/all-data-by-entity', function (req, res) {
         console.error(exp);
         res.send([]);
     });
-    
+
 })
 router.get('/source-data-by-entity', function (req, res) {
     esclient.search({
@@ -80,7 +68,7 @@ router.get('/source-data-by-entity', function (req, res) {
         console.error(exp);
         res.send([]);
     });
-    
+
 });
 
 
