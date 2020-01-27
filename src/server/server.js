@@ -10,6 +10,7 @@ dotenv.config();
 
 console.debug("check process");
 console.debug(process.env.REACT_APP_API_END_POINT);
+console.debug(process.env);
 
 
 // allow cross domain access
