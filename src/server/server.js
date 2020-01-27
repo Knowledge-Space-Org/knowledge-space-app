@@ -1,11 +1,11 @@
-#!/usr/bin/env node
 const express = require('express');
 const bodyParser = require('body-parser')
 const path = require('path');
 const app = express();
 
 // to be able to read environment variables 
-const dotenv = require('dotenv');
+// const dotenv = require('dotenv');
+const dotenv =require('dotenv').config({path:__dirname+'/.env'})
 dotenv.config();
 
 console.debug("check process");
