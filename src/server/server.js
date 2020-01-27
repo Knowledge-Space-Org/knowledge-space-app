@@ -5,7 +5,7 @@ const app = express();
 
 // to be able to read environment variables 
 // const dotenv = require('dotenv');
-const dotenv =require('dotenv').config({path:__dirname+'/.env'})
+const dotenv =require('dotenv');
 dotenv.config();
 
 console.debug("check process");
