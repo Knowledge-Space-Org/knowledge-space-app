@@ -34,7 +34,7 @@
     "redux-saga": "^0.16.0"
   },
   "scripts": {
-    "server": "npx nodemon src/server/server.js",
+    "server": "npx nodemon server/server.js",
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",

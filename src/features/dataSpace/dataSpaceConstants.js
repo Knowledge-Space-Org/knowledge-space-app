@@ -101,7 +101,13 @@ export const DATASPACE_SOURCES = {
     description: '3D Models of rat neuronal morphologies.',
     type: 'morphology',
     aggs: {'dc.subject': 'Cell', region_term: 'Region'},
-    columns: { 'dc.title': 'Title', 'dc.subject': 'Cell', 'region_term': 'Region'  }
-  
+    columns: { 'dc.title': 'Title', 'dc.subject': 'Cell', 'region_term': 'Region'  }  
+  },
+  scr_ebrains: {
+    label: 'KnowledgeGraph',
+    description: 'KnowledgeGraph data from Ebrains',
+    type: 'KnowledgeGraph',
+    columns: {'item.name':"Title",'item.description': 'Description',},
+    aggs: {'subjects.sex.value.keyword':'Sex'}
   }
 }

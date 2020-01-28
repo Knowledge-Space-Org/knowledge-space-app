@@ -66,7 +66,7 @@ const Main = props => {
       <AppRoute exact path="/wiki/:slug/literature" component={LiteraturePage} />
       <AppRoute exact path="/wiki/:curie" component={WikiPage} />
       <AppRoute exact path="/external/:externalId" component={ExternalIdPage} />
-      <AppRoute noNavBar={true} exact path="/external/:externalId/:type" component={MBAPage} />
+      {/* <AppRoute noNavBar={true} exact path="/external/:externalId/:type" component={MBAPage} /> */}
       <AppRoute exact path="/brain-regions" component={GraphPage} />
     </Switch>
   )

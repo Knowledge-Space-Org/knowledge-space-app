@@ -40,10 +40,15 @@ const cellValue = (value = '') => {
 const DataSpaceResults = ({hits, classes, columns, page, handlePageChange}) => {
   const results = has(hits, 'hits') ? hits.hits : []
   const total = has(hits, 'total') ? hits.total : 0
-
+  let elem = null;
+  if(hits && hits.total && hits.total.value){
+    elem =  get(hits.total, 'value') || 0;
+  }else{
+    elem =  get(hits, 'total') || 0;
+  }
   return (
     <div className={classes.root}>
-      <Typography variant="subtitle1" className={classes.total}>{ get(hits, 'total') || 0} records found</Typography>
+      <Typography variant="subtitle1" className={classes.total}>{ elem } records found</Typography>
       <Divider/>
       <Table className={classes.table} aria-labelledby="tableTitle">
         <TableHead>

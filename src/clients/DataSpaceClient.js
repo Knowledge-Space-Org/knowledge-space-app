@@ -62,12 +62,34 @@ export const querySourceByEntity = ({ source, entity, page = 0, q = '', filters 
   if (isNull(labels)) {
     return {}
   }
-  const body = {
-    aggs,
-    query: {
-      bool: {
-        must: { query_string: { query } }
+  let body = null;
+  if (source === "scr_ebrains1") {
+    body = {
+      size: 0,
+      query: {
+        query_string: { query }
+      },
+      // aggs: {
+      //   sources: {
+      //     terms: {
+      //       field: '_index',
+      //       size: 20
+      //     }
+      //   }
+      // }
+    }
+  } else {
+    body = {
+      aggs,
+      query: {
+        bool: {
+          must: { query_string: { query } }
+        }
       }
+    }
+    const filterFields = omitBy(filters, isEmpty)
+    if (!isEmpty(filterFields)) {
+      body.query.bool.filter = filterBuilder(filterFields)
     }
   }
 
@@ -76,10 +98,7 @@ export const querySourceByEntity = ({ source, entity, page = 0, q = '', filters 
   body.from = page * 25
 
 
-  const filterFields = omitBy(filters, isEmpty)
-  if (!isEmpty(filterFields)) {
-    body.query.bool.filter = filterBuilder(filterFields)
-  }
+
 
   // const request = esclient.search({
   //   index: source,

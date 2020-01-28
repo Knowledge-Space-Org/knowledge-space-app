@@ -1,6 +1,6 @@
-import React, {Component} from 'react'
-import {connect} from 'react-redux'
-import {withStyles} from '@material-ui/core/styles'
+import React, { Component } from 'react'
+import { connect } from 'react-redux'
+import { withStyles } from '@material-ui/core/styles'
 
 import Typography from '@material-ui/core/Typography'
 import Paper from '@material-ui/core/Paper'
@@ -8,9 +8,9 @@ import Divider from '@material-ui/core/Divider'
 import List from '@material-ui/core/List'
 import ListItem from '@material-ui/core/ListItem'
 
-import {reduce, has, reject, isEmpty} from 'lodash'
+import { reduce, has, reject, isEmpty } from 'lodash'
 
-import {DATASPACE_SOURCES} from '../dataSpace/dataSpaceConstants'
+import { DATASPACE_SOURCES } from '../dataSpace/dataSpaceConstants'
 import DataSpaceCategory from './components/DataSpaceCategory'
 
 const styles = theme => ({
@@ -64,16 +64,16 @@ const styles = theme => ({
 
 class DataSpaceAggs extends Component {
   render() {
-    const {aggByType, entity, classes} = this.props
+    const { aggByType, entity, classes } = this.props
     const types = reject(Object.keys(aggByType), o => isEmpty(aggByType[o].sources))
     return (
       <Paper className={classes.dataSpaceAggs} elevation={1}>
         <Typography variant="h3">DataSpace</Typography>
-        <Divider/>
+        <Divider />
         <List component="nav">
           {
             types.map(type => {
-              const {sources, doc_count} = aggByType[type]
+              const { sources, doc_count } = aggByType[type]
               return (
                 <ListItem key={type} classes={{}} disableGutters>
                   <DataSpaceCategory
@@ -96,22 +96,30 @@ class DataSpaceAggs extends Component {
 
 // We take our bucket aggs coming in from ES and merge that with our
 // DataSpace source definitions.
-const mapStateToProps = ({dataSpaceAggs, entity}) => {
+const mapStateToProps = ({ dataSpaceAggs, entity }) => {
   console.error("check detauks");
   console.error(dataSpaceAggs);
   console.error(entity);
   // First lets take our ES buckets and flatten them to a dictionary.
   // { source_id: 1 }
-  const aggs = reduce(dataSpaceAggs, (memo, {key, doc_count}) => {
+  // work-around to get knowledge graph data sets
+  const dataSpaceAggsNew = dataSpaceAggs.slice ? dataSpaceAggs.slice() : [];
+  if (dataSpaceAggs.slice) {
+    dataSpaceAggsNew.push({
+      key: 'scr_ebrains',
+      doc_count: 604,
+    })
+  }
+  const aggs = reduce(dataSpaceAggsNew, (memo, { key, doc_count }) => {
     memo[key] = doc_count
     return memo
   }, {})
   // Now we take our DATASPACE_SOURCES, group by type, and add our agg counts
   const aggByType = reduce(DATASPACE_SOURCES, (memo, value, key) => {
-    const {type} = value
+    const { type } = value
     value.id = key
     if (!has(memo, type)) {
-      memo[type] = {sources: [], doc_count: 0}
+      memo[type] = { sources: [], doc_count: 0 }
     }
     if (has(aggs, key)) {
       memo[type].doc_count = memo[type].doc_count + aggs[key]
@@ -120,7 +128,7 @@ const mapStateToProps = ({dataSpaceAggs, entity}) => {
     }
     return memo
   }, {})
-  return {aggByType, entity}
+  return { aggByType, entity }
 }
 
 export default withStyles(styles)(connect(mapStateToProps)(DataSpaceAggs))
