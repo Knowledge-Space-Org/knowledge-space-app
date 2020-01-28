@@ -24,16 +24,29 @@ app.use(express.static(path.resolve(__dirname, '../build')));
 // api routes
 const custom = require('./routes/other-routes.js');
 const client_routes = require('./routes/client-routes.js');
-
-app.use('/graph/', custom);
+const esUtils = require('./utility/ES-utils.js');
+app.use('/graph/', custom.router);
 app.use('/entity/', client_routes);
 
+app.get('/external/:external_id/:type', async (req,res)=>{
+  let finalData = [];
+  const cypher_query = 'MATCH (n:owl__Class)-[:rdfs__subClassOf]->(p:owl__Class)' +
+    "where  n.ns3__hasDbXref =  '" + req.params.external_id + "'" +
+    ' return n.skos__notation as curie, n.ns3__hasDbXref as search_id'
+  const data = await custom.runGraphQuery(cypher_query, "NIFSTD");
+  console.debug("data for curie");
+  console.debug(req.params);
+  if (data[0] && data[0]._fields) {
+    const curie = data[0]._fields[0]; // for curie
+    const slug = await esUtils.findSlugByCurie(curie);
+    const slugDetails = await esUtils.findBySlug(slug);
+    finalData = esUtils.getSpecificDetails(slugDetails, req.params.type);
+  }
+  res.send(finalData);
+})
 
 // eveything else will be served to the client
 app.get('/*', function (req, res) {
-  console.debug("request check");
-  console.debug(req);
-  
   res.sendFile(path.join(path.resolve(__dirname, '../build'), 'index.html'));
 });
 

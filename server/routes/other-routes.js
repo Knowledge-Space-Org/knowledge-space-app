@@ -24,6 +24,7 @@ async function queryNeo4j(query, database) {
   return result;
 }
 
+
 router.get('/get-brain-region-relations', async function (req, res) {
   cypher_query = "WITH '" + req.query.term + "' as term " +
     'MATCH (n)-[:rdfs__subClassOf]->(p)-[:rdfs__subClassOf]->(q) ' +
@@ -55,22 +56,6 @@ router.get('/get-by-reference-id', async function (req, res) {
   res.send(data);
 });
 
-router.get('/external/:external_id/:type', async (req,res)=>{
-  let finalData = [];
-  const cypher_query = 'MATCH (n:owl__Class)-[:rdfs__subClassOf]->(p:owl__Class)' +
-    "where  n.ns3__hasDbXref =  '" + req.params.external_id + "'" +
-    ' return n.skos__notation as curie, n.ns3__hasDbXref as search_id'
-  const data = await queryNeo4j(cypher_query, "NIFSTD");
-  console.debug("data for curie");
-  console.debug(req.params);
-  if (data[0] && data[0]._fields) {
-    const curie = data[0]._fields[0]; // for curie
-    const slug = await esUtils.findSlugByCurie(curie);
-    const slugDetails = await esUtils.findBySlug(slug);
-    finalData = esUtils.getSpecificDetails(slugDetails, req.params.type);
-  }
-  res.send(finalData);
-})
 
 router.get('/get-all-by-reference-id', async function (req, res) {
   let finalData = [];
@@ -89,4 +74,7 @@ router.get('/get-all-by-reference-id', async function (req, res) {
   res.send(finalData);
 });
 
-module.exports = router;
+module.exports = {
+  router,
+  runGraphQuery: queryNeo4j
+}
