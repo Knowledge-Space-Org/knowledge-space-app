@@ -103,7 +103,7 @@ export const DATASPACE_SOURCES = {
     aggs: {'dc.subject': 'Cell', region_term: 'Region'},
     columns: { 'dc.title': 'Title', 'dc.subject': 'Cell', 'region_term': 'Region'  }  
   },
-  scr_ebrains: {
+  scr_017612_ebrains: {
     label: 'KnowledgeGraph',
     description: 'KnowledgeGraph data from Ebrains',
     type: 'KnowledgeGraph',

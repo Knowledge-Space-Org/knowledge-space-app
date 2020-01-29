@@ -1,7 +1,10 @@
+#!/usr/bin/env node
 const express = require('express');
 const bodyParser = require('body-parser')
 const path = require('path');
 const app = express();
+// const fs = require('fs');
+// const https = require('https');
 
 // to be able to read environment variables 
 // const dotenv = require('dotenv');
@@ -40,7 +43,7 @@ app.get('/external/:external_id/:type', async (req,res)=>{
     const curie = data[0]._fields[0]; // for curie
     const slug = await esUtils.findSlugByCurie(curie);
     const slugDetails = await esUtils.findBySlug(slug);
-    finalData = esUtils.getSpecificDetails(slugDetails, req.params.type);
+    finalData = await esUtils.getSpecificDetails(slugDetails, req.params.type,slug);
   }
   res.send(finalData);
 })
@@ -63,6 +66,6 @@ app.listen(5000, (req) => {
 // https.createServer({
 //   key: privateKey,
 //   cert: certificate
-// }, app).listen(8081, () => {
+// }, app).listen(5000, () => {
 //   console.debug("listening")
 // });

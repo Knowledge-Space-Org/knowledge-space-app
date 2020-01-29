@@ -40,29 +40,13 @@ router.get('/details', function (req, res) {
 });
 
 // datasource client
-router.get('/all-data-by-entity', function (req, res) {
-    esclient.search({
-        index: '*',
-        type: 'dataSpace',
-        body: req.query.body
-    }).then(response => {
-        res.send(response)
-    }).catch(exp => {
-        console.error("error occured in all-data-by-entity");
-        console.error(req.query.body);
-        console.error(exp);
-        res.send([]);
-    });
+router.get('/all-data-by-entity', async function (req, res) {
+    const response = await esUtils.queryAllDataSpaceByEntity(req.query.labels);
+    res.send(response);
 
 })
 router.get('/source-data-by-entity', function (req, res) {
     let esclientToUse = esclient;
-    if(req.query.source==="scr_ebrains"){
-        esclientToUse = esUtils.getDataSpaceESClient()
-    }
-    console.debug("esclient to use");
-    console.debug(req.query.body);
-    console.debug(req.query.source);
     esclientToUse.search({
         index: req.query.source,
         body: req.query.body,

@@ -97,18 +97,15 @@ class DataSpaceAggs extends Component {
 // We take our bucket aggs coming in from ES and merge that with our
 // DataSpace source definitions.
 const mapStateToProps = ({ dataSpaceAggs, entity }) => {
-  console.error("check detauks");
-  console.error(dataSpaceAggs);
-  console.error(entity);
   // First lets take our ES buckets and flatten them to a dictionary.
   // { source_id: 1 }
   // work-around to get knowledge graph data sets
   const dataSpaceAggsNew = dataSpaceAggs.slice ? dataSpaceAggs.slice() : [];
   if (dataSpaceAggs.slice) {
-    dataSpaceAggsNew.push({
-      key: 'scr_ebrains',
-      doc_count: 604,
-    })
+    // dataSpaceAggsNew.push({
+    //   key: 'scr_ebrains',
+    //   doc_count: 604,
+    // })
   }
   const aggs = reduce(dataSpaceAggsNew, (memo, { key, doc_count }) => {
     memo[key] = doc_count

@@ -1,6 +1,6 @@
-let { map, flatten, head } = require('lodash');
+let { map, flatten, head, isNull,reduce ,has} = require('lodash');
 const elasticsearch = require('elasticsearch')
-
+const DATASPACE_SOURCES = require("./dataSpaceConstants.js");
 
 const esDataSpaceClient = new elasticsearch.Client({
     host: process.env.REACT_APP_ES_DATASPACE_URL,
@@ -19,7 +19,42 @@ const filterBuilder = filters => {
     }))
 }
 
-module.exports = {
+const queryString = (labels) => {
+    if (labels.length > 1) {
+        return labels.map(label => `(${label})`).join(' OR ');
+    } else {
+        return head(labels);
+    }
+}
+
+const prepareDataSetDetails = (slug,dataSetsAggs) => {
+    const aggs = reduce(dataSetsAggs, (memo, { key, doc_count }) => {
+        memo[key] = doc_count
+        return memo
+    }, {})
+    const aggByType = reduce(DATASPACE_SOURCES, (memo, value, key) => {
+        const { type } = value
+        value.id = key
+        if (!has(memo, type)) {
+            memo[type] = { sources: [], doc_count: 0 }
+        }
+        if (has(aggs, key)) {
+            const newObj = {};
+            memo[type].doc_count = memo[type].doc_count + aggs[key]
+            newObj.type = value.type
+            newObj.id = value.id
+            newObj.label = value.label
+            newObj.description = value.description
+            newObj.doc_count = aggs[key]
+            newObj.url = process.env.REACT_APP_API_END_POINT + 'wiki/'+slug+'/dataspace/'+value.id;
+            memo[type].sources.push(newObj)
+        }
+        return memo
+    }, {})
+    return aggByType;
+}
+
+const esUtils = {
     getESClient: function () {
         return esclient;
     },
@@ -55,16 +90,64 @@ module.exports = {
             return [];
         })
     },
-    getSpecificDetails: (slugDetails, type) => {
-        let details = [];
-        switch (type) {
-            case 'datasets':
-                break;
-            default:
-                details = slugDetails._source ? slugDetails._source.summary : [];
-                break;
+    queryAllDataSpaceByEntity: async (labels) => {
+        if (isNull(labels)) {
+            return {};
         }
-        return details;
-    }
+        const query = queryString(labels)
 
+        const body = {
+            size: 0,
+            query: {
+                query_string: { query }
+            },
+            aggs: {
+                sources: {
+                    terms: {
+                        field: '_index',
+                        size: 20
+                    }
+                }
+            }
+        }
+        return esclient.search({
+            index: 'scr*',
+            body
+        }).then(response => {
+            return response;
+        }).catch(exp => {
+            console.error("error occured in all-data-by-entity");
+            console.error(req.query.body);
+            console.error(exp);
+            return [];
+        });
+    },
 }
+
+esUtils.getSpecificDetails = async (slugDetails, type,slug) => {
+    let details = [];
+    switch (type) {
+        case 'datasets':
+            details = await esUtils.getDataSetsByEntity(slugDetails._source,slug);
+            break;
+        default:
+            details = slugDetails._source ? slugDetails._source.summary : [];
+            break;
+    }
+    return details;
+}
+
+esUtils.getDataSetsByEntity = async (entity,slug) => {
+    try {
+        const allDataSets = await esUtils.queryAllDataSpaceByEntity(entity.labels);
+        const dataSetDetails = prepareDataSetDetails(slug,allDataSets.aggregations.sources.buckets);
+        return dataSetDetails;
+    } catch (exp) {
+        console.error("error occured in getDataSetsByEntity");
+        console.error(entity);
+        console.error(exp);
+        return [];
+    }
+}
+
+module.exports = esUtils;
