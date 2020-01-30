@@ -61,13 +61,15 @@ class DataSpaceSearch extends Component {
 
   render() {
     const {classes,  entity, sourceConfig, filters, facets, results, page} = this.props
+    console.debug("check facets in render");
+    console.debug(facets);
     const { slug, category, name } = entity;
-    const {columns, label} = sourceConfig
+    const {columns, label ,aggs} = sourceConfig
 
     return (
       <Grid container direction="row" justify="flex-start" alignItems="flex-start" spacing={16}>
         <Grid item xs={12} sm={3}>
-          { facets && <Facets facets={facets} selected={filters} handleFacetToggle={this.handleFacetToggle.bind(this)}/> }
+          { facets && <Facets aggs={aggs} facets={facets} selected={filters} handleFacetToggle={this.handleFacetToggle.bind(this)}/> }
         </Grid>
         <Grid item xs={12} sm={9}>
           <Paper elevation={1}>

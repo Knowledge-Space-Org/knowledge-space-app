@@ -10,36 +10,36 @@ export const DATASPACE_SOURCES = {
     label: 'NeuroML Database',
     description: 'Curated relational database that provides for the storage and retrieval of computational neuroscience model.',
     type: 'models',
-    columns: {'dc.title': 'Model Name', model_type: 'Model Type', 'dc.creator': 'Authors', 'dc.subject': 'Keywords'},
-    aggs: {model_type: 'Model Type', 'dc.creator': 'Authors', 'dc.subject': 'Keywords'}
+    columns: { 'dc.title': 'Model Name', model_type: 'Model Type', 'dc.creator': 'Authors', 'dc.subject': 'Keywords' },
+    aggs: { model_type: 'Model Type', 'dc.creator': 'Authors', 'dc.subject': 'Keywords' }
   },
   scr_002145_neuromorpho_modelimage: {
     label: 'NeuroMorpho',
     description: 'A curated repository of digitally reconstructed neurons.',
     type: 'morphology',
-    columns: {'dc.title': 'Model Name', 'dc.subject': 'Subjects', age: 'Age', gender: 'Gender', strain_name: 'Strain'},
-    aggs: {species: 'Model Name', strain_name: 'Strain', 'dc.subject': 'Subject'}
+    columns: { 'dc.title': 'Model Name', 'dc.subject': 'Subjects', age: 'Age', gender: 'Gender', strain_name: 'Strain' },
+    aggs: { species: 'Model Name', strain_name: 'Strain', 'dc.subject': 'Subject' }
   },
   scr_007271_modeldb_models: {
     label: 'ModelDB',
     description: 'Provides high quality computational neuroscience models. ModelDB is tightly coupled with NeuronDB.',
     type: 'models',
-    columns: {'dc.title': 'Model Name', model_type: 'Model Type', model_concepts: 'Model Concepts', simulator_software: 'Software'},
-    aggs: {model_concepts: 'Model Concepts', simulator_software: 'Software', model_type: 'Model Type'}
+    columns: { 'dc.title': 'Model Name', model_type: 'Model Type', model_concepts: 'Model Concepts', simulator_software: 'Software' },
+    aggs: { model_concepts: 'Model Concepts', simulator_software: 'Software', model_type: 'Model Type' }
   },
   scr_006131_hba_atlas: {
     label: 'Human Brain Atlas',
     description: 'Contains sections stained for cell bodies or nerve fibers, as well as corresponding MRI sections through a living human brain.',
     type: 'anatomy',
-    columns: {species: 'Species', brain_region: 'Brain Region', brain_view: 'Brain View'},
-    aggs: {species: 'Species', brain_region: 'Brain Region', brain_view: 'Brain View'}
+    columns: { species: 'Species', brain_region: 'Brain Region', brain_view: 'Brain View' },
+    aggs: { species: 'Species', brain_region: 'Brain Region', brain_view: 'Brain View' }
   },
   scr_002978_aba_expression: {
     label: 'Allen Brain Atlas Mouse Brain - Expression',
     description: 'A genome_wide database of gene expression in the mouse brain.',
     type: 'expression',
-    columns: {'dc.title': 'Gene', organism: 'Organism', species: 'Species'},
-    aggs: {gene_name: 'Gene', organism: 'Organism', species: 'Species'}
+    columns: { 'dc.title': 'Gene', organism: 'Organism', species: 'Species' },
+    aggs: { gene_name: 'Gene', organism: 'Organism', species: 'Species' }
   },
   scr_002978_aba_celltypeephysdata: {
     label: 'Allen Brain Atlas Mouse Brain - CellType EphysData',
@@ -50,22 +50,22 @@ export const DATASPACE_SOURCES = {
     label: 'GENSAT',
     description: 'Contains gene expression data and maps of the mouse brain and spinal cord.',
     type: 'expression',
-    columns: {gene_name: 'Gene', structure_name: 'Structure', stain: 'Stain', age: 'Age'},
-    aggs: {gene_name: 'Gene', structure_name: 'Structure', stain: 'Stain'}
+    columns: { gene_name: 'Gene', structure_name: 'Structure', stain: 'Stain', age: 'Age' },
+    aggs: { gene_name: 'Gene', structure_name: 'Structure', stain: 'Stain' }
   },
   scr_014194_icg_ionchannels: {
     label: 'IonChannelGenealogy',
     description: 'Provides a quantitative assay of publicly available ion channel models.',
     type: 'models',
-    columns: {'dc.title': 'Title', 'dc.subject': 'Species', brain_area: 'Brain Area',  neuron_type: 'Neuron'},
-    aggs: {'dc.subject': 'Species', brain_area: 'Brain Area', neuron_type: 'Neuron'}
+    columns: { 'dc.title': 'Title', 'dc.subject': 'Species', brain_area: 'Brain Area', neuron_type: 'Neuron' },
+    aggs: { 'dc.subject': 'Species', brain_area: 'Brain Area', neuron_type: 'Neuron' }
   },
   scr_003105_neurondb_currents: {
     label: 'NeuronDB',
     description: 'Provides data about neurotransmitter properties for submitted neurons.',
     type: 'physiology',
-    columns: {neuron: 'Neuron', current: 'Current', compartment: 'Compartment'},
-    aggs: {neuron: 'Neuron', current: 'Current', compartment: 'Compartment'}
+    columns: { neuron: 'Neuron', current: 'Current', compartment: 'Compartment' },
+    aggs: { neuron: 'Neuron', current: 'Current', compartment: 'Compartment' }
   },
   scr_006878_brainmaps_atlas: {
     label: 'BrainMaps',
@@ -81,15 +81,15 @@ export const DATASPACE_SOURCES = {
     label: 'NeuroElectro',
     description: 'A database of elecrophysiological properties text-mined from the biomedical literature as a function of neuron type.',
     type: 'physiology',
-    columns: {'dc.title': 'Title', 'dc.description': 'Description', property_name: 'property_name'},
-    aggs: {property_name: 'property_name'}
+    columns: { 'dc.title': 'Title', 'dc.description': 'Description', property_name: 'property_name' },
+    aggs: { property_name: 'property_name' }
   },
   scr_003510_cil_images: {
     label: 'Cell Image Library',
     description: 'Provides annotated images, videos and animations of cellular processes.',
     type: 'morphology',
-    aggs: {species: 'Species', celltype: 'Cell Type', biologicalprocess: 'Biological Process'},
-    columns: {image_url: 'Image', species: 'Species', 'dc.creator': 'Authors', biologicalprcoess: 'Biological Process', celltype: 'Cell Type'}
+    aggs: { species: 'Species', celltype: 'Cell Type', biologicalprocess: 'Biological Process' },
+    columns: { image_url: 'Image', species: 'Species', 'dc.creator': 'Authors', biologicalprcoess: 'Biological Process', celltype: 'Cell Type' }
   },
   scr_002978_aba_celltypemorphodata: {
     label: 'Allen Brain Atlas Mouse Brain - CellType MorphoData',
@@ -100,14 +100,14 @@ export const DATASPACE_SOURCES = {
     label: 'Blue Brain Project Cell Morphology',
     description: '3D Models of rat neuronal morphologies.',
     type: 'morphology',
-    aggs: {'dc.subject': 'Cell', region_term: 'Region'},
-    columns: { 'dc.title': 'Title', 'dc.subject': 'Cell', 'region_term': 'Region'  }  
+    aggs: { 'dc.subject': 'Cell', region_term: 'Region' },
+    columns: { 'dc.title': 'Title', 'dc.subject': 'Cell', 'region_term': 'Region' }
   },
   scr_017612_ebrains: {
-    label: 'KnowledgeGraph',
-    description: 'KnowledgeGraph data from Ebrains',
-    type: 'KnowledgeGraph',
-    columns: {'item.name':"Title",'item.description': 'Description',},
-    aggs: {'subjects.sex.value.keyword':'Sex', 'organisms.subject.species.name.keyword':"Species", 'protocol.methods.name.keyword':'Protocol'}
+    label: 'EBRAINS Knowledge Graph',
+    description: 'The EBRAINS Knowledge Graph is a multi-modal metadata store which brings together information from different fields on brain research. At the core of the EBRAINS Knowledge Graph, a graph database tracks the linkage between experimental data and neuroscientific data science supporting more extensive data reuse and complex computational research than would be possible otherwise.',
+    type: 'Knowledge Graph',
+    columns: { 'item.name': "Title", 'item.description': 'Description', },
+    aggs: { 'subjects.sex.value.key': 'Sex', 'organisms.subject.species.name.key': "Species", 'protocol.methods.name.key': 'Methods' }
   }
 }

@@ -7,7 +7,6 @@ const esclient = esUtils.getESClient();
 
 // autosuggest
 router.get('/auto-suggest', function (req, res) {
-    console.debug("In auto suggest");
     esclient.search({
         index: 'scigraph',
         type: 'entities',

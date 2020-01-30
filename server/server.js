@@ -10,7 +10,6 @@ const app = express();
 // const dotenv = require('dotenv');
 const dotenv =require('dotenv');
 dotenv.config();
-console.debug(process.env);
 // allow cross domain access
 var allowCrossDomain = function (req, res, next) {
   res.header('Access-Control-Allow-Origin', "*");

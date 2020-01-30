@@ -98,11 +98,11 @@ const DATASPACE_SOURCES = {
       columns: { 'dc.title': 'Title', 'dc.subject': 'Cell', 'region_term': 'Region'  }  
     },
     scr_017612_ebrains: {
-      label: 'KnowledgeGraph',
-      description: 'KnowledgeGraph data from Ebrains',
-      type: 'KnowledgeGraph',
-      columns: {'item.name':"Title",'item.description': 'Description',},
-      aggs: {'subjects.sex.value.keyword':'Sex'}
+      label: 'EBRAINS Knowledge Graph',
+      description: 'The EBRAINS Knowledge Graph is a multi-modal metadata store which brings together information from different fields on brain research. At the core of the EBRAINS Knowledge Graph, a graph database tracks the linkage between experimental data and neuroscientific data science supporting more extensive data reuse and complex computational research than would be possible otherwise.',
+      type: 'Knowledge Graph',
+      columns: { 'item.name': "Title", 'item.description': 'Description', },
+      aggs: { 'subjects.sex.value.key': 'Sex', 'organisms.subject.species.name.key': "Species", 'protocol.methods.name.key': 'Methods' }
     }
   }
   module.exports = DATASPACE_SOURCES;
