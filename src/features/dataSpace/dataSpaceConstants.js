@@ -108,6 +108,6 @@ export const DATASPACE_SOURCES = {
     description: 'KnowledgeGraph data from Ebrains',
     type: 'KnowledgeGraph',
     columns: {'item.name':"Title",'item.description': 'Description',},
-    aggs: {'subjects.sex.value.keyword':'Sex'}
+    aggs: {'subjects.sex.value.keyword':'Sex', 'organisms.subject.species.name.keyword':"Species", 'protocol.methods.name.keyword':'Protocol'}
   }
 }
