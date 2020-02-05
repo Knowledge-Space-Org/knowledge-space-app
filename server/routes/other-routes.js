@@ -49,9 +49,13 @@ router.get('/get-paths', async function (req, res) {
 
 
 router.get('/get-by-reference-id', async function (req, res) {
-  cypher_query = 'MATCH (n:owl__Class)-[:rdfs__subClassOf]->(p:owl__Class)' +
-    "where  n.ns3__hasDbXref =  '" + req.query.external_id + "'" +
-    ' return n.skos__notation as curie, n.ns3__hasDbXref as search_id'
+  const exter_id = "'" + req.query.external_id + "'"
+  const atlas = exter_id.split(":")[0]
+  const id = exter_id.split(":")[1]
+  const cypher_query = ' MATCH (atlas)<-[definedby:subClassOf]-(label)-[:`http://uri.interlex.org/tgbugs/uris/readable/delineates`]->(anatomy)' +
+    ' WHERE toUpper(atlas.abbreviation) = ' + atlas + '\' AND split(label.iri,"/")[-1] = \'' + id + ' AND exists(atlas.abbreviation)' +
+    ' RETURN anatomy.`http://www.geneontology.org/formats/oboInOwl#id` as curie, toUpper(atlas.abbreviation) + ":" + split(label.iri,"/")[-1] as search_id'
+
   const data = await queryNeo4j(cypher_query, "NIFSTD");
   res.send(data);
 });

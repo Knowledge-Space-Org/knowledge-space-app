@@ -37,7 +37,7 @@ app.get('/external/:external_id/:type', async (req,res)=>{
     ' return n.skos__notation as curie, n.ns3__hasDbXref as search_id'
   const data = await custom.runGraphQuery(cypher_query, "NIFSTD");
   console.debug("data for curie");
-  console.debug(req.params);
+  console.debug(data);
   if (data[0] && data[0]._fields) {
     const curie = data[0]._fields[0]; // for curie
     const slug = await esUtils.findSlugByCurie(curie);

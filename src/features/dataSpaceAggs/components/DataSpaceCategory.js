@@ -33,7 +33,7 @@ const DataSpaceCategory = ({label, sources, doc_count, entity, classes}) => {
       { sources.map(source => (
         <ListItem key={source.id} button classes={{root: classes.sourceButton}} disableGutters onClick={handleClick}>
           <ListItemText classes={{primary: classes.sourceLabel}}
-            secondary={source.description}
+            secondary={<div dangerouslySetInnerHTML={{__html: source.description}} ></div>}
             primary={
               <React.Fragment>
                 <Link to={`/wiki/${slug}/dataspace/${source.id}`}>

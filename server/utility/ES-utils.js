@@ -117,7 +117,7 @@ const esUtils = {
             return response;
         }).catch(exp => {
             console.error("error occured in all-data-by-entity");
-            console.error(req.query.body);
+            console.error(body);
             console.error(exp);
             return [];
         });
