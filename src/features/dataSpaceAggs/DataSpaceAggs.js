@@ -8,6 +8,9 @@ import Divider from '@material-ui/core/Divider'
 import List from '@material-ui/core/List'
 import ListItem from '@material-ui/core/ListItem'
 
+import ExpansionPanel from '@material-ui/core/ExpansionPanel';
+
+
 import { reduce, has, reject, isEmpty } from 'lodash'
 
 import { DATASPACE_SOURCES } from '../dataSpace/dataSpaceConstants'
@@ -34,7 +37,11 @@ const styles = theme => ({
     width: '100%',
     paddingBottom: 0,
     paddingTop: 0,
-    marginTop: 0
+    marginTop: 0,
+    margin:0,
+  },
+  panelItems:{
+    flexDirection:'column',
   },
   categorySubtitle: {
     paddingLeft: 0,
@@ -42,7 +49,8 @@ const styles = theme => ({
     fontSize: theme.typography.h5.fontSize,
     display: 'flex',
     alignItems: 'center',
-    justifyContent: 'space-between'
+    justifyContent: 'space-between',
+    width:'100%'
   },
   categoryResultsFound: {
     fontSize: theme.typography.h6.fontSize,
@@ -70,12 +78,12 @@ class DataSpaceAggs extends Component {
       <Paper className={classes.dataSpaceAggs} elevation={1}>
         <Typography variant="h3">DataSpace</Typography>
         <Divider />
-        <List component="nav">
+        <React.Fragment>
           {
             types.map(type => {
               const { sources, doc_count } = aggByType[type]
               return (
-                <ListItem key={type} classes={{}} disableGutters>
+                // <ListItem key={type} classes={{}} disableGutters>
                   <DataSpaceCategory
                     classes={classes}
                     entity={entity}
@@ -83,12 +91,12 @@ class DataSpaceAggs extends Component {
                     sources={sources}
                     doc_count={doc_count}
                   />
-                </ListItem>
+                // </ListItem>
               )
               return null;
             })
           }
-        </List>
+        </React.Fragment>
       </Paper>
     )
   }

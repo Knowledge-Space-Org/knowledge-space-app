@@ -18,6 +18,7 @@
     "neode": "^0.3.7",
     "query-string": "^6.2.0",
     "react": "^16.5.2",
+    "react-alice-carousel": "^1.17.3",
     "react-dom": "^16.5.2",
     "react-event-listener": "^0.6.4",
     "react-ga": "^2.7.0",
@@ -27,11 +28,13 @@
     "react-router": "^4.3.1",
     "react-router-dom": "^4.3.1",
     "react-scripts": "2.0.4",
+    "react-slick": "^0.25.2",
     "react-treeview": "^0.4.7",
     "recompose": "^0.30.0",
     "redux": "^4.0.0",
     "redux-devtools-extension": "^2.13.5",
-    "redux-saga": "^0.16.0"
+    "redux-saga": "^0.16.0",
+    "slick-carousel": "^1.8.1"
   },
   "scripts": {
     "server": "npx nodemon server/server.js",
