@@ -20,6 +20,8 @@ import HomePageOld from '../../pages/HomePage-old'
 const styles = theme => ({
   root: {
     flex: '1 1 100%',
+    paddingTop:'40px',
+    paddingLeft:'20px',
   }
 })
 

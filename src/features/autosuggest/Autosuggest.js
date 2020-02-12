@@ -87,7 +87,7 @@ class Autosuggest extends Component {
         }) => (
             <div className={classes.search}>
               {/* <form onSubmit={handleSubmit}> */}
-                <div style={{ padding:'0 300px',cursor: 'text', display: 'flex', alignItems: 'center' }}>
+                <div  className={classes.spacingClass} style={{cursor: 'text', display: 'flex', alignItems: 'center' }}>
                   {renderInput({
                     classes: { root: classes.inputRoot, input: classes.inputInput },
                     inputProps: getInputProps({ 'aria-label': 'naked',classes:{input:classes.SearchInput} ,className:classes.SearchInput ,placeholder: 'Search KnowledgeSpace' })
@@ -97,7 +97,7 @@ class Autosuggest extends Component {
                   <Button variant='outlined' className={classes.searchButton} onClick={handleSubmit}>Search</Button>
                 </div>
               {/* </form> */}
-              <div {...getMenuProps()} className={classes.autoCompleteResult} style={{ width: '100%' }}>
+              <div {...getMenuProps()} className={classes.autoCompleteResult + " " +classes.spacingClass} style={{ width: '100%' }}>
                 {isOpen ? (
                   <Paper square className={classes.suggestBox}>
                     {this.handleChange(inputValue) && suggestions.map((suggestion, index) => {

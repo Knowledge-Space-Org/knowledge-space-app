@@ -19,7 +19,7 @@ import hbp from 'imgs/hbp-logo.png';
 import nif from 'imgs/nif-logo.png';
 import incf from 'imgs/incf-logo.svg';
 
-import ebrains from 'imgs/partners/ebrains.svg';
+import ebrains from 'imgs/partners/ebrains.png';
 import brainmaps from 'imgs/partners/brainmaps.png';
 import neuromorpho from 'imgs/partners/neuromorpho.png';
 import opensourcebrain from 'imgs/partners/opensourcebrain.png';

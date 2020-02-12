@@ -19,7 +19,7 @@ import hbp from 'imgs/hbp-logo.png';
 import nif from 'imgs/nif-logo.png';
 import incf from 'imgs/incf-logo.svg';
 
-import ebrains from 'imgs/partners/ebrains.svg';
+import ebrains from 'imgs/partners/ebrains.png';
 import brainmaps from 'imgs/partners/brainmaps.png';
 import neuromorpho from 'imgs/partners/neuromorpho.png';
 import opensourcebrain from 'imgs/partners/opensourcebrain.png';
@@ -35,8 +35,8 @@ import cli from 'imgs/partners/cli.png';
 import allen from 'imgs/partners/allen.png';
 
 import banner from 'imgs/ks-banner.png';
-import AliceCarousel from 'react-alice-carousel'
-import "react-alice-carousel/lib/alice-carousel.css";
+import "../common/components/react-alice-carousel/lib/alice-carousel.css";
+import ReactAliceCarousel from '../common/components/react-alice-carousel/lib/react-alice-carousel'
 
 const partner_logos = [
   {
@@ -47,17 +47,20 @@ const partner_logos = [
   {
     href: 'http://neuromorpho.org/',
     name: 'Neuromorpho',
-    src: neuromorpho
+    src: neuromorpho,
+    isSpacingRequired: true, // for large icons 
   },
   {
     href: 'http://www.opensourcebrain.org/',
     name: 'Open Source Brain',
-    src: opensourcebrain
+    src: opensourcebrain,
+    isSpacingRequired: true, // for large icons 
   },
   {
     href: 'https://icg.neurotheory.ox.ac.uk/',
     name: 'IonChannelGenealogy',
-    src: icg
+    src: icg,
+    isSpacingRequired: true, // for large icons 
   },
   {
     href: 'https://www.ncbi.nlm.nih.gov/pubmed',
@@ -72,22 +75,26 @@ const partner_logos = [
   {
     href: 'https://senselab.med.yale.edu/ModelDB/',
     name: 'ModelDB',
-    src: modeldb
+    src: modeldb,
+    isSpacingRequired: true, // for large icons 
   },
   {
     href: 'http://www.gensat.org/daily_showcase.jsp',
     name: 'GENSAT',
-    src: gensat
+    src: gensat,
+    isSpacingRequired: true, // for large icons 
   },
   {
     href: 'https://senselab.med.yale.edu/neurondb',
     name: 'NeuronDB',
-    src: neurondb
+    src: neurondb,
+    isSpacingRequired: true, // for large icons 
   },
   {
     href: 'https://neuroelectro.org/',
     name: 'NeuroElectro',
-    src: neuroelectro
+    src: neuroelectro,
+    isSpacingRequired: true, // for large icons 
   },
   {
     href: 'https://bluebrain.epfl.ch/',
@@ -121,6 +128,10 @@ const logos = sortLogos(partner_logos);
 
 
 const styles = theme => ({
+  homeWrapper:{
+    marginTop:'-40px', // adjust main div padding on home page
+    marginLeft:'-20px',
+  },
   title: {
     [theme.breakpoints.down('sm')]: {
       display: 'block',
@@ -134,34 +145,37 @@ const styles = theme => ({
   },
   SearchInput: {
     padding: '5px 10px',
-    border: '1px solid #626262'
+    border: '2px solid #ccc',
+    borderRadius:'8px'
   },
-  searchAreaWrapper:{
-    marginTop:'30px',
+  searchAreaWrapper: {
+    // marginTop: '30px',
   },
   searchContainer: {
     // margin: '20px 0'
-    paddingTop: '20px',
+    // paddingTop: '20px',
     width: '100%'
   },
   searchSubtitle: {
     paddingTop: '15px',
     color: '#005995',
   },
-  dataSourceText:{
+  dataSourceText: {
     color: '#626262',
   },
   introText: {
     paddingLeft: '20px',
-    paddingTop:'20px',
+    paddingTop: '20px',
     color: '#626262',
   },
-  bannerParent:{
-    position:'relative',
+  bannerParent: {
+    position: 'relative',
   },
   bannerImg: {
-    height: '300px',
+    height: 'auto',
     width: '100%',
+    opacity:0.8,
+    maxHeight:'300px',
   },
   searchIcon: {
     fontSize: theme.typography.h4.fontSize,
@@ -170,10 +184,12 @@ const styles = theme => ({
     alignItems: 'center',
     justifyContent: 'center'
   },
-  autoCompleteResult:{
-    padding:'0 300px', //same as input box
+  spacingClass:{
+    padding: '0 15%', //same as input box
+  },
+  autoCompleteResult: {   
     marginTop: '-7px',
-    margingLeft:'1px'
+    margingLeft: '1px'
   },
   suggestBox: {
     zIndex: 1,
@@ -188,6 +204,9 @@ const styles = theme => ({
       color: '#fff',
       opacity: '0.8',
     },
+    minHeight: '40px',
+    borderRradius: '4px',
+    minWwidth: '100px',
   },
   search: {
     borderRadius: theme.shape.borderRadius,
@@ -196,7 +215,7 @@ const styles = theme => ({
     //   boxShadow: theme.shadows[5],
     //   backgroundColor: fade(theme.palette.common.white, 0.25)
     // },
-    margingTop:'30px',
+    margingTop: '30px',
     width: '100%'
   },
   logoContainer: {
@@ -207,11 +226,11 @@ const styles = theme => ({
   },
   logo: {
     paddingLeft: '25px',
-    paddingRight:'25px',
-    marginTop:'18px',
+    paddingRight: '25px',
+    marginTop: '18px',
     // minWidth: 100
-    height:'50px',
-    marginBottom:'0',
+    // height:'50px',
+    marginBottom: '0',
   },
   dataSourcesLogoContainer: {
     marginTop: '125px',
@@ -219,20 +238,27 @@ const styles = theme => ({
       display: 'none'
     }
   },
-  overlayIntro:{
-    position:'absolute',
-    top:0,
-    left:0,
+  overlayIntro: {
+    position: 'absolute',
+    top: 0,
+    left: '45px',
+    [theme.breakpoints.down('sm')]: {
+      position: 'relative'
+    }
   },
   dataSources: {
     [theme.breakpoints.down('sm')]: {
       display: 'none'
     },
-    marginTop: 150
+    paddingTop: 130
   },
   dataSourceLogo: {
-    marginRight: 'auto',
-    marginLeft: 'auto',
+    // marginRight: 'auto',
+    // marginLeft: 'auto',
+  },
+  dataSourceLogoSpacing: {
+    marginLeft: '150px',
+    marginRight: '150px'
   },
   imgFullHeight: {
     left: 'auto',
@@ -271,21 +297,33 @@ const styles = theme => ({
     backgroundColor: '#e0e0e0'
   },
   partnerInfo: {
-    justifyContent: 'flex-end'
+    justifyContent: 'flex-end',
+    [theme.breakpoints.down('md')]: {
+      justifyContent:'center',
+     },
   },
   copyrightText: {
     justifyContent: 'center',
     color: '#626262',
   },
+  partnerTextWrapper:{
+    [theme.breakpoints.down('md')]: {
+      justifyContent:'center',
+     },
+  },
   partnerText: {
     justifyContent: 'center',
+    [theme.breakpoints.down('md')]: {
+     marginRight:'0',
+    },
     color: '#626262',
-    paddingTop:'5px',
-    marginRight:'150px',
+    paddingTop: '5px',
+    // marginLeft:'20px',
+    marginRight: '180px',
   },
   footer: {
     borderTop: '1px solid #ddd',
-    marginTop: '70px',
+    marginTop: '50px',
     bottom: 0,
     width: '100%',
   }
@@ -313,17 +351,30 @@ class HomePage extends Component {
       0: {
         items: 1,
       },
+      720: {
+        items: 1,
+      },
       1024: {
-        items: 5
+        items: 4
       }
     }
 
+    const stagePadding = {
+      paddingLeft: 0,     // in pixels
+      paddingRight: 0
+    }
+
+    const dataSourceLogos = logos.map(logo => (
+      <div key={logo.src} itemClassName={logo.isSpacingRequired ? classes.dataSourceLogoSpacing:null}>
+        {logo.src && <img onClick={() => window.open(logo.href)} alt={logo.name} src={logo.src} className={classes.dataSourceLogo} />}
+      </div>
+    ))
 
     return (
-      <Grid container className="my-home" >
+      <Grid container className={classes.homeWrapper} >
         <Grid xs={12} item className={classes.bannerParent} >
           <div className={classes.overlayIntro}>
-            <Typography className={classes.introText} align="left" variant="h5" gutterBottom>A community encyclopedia linking brain research concepts to data, models, and literature.</Typography>
+            <Typography className={classes.introText} align="left" variant="subtitle1" gutterBottom>A community encyclopedia linking brain research concepts to data, models, and literature.</Typography>
           </div>
           <img src={banner} className={classes.bannerImg} />
         </Grid>
@@ -337,29 +388,24 @@ class HomePage extends Component {
         </Grid>
         <Grid container direction="row" alignItems='center' justify="flex-start" classes={{ container: classes.dataSources }}>
           <Grid item xs={12}>
-            <Typography variant="h4" className={classes.dataSourceText} gutterBottom>Data Sources</Typography>
+            <Typography variant="h6" className={classes.dataSourceText} gutterBottom>Data Sources</Typography>
           </Grid>
         </Grid>
         <Grid container direction="row" justify="flex-start">
 
-          <AliceCarousel autoPlay autoPlayInterval={2000} dotsDisabled buttonsDisabled responsive={responsive}>
-            {logos.map(logo => (
-              <div key={logo.src}>
-                <img onClick={() => window.open(logo.href)} alt={logo.name} src={logo.src} className={classes.dataSourceLogo} />
-              </div>
-            ))
-            }
-          </AliceCarousel>
+          <ReactAliceCarousel stagePadding={stagePadding}  autoPlay autoPlayInterval={1500} dotsDisabled buttonsDisabled responsive={responsive}>
+                  {dataSourceLogos}
+          </ReactAliceCarousel>
 
         </Grid>
 
         <Grid item className={classes.footer} xs={12}>
           <Grid item xs={12} container direction='column' alignItems='center'>
-            <Grid container item xs={12} alignItems="flex-start"  justify="flex-end" direction="row">
-              <Typography className={classes.partnerText} gutterBottom variant='subtitle'>In collaboration with</Typography>
+            <Grid container className={classes.partnerTextWrapper}  item  xs={12}  alignItems="flex-start" justify="flex-end" direction="row">
+              <Typography className={classes.partnerText} gutterBottom variant='h6'>In collaboration with</Typography>
             </Grid>
-            <Grid className={classes.partnerInfo} container direction="row" alignItems='center'>
-              <Grid item>
+            <Grid item xs={12}  className={classes.partnerInfo} container direction="row" alignItems='center'>
+              <Grid item >
                 <a href='https://humanbrainproject.eu/'>
                   <img alt='HBP' className={classes.logo} src={hbp} />
                 </a>
