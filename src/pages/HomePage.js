@@ -34,7 +34,7 @@ import bbp from 'imgs/partners/bbp.png';
 import cli from 'imgs/partners/cli.png';
 import allen from 'imgs/partners/allen.png';
 
-import banner from 'imgs/banner.jpg';
+import banner from 'imgs/ks-banner.png';
 import AliceCarousel from 'react-alice-carousel'
 import "react-alice-carousel/lib/alice-carousel.css";
 
