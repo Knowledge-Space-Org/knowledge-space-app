@@ -1,22 +1,15 @@
 import React, { Component } from 'react'
+import styled from 'styled-components'
 import { connect } from 'react-redux'
 
 import Grid from '@material-ui/core/Grid'
 import Typography from '@material-ui/core/Typography'
 import { withStyles } from '@material-ui/core/styles'
-import { fade } from '@material-ui/core/styles/colorManipulator'
-import GridList from '@material-ui/core/GridList';
-import GridListTile from '@material-ui/core/GridListTile';
-import GridListTileBar from '@material-ui/core/GridListTileBar';
-
-import Fab from '@material-ui/core/Fab';
-import ChevronLeftIcon from '@material-ui/icons/ChevronLeft';
-import ChevronRightIcon from '@material-ui/icons/ChevronRight';
 
 import Autosuggest from 'features/autosuggest/Autosuggest'
 
-import hbp from 'imgs/hbp-logo.png';
-import nif from 'imgs/nif-logo.png';
+import hbp from 'imgs/hbp-logo-new.png';
+import nif from 'imgs/nif-logo-new.png';
 import incf from 'imgs/incf-logo.svg';
 
 import ebrains from 'imgs/partners/ebrains.png';
@@ -35,8 +28,15 @@ import cli from 'imgs/partners/cli.png';
 import allen from 'imgs/partners/allen.png';
 
 import banner from 'imgs/ks-banner.png';
-import "../common/components/react-alice-carousel/lib/alice-carousel.css";
-import ReactAliceCarousel from '../common/components/react-alice-carousel/lib/react-alice-carousel'
+
+import AliceCarousel from 'react-alice-carousel'
+import 'react-alice-carousel/lib/alice-carousel.css'
+
+import '../styles/app.css';
+
+import Fab from '@material-ui/core/Fab';
+import ChevronLeftIcon from '@material-ui/icons/ChevronLeft';
+import ChevronRightIcon from '@material-ui/icons/ChevronRight';
 
 const partner_logos = [
   {
@@ -128,9 +128,9 @@ const logos = sortLogos(partner_logos);
 
 
 const styles = theme => ({
-  homeWrapper:{
-    marginTop:'-40px', // adjust main div padding on home page
-    marginLeft:'-20px',
+  homeWrapper: {
+    marginTop: '-40px', // adjust main div padding on home page
+    marginLeft: '-20px',
   },
   title: {
     [theme.breakpoints.down('sm')]: {
@@ -146,7 +146,7 @@ const styles = theme => ({
   SearchInput: {
     padding: '5px 10px',
     border: '2px solid #ccc',
-    borderRadius:'8px'
+    borderRadius: '8px'
   },
   searchAreaWrapper: {
     // marginTop: '30px',
@@ -159,6 +159,10 @@ const styles = theme => ({
   searchSubtitle: {
     paddingTop: '15px',
     color: '#005995',
+  },
+  descriptionText: {
+    color: '#626262',
+    marginTop: '50px'
   },
   dataSourceText: {
     color: '#626262',
@@ -174,8 +178,8 @@ const styles = theme => ({
   bannerImg: {
     height: 'auto',
     width: '100%',
-    opacity:0.8,
-    maxHeight:'300px',
+    opacity: 0.8,
+    maxHeight: '300px',
   },
   searchIcon: {
     fontSize: theme.typography.h4.fontSize,
@@ -184,10 +188,10 @@ const styles = theme => ({
     alignItems: 'center',
     justifyContent: 'center'
   },
-  spacingClass:{
+  spacingClass: {
     padding: '0 15%', //same as input box
   },
-  autoCompleteResult: {   
+  autoCompleteResult: {
     marginTop: '-7px',
     margingLeft: '1px'
   },
@@ -242,23 +246,26 @@ const styles = theme => ({
     position: 'absolute',
     top: 0,
     left: '45px',
-    [theme.breakpoints.down('sm')]: {
-      position: 'relative'
+    [theme.breakpoints.down('md')]: {
+      position: 'relative',
+      '& h6':{
+          maxWidth:'100%'
+      }
     }
   },
   dataSources: {
-    [theme.breakpoints.down('sm')]: {
-      display: 'none'
-    },
-    paddingTop: 130
+    // [theme.breakpoints.down('sm')]: {
+    //   display: 'none'
+    // },
+    marginTop: 200
   },
   dataSourceLogo: {
     // marginRight: 'auto',
     // marginLeft: 'auto',
   },
   dataSourceLogoSpacing: {
-    marginLeft: '150px',
-    marginRight: '150px'
+    // marginLeft: '150px',
+    // marginRight: '150px'
   },
   imgFullHeight: {
     left: 'auto',
@@ -296,25 +303,46 @@ const styles = theme => ({
   tileBar: {
     backgroundColor: '#e0e0e0'
   },
+  carouselParent: {
+    position: 'relative',
+    '& .nav-options': {
+      opacity: 0,
+      top: 0,
+    },
+    '&:hover': {
+      '& .nav-options': {
+        opacity: 1,
+        transition: 'opacity 1000ms linear',
+      }
+    }
+  },
+  leftNav: {
+    position: 'absolute',
+    left: 0,
+  },
+  rightNav: {
+    position: 'absolute',
+    right: 0,
+  },
   partnerInfo: {
     justifyContent: 'flex-end',
     [theme.breakpoints.down('md')]: {
-      justifyContent:'center',
-     },
+      justifyContent: 'center',
+    },
   },
   copyrightText: {
     justifyContent: 'center',
     color: '#626262',
   },
-  partnerTextWrapper:{
+  partnerTextWrapper: {
     [theme.breakpoints.down('md')]: {
-      justifyContent:'center',
-     },
+      justifyContent: 'center',
+    },
   },
   partnerText: {
     justifyContent: 'center',
     [theme.breakpoints.down('md')]: {
-     marginRight:'0',
+      marginRight: '0',
     },
     color: '#626262',
     paddingTop: '5px',
@@ -365,16 +393,41 @@ class HomePage extends Component {
     }
 
     const dataSourceLogos = logos.map(logo => (
-      <div key={logo.src} itemClassName={logo.isSpacingRequired ? classes.dataSourceLogoSpacing:null}>
+      <div key={logo.src}>
         {logo.src && <img onClick={() => window.open(logo.href)} alt={logo.name} src={logo.src} className={classes.dataSourceLogo} />}
       </div>
     ))
+
+    const Wrapper = styled.div`
+      width: 100%;
+      li.alice-carousel__stage-item :not(.__cloned) {
+        width: auto !important;
+        margin-right: 1rem;
+      }
+    `;
+
+    // syles for navigation arrows
+    const GlobalCss = withStyles({
+      // @global is handled by jss-plugin-global.
+      '@global': {
+        // You should target [class*="MuiButton-root"] instead if you nest themes.
+        '.carousel-parent': {
+          '.nav-options': {
+            'opacity': 0
+          }
+        },
+      },
+    })(() => null);
+
 
     return (
       <Grid container className={classes.homeWrapper} >
         <Grid xs={12} item className={classes.bannerParent} >
           <div className={classes.overlayIntro}>
-            <Typography className={classes.introText} align="left" variant="subtitle1" gutterBottom>A community encyclopedia linking brain research concepts to data, models, and literature.</Typography>
+            <Typography className={classes.introText + " "+ 'app-intro-text' } align="left" variant="h6" gutterBottom>
+              {/* A community encyclopedia linking brain research concepts to data, models, and literature. */}
+              KnowledgeSpace is a community-based encyclopedia that links brain research concepts to data, models, and literature. It provides users with access to anatomy, gene expression, models, morphology, and physiology data from over 15 different neuroscience data/model repositories, such as Allen Institute for Brain Science and the Human Brain Project. It is an open project and welcomes participation and contributions from members of the global research community.
+            </Typography>
           </div>
           <img src={banner} className={classes.bannerImg} />
         </Grid>
@@ -386,25 +439,34 @@ class HomePage extends Component {
         <Grid item xs={12} sm={12}>
           <Typography className={classes.searchSubtitle} variant="subtitle1" gutterBottom>Over 1678580 pieces of data collected from 14 sources.</Typography>
         </Grid>
+        {/* <Grid item xs={12} sm={12}>
+          <Typography className={classes.descriptionText + " " + classes.spacingClass} variant="subtitle1" gutterBottom>KnowledgeSpace is a community-based encyclopedia that links brain research concepts to data, models, and literature. It provides users with access to anatomy, gene expression, models, morphology, and physiology data from over 15 different neuroscience data/model repositories, such as Allen Institute for Brain Science and the Human Brain Project. It is an open project and welcomes participation and contributions from members of the global research community.</Typography>
+        </Grid> */}
         <Grid container direction="row" alignItems='center' justify="flex-start" classes={{ container: classes.dataSources }}>
           <Grid item xs={12}>
             <Typography variant="h6" className={classes.dataSourceText} gutterBottom>Data Sources</Typography>
           </Grid>
         </Grid>
-        <Grid container direction="row" justify="flex-start">
+        <Grid container className={classes.carouselParent + " " + 'carousel-parent'} direction="row" justify="flex-start">
+          <Wrapper>
+            <AliceCarousel ref={(el) => (this.Carousel = el)} items={dataSourceLogos} stagePadding={stagePadding} autoPlay buttonsDisabled autoPlayInterval={2500} dotsDisabled responsive={responsive}>
 
-          <ReactAliceCarousel stagePadding={stagePadding}  autoPlay autoPlayInterval={1500} dotsDisabled buttonsDisabled responsive={responsive}>
-                  {dataSourceLogos}
-          </ReactAliceCarousel>
-
+            </AliceCarousel>
+            <Fab aria-label="Left" className={classes.fab + " " + classes.leftNav + " " + 'nav-options'} onClick={() => this.Carousel.slidePrev()}>
+              <ChevronLeftIcon />
+            </Fab>
+            <Fab aria-label="ScrollRight" className={classes.fab + " " + classes.rightNav + " " + 'nav-options'} onClick={() => this.Carousel.slideNext()}>
+              <ChevronRightIcon />
+            </Fab>
+          </Wrapper>
         </Grid>
 
-        <Grid item className={classes.footer} xs={12}>
+        <Grid item className={classes.footer + " " + 'app-footer'} xs={12}>
           <Grid item xs={12} container direction='column' alignItems='center'>
-            <Grid container className={classes.partnerTextWrapper}  item  xs={12}  alignItems="flex-start" justify="flex-end" direction="row">
+            <Grid container className={classes.partnerTextWrapper} item xs={12} alignItems="flex-start" justify="flex-end" direction="row">
               <Typography className={classes.partnerText} gutterBottom variant='h6'>In collaboration with</Typography>
             </Grid>
-            <Grid item xs={12}  className={classes.partnerInfo} container direction="row" alignItems='center'>
+            <Grid item xs={12} className={classes.partnerInfo} container direction="row" alignItems='center'>
               <Grid item >
                 <a href='https://humanbrainproject.eu/'>
                   <img alt='HBP' className={classes.logo} src={hbp} />

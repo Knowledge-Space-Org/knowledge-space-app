@@ -25,7 +25,7 @@ const DataSpaceCategory = ({ label, sources, doc_count, entity, classes }) => {
   const { slug, category } = entity
 
   return (
-    <ExpansionPanel defaultExpanded>
+    <ExpansionPanel>
     <ExpansionPanelSummary
       expandIcon={<ExpandMoreIcon />}
       aria-controls="panel1a-content"
@@ -33,7 +33,7 @@ const DataSpaceCategory = ({ label, sources, doc_count, entity, classes }) => {
       classes={{ root: classes.categoryList }}
     >
       {
-        <ListSubheader component="h6" classes={{ root: classes.categorySubtitle }}>
+        <ListSubheader component="div" classes={{ root: classes.categorySubtitle }}>
           <label className={classes.categoryLabel}>{label}</label>
           <Chip classes={{ root: classes.categoryResultsFound }} color="secondary" label={`${doc_count} results`} />
         </ListSubheader>}
@@ -43,7 +43,7 @@ const DataSpaceCategory = ({ label, sources, doc_count, entity, classes }) => {
         sources.map(source => (
           <ListItem key={source.id} button classes={{ root: classes.sourceButton }} disableGutters onClick={handleClick}>
             <ListItemText classes={{ primary: classes.sourceLabel }}
-              secondary={<div dangerouslySetInnerHTML={{ __html: source.description }} ></div>}
+              secondary={<span dangerouslySetInnerHTML={{ __html: source.description }} ></span>}
               primary={
                 <React.Fragment>
                   <Link to={`/wiki/${slug}/dataspace/${source.id}`}>

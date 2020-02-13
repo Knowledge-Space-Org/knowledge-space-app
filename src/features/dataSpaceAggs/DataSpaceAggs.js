@@ -30,8 +30,12 @@ const styles = theme => ({
     overflow: 'hidden',
     textAlign: 'justify'
   },
+  expansionPanelWrapper:{
+    paddingTop: '20px',
+  },
   categoryLabel: {
-    textTransform: 'uppercase'
+    textTransform: 'uppercase',
+    cursor:'pointer',
   },
   categoryList: {
     width: '100%',
@@ -39,6 +43,9 @@ const styles = theme => ({
     paddingTop: 0,
     marginTop: 0,
     margin:0,
+    '& >div':{
+      margin: '5px 0 !important',
+    }
   },
   panelItems:{
     flexDirection:'column',
@@ -46,11 +53,12 @@ const styles = theme => ({
   categorySubtitle: {
     paddingLeft: 0,
     margin: 0,
-    fontSize: theme.typography.h5.fontSize,
+    fontSize: theme.typography.h6.fontSize,
     display: 'flex',
     alignItems: 'center',
     justifyContent: 'space-between',
-    width:'100%'
+    width:'100%',
+    cursor:'pointer',
   },
   categoryResultsFound: {
     fontSize: theme.typography.h6.fontSize,
@@ -78,13 +86,14 @@ class DataSpaceAggs extends Component {
       <Paper className={classes.dataSpaceAggs} elevation={1}>
         <Typography variant="h3">DataSpace</Typography>
         <Divider />
-        <React.Fragment>
+        <div className={classes.expansionPanelWrapper}>
           {
             types.map(type => {
               const { sources, doc_count } = aggByType[type]
               return (
                 // <ListItem key={type} classes={{}} disableGutters>
                   <DataSpaceCategory
+                    key={type}
                     classes={classes}
                     entity={entity}
                     label={type}
@@ -96,7 +105,7 @@ class DataSpaceAggs extends Component {
               return null;
             })
           }
-        </React.Fragment>
+        </div>
       </Paper>
     )
   }
