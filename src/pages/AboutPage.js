@@ -92,11 +92,13 @@ class AboutPage extends Component {
           </Typography>
           <Typography variant="body1" align='center' gutterBottom>
               <Button
-                rel='noopener'
-                target="_blank"
+                // rel='noopener'
+                // target="_blank"
                 color='primary'
                 className={classes.button}
-                href='https://docs.google.com/document/d/1cNtiwtt5uu1EjguNxU9y1FiizDi2_XRXUMZq3G8yB-Y/edit'>
+                onClick={() => this.props.history.push('/documentation')}
+                // href='https://docs.google.com/document/d/1cNtiwtt5uu1EjguNxU9y1FiizDi2_XRXUMZq3G8yB-Y/edit'
+                >
                   How To Documentation
               </Button>
               <Button

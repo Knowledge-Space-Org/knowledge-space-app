@@ -15,7 +15,6 @@ import ContactPage from 'pages/ContactPage'
 import DocumentationPage from 'pages/DocumentationPage'
 import GraphPage from '../../pages/GraphPage'
 import Nav from './Nav'
-import HomePageOld from '../../pages/HomePage-old'
 
 const styles = theme => ({
   root: {
@@ -55,7 +54,6 @@ const Main = props => {
   return (
     <Switch>
       <AppRoute exact path="/" component={HomePage} />
-      <AppRoute exact path="/home" component={HomePageOld} />
       <AppRoute exact path="/about" component={AboutPage} />
       <AppRoute exact path="/contact" component={ContactPage} />
       <AppRoute exact path="/documentation" component={DocumentationPage} />
