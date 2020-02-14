@@ -49,12 +49,11 @@ const partner_logos = [
     name: 'Neuromorpho',
     src: neuromorpho,
     isSpacingRequired: true, // for large icons 
-  },
+  },  
   {
-    href: 'http://www.opensourcebrain.org/',
-    name: 'Open Source Brain',
-    src: opensourcebrain,
-    isSpacingRequired: true, // for large icons 
+    href: 'https://www.ncbi.nlm.nih.gov/pubmed',
+    name: 'PubMed',
+    src: pubmed
   },
   {
     href: 'https://icg.neurotheory.ox.ac.uk/',
@@ -63,20 +62,20 @@ const partner_logos = [
     isSpacingRequired: true, // for large icons 
   },
   {
-    href: 'https://www.ncbi.nlm.nih.gov/pubmed',
-    name: 'PubMed',
-    src: pubmed
-  },
-  {
     href: 'http://neurolex.org',
     name: 'NeuroLex',
     src: neurolex
-  },
+  },   
   {
-    href: 'https://senselab.med.yale.edu/ModelDB/',
-    name: 'ModelDB',
-    src: modeldb,
+    href: 'https://senselab.med.yale.edu/neurondb',
+    name: 'NeuronDB',
+    src: neurondb,
     isSpacingRequired: true, // for large icons 
+  },  
+  {
+    href: 'https://bluebrain.epfl.ch/',
+    name: 'Blue Brain Project',
+    src: bbp
   },
   {
     href: 'http://www.gensat.org/daily_showcase.jsp',
@@ -85,10 +84,9 @@ const partner_logos = [
     isSpacingRequired: true, // for large icons 
   },
   {
-    href: 'https://senselab.med.yale.edu/neurondb',
-    name: 'NeuronDB',
-    src: neurondb,
-    isSpacingRequired: true, // for large icons 
+    href: 'http://cellimagelibrary.org/',
+    name: 'Cell Image Library',
+    src: cli
   },
   {
     href: 'https://neuroelectro.org/',
@@ -97,34 +95,38 @@ const partner_logos = [
     isSpacingRequired: true, // for large icons 
   },
   {
-    href: 'https://bluebrain.epfl.ch/',
-    name: 'Blue Brain Project',
-    src: bbp
-  },
-  {
-    href: 'http://cellimagelibrary.org/',
-    name: 'Cell Image Library',
-    src: cli
-  },
-  {
     href: 'http://brainmap.org/',
     name: 'BrainMaps',
     src: brainmaps
   },
   {
+    href: 'https://senselab.med.yale.edu/ModelDB/',
+    name: 'ModelDB',
+    src: modeldb,
+    isSpacingRequired: true, // for large icons 
+  }, 
+  {
     href: 'https://ebrains.eu/',
     name: 'EBRAINS',
     src: ebrains
-  }
+  },
+  {
+    href: 'http://www.opensourcebrain.org/',
+    name: 'Open Source Brain',
+    src: opensourcebrain,
+    isSpacingRequired: true, // for large icons 
+  },  
 ];
 
-const sortLogos = (logos) => {
-  return logos.sort((c1, c2) => {
-    return c1.name.toLowerCase() > c2.name.toLowerCase() ? 1 : -1;
-  });
-}
+// disable sort in order to maintain space between logos
+// const sortLogos = (logos) => {
+//   return logos.sort((c1, c2) => {
+//     return c1.name.toLowerCase() > c2.name.toLowerCase() ? 1 : -1;
+//   });
+// }
+// const logos = sortLogos(partner_logos);
 
-const logos = sortLogos(partner_logos);
+const logos  = partner_logos;
 
 
 const styles = theme => ({
@@ -168,9 +170,9 @@ const styles = theme => ({
     color: '#626262',
   },
   introText: {
-    paddingLeft: '20px',
-    paddingTop: '20px',
+    padding: '20px',
     color: '#626262',
+    fontSize:'1rem'
   },
   bannerParent: {
     position: 'relative',
@@ -228,6 +230,9 @@ const styles = theme => ({
       minWidth: '500px'
     }
   },
+  dataSourceLogo:{
+    cursor:'pointer',
+  },
   logo: {
     paddingLeft: '25px',
     paddingRight: '25px',
@@ -254,19 +259,9 @@ const styles = theme => ({
     }
   },
   dataSources: {
-    // [theme.breakpoints.down('sm')]: {
-    //   display: 'none'
-    // },
     marginTop: 200
   },
-  dataSourceLogo: {
-    // marginRight: 'auto',
-    // marginLeft: 'auto',
-  },
-  dataSourceLogoSpacing: {
-    // marginLeft: '150px',
-    // marginRight: '150px'
-  },
+  
   imgFullHeight: {
     left: 'auto',
     height: 50,
@@ -379,10 +374,13 @@ class HomePage extends Component {
       0: {
         items: 1,
       },
-      720: {
-        items: 1,
+      950: {
+        items: 2,
       },
       1024: {
+        items: 3
+      },
+      1250: {
         items: 4
       }
     }
@@ -394,7 +392,7 @@ class HomePage extends Component {
 
     const dataSourceLogos = logos.map(logo => (
       <div key={logo.src}>
-        {logo.src && <img onClick={() => window.open(logo.href)} alt={logo.name} src={logo.src} className={classes.dataSourceLogo} />}
+        {logo.src && <img  onClick={() => window.open(logo.href)} alt={logo.name} src={logo.src} className={classes.dataSourceLogo} />}
       </div>
     ))
 
@@ -424,7 +422,7 @@ class HomePage extends Component {
       <Grid container className={classes.homeWrapper} >
         <Grid xs={12} item className={classes.bannerParent} >
           <div className={classes.overlayIntro}>
-            <Typography className={classes.introText + " "+ 'app-intro-text' } align="left" variant="h6" gutterBottom>
+            <Typography className={classes.introText + " "+ 'app-intro-text' } align="left" variant="subtitle2" gutterBottom>
               {/* A community encyclopedia linking brain research concepts to data, models, and literature. */}
               KnowledgeSpace is a community-based encyclopedia that links brain research concepts to data, models, and literature. It provides users with access to anatomy, gene expression, models, morphology, and physiology data from over 15 different neuroscience data/model repositories, such as Allen Institute for Brain Science and the Human Brain Project. It is an open project and welcomes participation and contributions from members of the global research community.
             </Typography>
