@@ -37,6 +37,7 @@ import '../styles/app.css';
 import Fab from '@material-ui/core/Fab';
 import ChevronLeftIcon from '@material-ui/icons/ChevronLeft';
 import ChevronRightIcon from '@material-ui/icons/ChevronRight';
+import { Link } from '@material-ui/core'
 
 const partner_logos = [
   {
@@ -49,7 +50,7 @@ const partner_logos = [
     name: 'Neuromorpho',
     src: neuromorpho,
     isSpacingRequired: true, // for large icons 
-  },  
+  },
   {
     href: 'https://www.ncbi.nlm.nih.gov/pubmed',
     name: 'PubMed',
@@ -65,13 +66,13 @@ const partner_logos = [
     href: 'http://neurolex.org',
     name: 'NeuroLex',
     src: neurolex
-  },   
+  },
   {
     href: 'https://senselab.med.yale.edu/neurondb',
     name: 'NeuronDB',
     src: neurondb,
     isSpacingRequired: true, // for large icons 
-  },  
+  },
   {
     href: 'https://bluebrain.epfl.ch/',
     name: 'Blue Brain Project',
@@ -104,7 +105,7 @@ const partner_logos = [
     name: 'ModelDB',
     src: modeldb,
     isSpacingRequired: true, // for large icons 
-  }, 
+  },
   {
     href: 'https://ebrains.eu/',
     name: 'EBRAINS',
@@ -115,7 +116,7 @@ const partner_logos = [
     name: 'Open Source Brain',
     src: opensourcebrain,
     isSpacingRequired: true, // for large icons 
-  },  
+  },
 ];
 
 // disable sort in order to maintain space between logos
@@ -126,7 +127,7 @@ const partner_logos = [
 // }
 // const logos = sortLogos(partner_logos);
 
-const logos  = partner_logos;
+const logos = partner_logos;
 
 
 const styles = theme => ({
@@ -172,7 +173,7 @@ const styles = theme => ({
   introText: {
     padding: '20px',
     color: '#626262',
-    fontSize:'1rem'
+    fontSize: '1rem'
   },
   bannerParent: {
     position: 'relative',
@@ -181,7 +182,6 @@ const styles = theme => ({
     height: 'auto',
     width: '100%',
     opacity: 0.8,
-    maxHeight: '300px',
   },
   searchIcon: {
     fontSize: theme.typography.h4.fontSize,
@@ -190,8 +190,17 @@ const styles = theme => ({
     alignItems: 'center',
     justifyContent: 'center'
   },
+  infoLinks:{
+    textDecoration:'underline',
+  },
+  infoLinkWraper:{
+    marginTop:100,
+  },
   spacingClass: {
     padding: '0 15%', //same as input box
+  },
+  leftSpace:{
+    paddingLeft:'100px'
   },
   autoCompleteResult: {
     marginTop: '-7px',
@@ -230,8 +239,8 @@ const styles = theme => ({
       minWidth: '500px'
     }
   },
-  dataSourceLogo:{
-    cursor:'pointer',
+  dataSourceLogo: {
+    cursor: 'pointer',
   },
   logo: {
     paddingLeft: '25px',
@@ -253,15 +262,15 @@ const styles = theme => ({
     left: '45px',
     [theme.breakpoints.down('md')]: {
       position: 'relative',
-      '& h6':{
-          maxWidth:'100%'
+      '& h6': {
+        maxWidth: '100%'
       }
     }
   },
   dataSources: {
-    marginTop: 200
+    marginTop: 100
   },
-  
+
   imgFullHeight: {
     left: 'auto',
     height: 50,
@@ -392,7 +401,7 @@ class HomePage extends Component {
 
     const dataSourceLogos = logos.map(logo => (
       <div key={logo.src}>
-        {logo.src && <img  onClick={() => window.open(logo.href)} alt={logo.name} src={logo.src} className={classes.dataSourceLogo} />}
+        {logo.src && <img onClick={() => window.open(logo.href)} alt={logo.name} src={logo.src} className={classes.dataSourceLogo} />}
       </div>
     ))
 
@@ -404,25 +413,11 @@ class HomePage extends Component {
       }
     `;
 
-    // syles for navigation arrows
-    const GlobalCss = withStyles({
-      // @global is handled by jss-plugin-global.
-      '@global': {
-        // You should target [class*="MuiButton-root"] instead if you nest themes.
-        '.carousel-parent': {
-          '.nav-options': {
-            'opacity': 0
-          }
-        },
-      },
-    })(() => null);
-
-
     return (
       <Grid container className={classes.homeWrapper} >
         <Grid xs={12} item className={classes.bannerParent} >
           <div className={classes.overlayIntro}>
-            <Typography className={classes.introText + " "+ 'app-intro-text' } align="left" variant="subtitle2" gutterBottom>
+            <Typography className={classes.introText + " " + 'app-intro-text'} align="left" variant="subtitle2" gutterBottom>
               {/* A community encyclopedia linking brain research concepts to data, models, and literature. */}
               KnowledgeSpace is a community-based encyclopedia that links brain research concepts to data, models, and literature. It provides users with access to anatomy, gene expression, models, morphology, and physiology data from over 15 different neuroscience data/model repositories, such as Allen Institute for Brain Science and the Human Brain Project. It is an open project and welcomes participation and contributions from members of the global research community.
             </Typography>
@@ -436,6 +431,13 @@ class HomePage extends Component {
         </Grid>
         <Grid item xs={12} sm={12}>
           <Typography className={classes.searchSubtitle} variant="subtitle1" gutterBottom>Over 1678580 pieces of data collected from 14 sources.</Typography>
+        </Grid>
+        <Grid item xs={12} sm={12} className={classes.infoLinkWraper} >
+          <Grid container className={classes.spacingClass} direction="row" alignItems='center' justify="space-between">
+              <Link className={classes.infoLinks} href="/documentation/#what_is_ks">What is KnowledgeSpace?</Link>
+              <Link className={classes.infoLinks + " " +classes.leftSpace} href="/documentation/#how_do_i_navigate">How do I navigate?</Link>
+              <Link className={classes.infoLinks + " " +classes.leftSpace} href="/documentation/#what_can_i_find">What can I find?</Link>
+          </Grid>
         </Grid>
         {/* <Grid item xs={12} sm={12}>
           <Typography className={classes.descriptionText + " " + classes.spacingClass} variant="subtitle1" gutterBottom>KnowledgeSpace is a community-based encyclopedia that links brain research concepts to data, models, and literature. It provides users with access to anatomy, gene expression, models, morphology, and physiology data from over 15 different neuroscience data/model repositories, such as Allen Institute for Brain Science and the Human Brain Project. It is an open project and welcomes participation and contributions from members of the global research community.</Typography>
