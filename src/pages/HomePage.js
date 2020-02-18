@@ -191,6 +191,7 @@ const styles = theme => ({
     justifyContent: 'center'
   },
   infoLinks:{
+    fontSize: theme.typography.h6.fontSize,
     textDecoration:'underline',
   },
   infoLinkWraper:{

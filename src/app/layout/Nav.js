@@ -192,12 +192,20 @@ class Nav extends React.Component {
         <MenuItem onClick={this.handleContactClick}>
           Contact Us
         </MenuItem>
-        <MenuItem onClick={() => this.props.history.push('/documentation')}>
+        <MenuItem onClick={() => {
+          this.handleMenuClose()
+          this.props.history.push('/documentation')
+        }
+        }>
           How To Documentation
         </MenuItem>
-        <MenuItem onClick={() => window.open('https://github.com/OpenKnowledgeSpace/KnowledgeSpace')}>
+        <MenuItem onClick={() => {
+          this.handleMenuClose()
+          window.open('https://github.com/OpenKnowledgeSpace/KnowledgeSpace')
+        }
+        }>
           Technical Documentation
-        </MenuItem>        
+        </MenuItem>
       </Menu>
     );
 
@@ -218,7 +226,7 @@ class Nav extends React.Component {
         <MenuItem onClick={() => this.props.history.push('/brain-regions')}>
           View Brain Regions
         </MenuItem>
-       
+
       </Menu>
     );
 
@@ -243,10 +251,18 @@ class Nav extends React.Component {
         <MenuItem onClick={this.handleContactClick}>
           Contact Us
         </MenuItem>
-        <MenuItem onClick={() => this.props.history.push('/documentation')}>
+        <MenuItem onClick={() => {
+          this.handleMenuClose()
+          this.props.history.push('/documentation')
+        }
+        }>
           How To Documentation
         </MenuItem>
-        <MenuItem onClick={() => window.open('https://github.com/OpenKnowledgeSpace/KnowledgeSpace')}>
+        <MenuItem onClick={() => {
+          this.handleMenuClose()
+          window.open('https://github.com/OpenKnowledgeSpace/KnowledgeSpace')
+        }
+        }>
           Technical Documentation
         </MenuItem>
 

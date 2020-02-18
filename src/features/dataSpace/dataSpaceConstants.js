@@ -105,7 +105,7 @@ export const DATASPACE_SOURCES = {
   },
   scr_017612_ebrains: {
     label: 'EBRAINS',
-    description: 'EBRAINS web platform is the entry point for researchers to discover EBRAINS services. The services were developed by, and are powered by the EU-funded <a target="_blank" href="https://humanbrainproject.eu/"> Human Brain Project</a>',
+    description: 'EBRAINS web platform is the entry point for researchers to discover EBRAINS services. The services were developed by, and are powered by the EU-funded Human Brain Project',
     type: 'Uncategorized',
     columns: { 'item.name': "Title", 'item.description': 'Description', },
     aggs: { 'subjects.sex.value.key': 'Sex', 'organisms.subject.species.name.key': "Species", 'protocol.methods.name.key': 'Methods' }
