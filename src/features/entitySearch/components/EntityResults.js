@@ -21,7 +21,7 @@ const styles = theme => ({
 
 const EntityResults = ({hits, classes}) => (
   <div className={classes.root}>
-    <Typography variant="subtitle1" className={classes.filterTitle}>{hits.total} records found</Typography>
+    <Typography variant="subtitle1" className={classes.filterTitle}>{hits.total ? hits.total.value : 0} records found</Typography>
     <Divider/>
     <List>
       { hits.hits.map((hit, i) => (

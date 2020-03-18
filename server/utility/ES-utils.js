@@ -64,9 +64,9 @@ const esUtils = {
     findSlugByCurie: async (curie) => {
         const queryFilters = { curies: [curie] };
         const body = { query: { bool: { filter: filterBuilder(queryFilters) } } };
-        return esclient.search({
+        return esDataSpaceClient.search({
             index: 'scigraph',
-            type: 'entities',
+            type:"_doc",
             body
         }).then(response => {
             const hit = head(response.hits.hits);
@@ -78,9 +78,10 @@ const esUtils = {
         })
     },
     findBySlug: async (slug) => {
-        return esclient.get({
+        console.error("finding slug main");
+        return esDataSpaceClient.get({
             index: 'scigraph',
-            type: 'entities',
+            type: '_doc',
             id: slug
         }).then(response => {
             return response;
@@ -95,7 +96,6 @@ const esUtils = {
             return {};
         }
         const query = queryString(labels)
-
         const body = {
             size: 0,
             query: {
@@ -110,7 +110,9 @@ const esUtils = {
                 }
             }
         }
-        return esclient.search({
+
+        console.error(body);
+        return esDataSpaceClient.search({
             index: 'scr*',
             body
         }).then(response => {

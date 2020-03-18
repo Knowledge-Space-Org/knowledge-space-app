@@ -56,6 +56,7 @@ router.get('/get-by-reference-id', async function (req, res) {
     ' WHERE toUpper(atlas.abbreviation) = ' + atlas + '\' AND split(label.iri,"/")[-1] = \'' + id + ' AND exists(atlas.abbreviation)' +
     ' RETURN anatomy.`http://www.geneontology.org/formats/oboInOwl#id` as curie, toUpper(atlas.abbreviation) + ":" + split(label.iri,"/")[-1] as search_id'
 
+  console.log(cypher_query);
   const data = await queryNeo4j(cypher_query, "NIFSTD");
   res.send(data);
 });

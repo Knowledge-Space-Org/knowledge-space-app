@@ -86,7 +86,7 @@ class Autosuggest extends Component {
           selectedItem
         }) => (
             <div className={classes.search}>
-              {/* <form onSubmit={handleSubmit}> */}
+              <form onSubmit={handleSubmit}>
                 <div  className={classes.spacingClass} style={{cursor: 'text', display: 'flex', alignItems: 'center' }}>
                   {renderInput({
                     classes: { root: classes.inputRoot, input: classes.inputInput },
@@ -96,7 +96,7 @@ class Autosuggest extends Component {
                   {/* <SearchIcon onClick={handleSubmit} classes={{root: classes.searchIcon}}/> */}
                   <Button variant='outlined' className={classes.searchButton} onClick={handleSubmit}>Search</Button>
                 </div>
-              {/* </form> */}
+              </form>
               <div {...getMenuProps()} className={classes.autoCompleteResult + " " +classes.spacingClass} style={{ width: '100%' }}>
                 {isOpen ? (
                   <Paper square className={classes.suggestBox}>

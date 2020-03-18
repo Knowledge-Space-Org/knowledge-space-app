@@ -39,7 +39,7 @@ const cellValue = (value = '') => {
 
 const DataSpaceResults = ({hits, classes, columns, page, handlePageChange}) => {
   const results = has(hits, 'hits') ? hits.hits : []
-  const total = has(hits, 'total') ? hits.total : 0
+  const total = has(hits, 'total') ? hits.total.value : 0
   let elem = null;
   if(hits && hits.total && hits.total.value){
     elem =  get(hits.total, 'value') || 0;

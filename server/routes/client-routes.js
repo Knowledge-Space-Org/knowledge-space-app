@@ -4,15 +4,23 @@ const router = app.Router();
 const esUtils = require('../utility/ES-utils');
 
 const esclient = esUtils.getESClient();
+const esDataSpaceClient = esUtils.getDataSpaceESClient();
 
 // autosuggest
 router.get('/auto-suggest', function (req, res) {
-    esclient.search({
+    console.log("auto suggest query");
+    console.log(req.query.body);
+    esDataSpaceClient.search({
         index: 'scigraph',
-        type: 'entities',
+        type: '_doc',
         body: req.query.body
     }).then(response => {
         res.send(response)
+    }).catch(err => {
+        console.error("Error occured in auto suggest");
+        console.error(req.query.body);
+        console.error(err);
+        res.send([]);
     })
 });
 
@@ -29,9 +37,9 @@ router.get('/find-by-slug', async function (req, res) {
 });
 
 router.get('/details', function (req, res) {
-    esclient.search({
+    esDataSpaceClient.search({
         index: 'scigraph',
-        type: 'entities',
+        type: '_doc',
         body: req.query.body
     }).then(response => {
         res.send(response)
@@ -45,7 +53,9 @@ router.get('/all-data-by-entity', async function (req, res) {
 
 })
 router.get('/source-data-by-entity', function (req, res) {
-    let esclientToUse = esclient;
+    console.log("check data query for index" + req.query.source);
+    console.log(req.query.body);
+    let esclientToUse = esDataSpaceClient;
     esclientToUse.search({
         index: req.query.source,
         body: req.query.body,
@@ -63,9 +73,9 @@ router.get('/source-data-by-entity', function (req, res) {
 
 //Literature
 router.get('/literature-by-curie-paths', function (req, res) {
-    esclient.search({
+    esDataSpaceClient.search({
         index: 'pubmed-19',
-        type: 'publication',
+        type: '_doc', // 'publication',
         body: req.query.body
     }).then(response => {
         res.send(response)

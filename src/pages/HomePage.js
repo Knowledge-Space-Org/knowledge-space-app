@@ -162,6 +162,7 @@ const styles = theme => ({
   searchSubtitle: {
     paddingTop: '15px',
     color: '#005995',
+    fontSize:'1.2rem'
   },
   descriptionText: {
     color: '#626262',
@@ -173,7 +174,7 @@ const styles = theme => ({
   introText: {
     padding: '20px',
     color: '#626262',
-    fontSize: '1rem'
+    fontSize: '1.2rem'
   },
   bannerParent: {
     position: 'relative',
@@ -190,18 +191,30 @@ const styles = theme => ({
     alignItems: 'center',
     justifyContent: 'center'
   },
-  infoLinks:{
-    fontSize: theme.typography.h6.fontSize,
-    textDecoration:'underline',
+  infoLinks: {
+    fontSize:'1.2rem',
+    textDecoration: 'underline',
+    fontFamily: "\"Arial\", \"Helvetica\", \"Roboto\", sans-serif",
   },
-  infoLinkWraper:{
-    marginTop:100,
+  infoLinkWraper: {
+    marginTop: 100,
   },
   spacingClass: {
     padding: '0 15%', //same as input box
   },
-  leftSpace:{
-    paddingLeft:'100px'
+  infoLinksParent:{
+    justifyContent:'space-between',
+    [theme.breakpoints.down('md')]: {
+      flexDirection:'column',
+      justifyContent: 'center',
+    },
+  },
+  leftSpace: {
+    paddingLeft: '100px',
+    [theme.breakpoints.down('md')]: {
+      paddingLeft: 0,
+      paddingTop:'10px',
+    },
   },
   autoCompleteResult: {
     marginTop: '-7px',
@@ -434,10 +447,10 @@ class HomePage extends Component {
           <Typography className={classes.searchSubtitle} variant="subtitle1" gutterBottom>Over 1678580 pieces of data collected from 14 sources.</Typography>
         </Grid>
         <Grid item xs={12} sm={12} className={classes.infoLinkWraper} >
-          <Grid container className={classes.spacingClass} direction="row" alignItems='center' justify="space-between">
-              <Link className={classes.infoLinks} href="/documentation/#what_is_ks">What is KnowledgeSpace?</Link>
-              <Link className={classes.infoLinks + " " +classes.leftSpace} href="/documentation/#how_do_i_navigate">How do I navigate?</Link>
-              <Link className={classes.infoLinks + " " +classes.leftSpace} href="/documentation/#what_can_i_find">What can I find?</Link>
+          <Grid container className={classes.spacingClass + " " +classes.infoLinksParent} direction="row" alignItems='center' >
+            <Link className={classes.infoLinks} href="/documentation/#what_is_ks">What is KnowledgeSpace?</Link>
+            <Link className={classes.infoLinks + " " + classes.leftSpace} href="/documentation/#how_do_i_navigate">How do I navigate?</Link>
+            <Link className={classes.infoLinks + " " + classes.leftSpace} href="/documentation/#what_can_i_find">What can I find?</Link>
           </Grid>
         </Grid>
         {/* <Grid item xs={12} sm={12}>

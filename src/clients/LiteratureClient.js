@@ -9,12 +9,12 @@ const aggsParams = () => (
     aggs: {
       pub_type: {
         terms: {
-          field: 'pub_type'
+          field: 'pub_type.keyword'
         }
       },
       'journal.title': {
         terms: {
-          field: 'journal.title'
+          field: 'journal.title.keyword'
         }
       }
     }
@@ -41,13 +41,14 @@ export const queryLiteratureByCuriePaths = ({ curie_paths, page = 1, q, filters 
   body.size = LITERATURE_RESULTS_PER_PAGE
 
   body.sort = [{ 'pub_date': { 'order': 'desc' } }]
+  body.track_total_hits = true
 
   // In literature, we should be able to filter using the Entity's path.
   if (!isEmpty(curie_paths)) {
     body.query.bool = {
       must: [{
         terms: {
-          "text_mined_entities.nlp.tagged_entities_grouped.NEURO|SCICRUNCH.reference": curie_paths
+          "text_mined_entities.nlp.tagged_entities_grouped.NEURO|SCICRUNCH.reference.keyword": curie_paths
         }
       }]
     }

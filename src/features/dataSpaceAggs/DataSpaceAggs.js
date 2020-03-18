@@ -5,11 +5,6 @@ import { withStyles } from '@material-ui/core/styles'
 import Typography from '@material-ui/core/Typography'
 import Paper from '@material-ui/core/Paper'
 import Divider from '@material-ui/core/Divider'
-import List from '@material-ui/core/List'
-import ListItem from '@material-ui/core/ListItem'
-
-import ExpansionPanel from '@material-ui/core/ExpansionPanel';
-
 
 import { reduce, has, reject, isEmpty } from 'lodash'
 
@@ -82,6 +77,8 @@ class DataSpaceAggs extends Component {
   render() {
     const { aggByType, entity, classes } = this.props
     const types = reject(Object.keys(aggByType), o => isEmpty(aggByType[o].sources))
+    console.debug("check props on aggs");
+    console.debug(this.props);
     return (
       <Paper className={classes.dataSpaceAggs} elevation={1}>
         <Typography variant="h3">DataSpace</Typography>

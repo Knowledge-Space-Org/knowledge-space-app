@@ -9,10 +9,8 @@ export const findSlugByCurie = curie => {
   if (typeof curie === 'undefined') {
     return null;
   }
-  
+
   return axios.get(API_END_POINT + 'entity/find-slug-by-curie', { params: { curie } }).then(res => {
-    console.debug("response return from server find-slug-by-curie");
-    console.debug(res.data);
     const response = res.data;
     return response;
   });
@@ -24,11 +22,9 @@ export const findCurieByExternalId = external_id => {
     return null;
   }
   return axios.get(API_END_POINT + 'graph/get-by-reference-id', { params: { external_id } }).then(res => {
-    console.debug("response return from server get-by-reference-id");
-    console.debug(res.data);
     const response = res.data;
-    if(response && response.length){
-      if(response[0] && response[0]._fields){
+    if (response && response.length) {
+      if (response[0] && response[0]._fields) {
         return response[0]._fields[0]; // for curie
       }
     }
@@ -37,13 +33,11 @@ export const findCurieByExternalId = external_id => {
 
 }
 
-export const findDetailsByExternalId = (external_id,type) => {
+export const findDetailsByExternalId = (external_id, type) => {
   if (typeof external_id === 'undefined') {
     return null;
   }
-  return axios.get(API_END_POINT + 'graph/get-all-by-reference-id', { params: { external_id,type } }).then(res => {
-    console.debug("response return from server get-all-by-reference-id");
-    console.debug(res.data);
+  return axios.get(API_END_POINT + 'graph/get-all-by-reference-id', { params: { external_id, type } }).then(res => {
     const response = res.data;
     return response;
   });
@@ -55,15 +49,8 @@ export const findBySlug = slug => {
   if (typeof slug === 'undefined') {
     return {}
   }
-  // return esclient.get({
-  //   index: 'scigraph',
-  //   type: 'entities',
-  //   id: slug
-  // }).then(response => response._source)
 
   return axios.get(API_END_POINT + 'entity/find-by-slug', { params: { id: slug } }).then(res => {
-    console.debug("response return from server find-by-slug");
-    console.debug(res.data);
     const response = res.data;
     return response._source
   });
@@ -74,7 +61,7 @@ const aggsParams = () => (
     aggs: {
       category: {
         terms: {
-          field: 'category'
+          field: 'category.keyword'
         }
       }
     }
@@ -118,24 +105,9 @@ export const search = ({ page = 1, q = '', filters = {} }) => {
     }
     body.query.bool.filter = filterBuilder(queryFilters)
   }
-
-  console.error("In search API");
-
-  // return esclient.search({
-  //   index: 'scigraph',
-  //   type: 'entities',
-  //   body
-  // }).then(response => ({
-  //   results: response.hits,
-  //   facets: combineAggsAndFilters(response.aggregations, filters),
-  //   page,
-  //   q,
-  //   filters
-  // })
+  body.track_total_hits = true;
 
   return axios.get(API_END_POINT + 'entity/details', { params: { body } }).then(res => {
-    console.debug("response return from server find-slug-by-curie");
-    console.debug(res.data);
     const response = res.data;
     return {
       results: response.hits,

@@ -101,7 +101,7 @@ class DocumentationPage extends Component {
           </Typography>
           <div>
             <ul className={classes.listItemParent}>
-              <li><a target="_blank" href='https://www.humanbrainproject.eu/en/explore-the-brain/use-data/'>Human Brain Project Tools and Resources</a></li>
+              <li><a target="_blank" href='https://ebrains.eu/'>Human Brain Project Tools and Resources</a></li>
               <li><a target="_blank" href='https://www.incf.org/resources/sbps'>INCF Network Tools and resources</a></li>
               <li><a target="_blank" href='https://www.nitrc.org/'>NeuroImaging Tools and Resources Collaboratory (NITRC)</a></li>
             </ul>
