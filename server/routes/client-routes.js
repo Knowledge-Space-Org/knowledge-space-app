@@ -8,8 +8,6 @@ const esDataSpaceClient = esUtils.getDataSpaceESClient();
 
 // autosuggest
 router.get('/auto-suggest', function (req, res) {
-    console.log("auto suggest query");
-    console.log(req.query.body);
     esDataSpaceClient.search({
         index: 'scigraph',
         type: '_doc',

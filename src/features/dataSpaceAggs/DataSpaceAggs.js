@@ -77,8 +77,6 @@ class DataSpaceAggs extends Component {
   render() {
     const { aggByType, entity, classes } = this.props
     const types = reject(Object.keys(aggByType), o => isEmpty(aggByType[o].sources))
-    console.debug("check props on aggs");
-    console.debug(this.props);
     return (
       <Paper className={classes.dataSpaceAggs} elevation={1}>
         <Typography variant="h3">DataSpace</Typography>

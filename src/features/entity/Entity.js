@@ -133,7 +133,6 @@ class Entity extends Component {
   }
 
   componentDidUpdate() {
-    console.debug("call in if update");
     this.updateUrlIfApplicable();
   }
 

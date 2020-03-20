@@ -67,16 +67,16 @@ export const DATASPACE_SOURCES = {
     columns: { neuron: 'Neuron', current: 'Current', compartment: 'Compartment' },
     aggs: { 'neuron.keyword': 'Neuron', 'current.keyword': 'Current', 'compartment.keyword': 'Compartment' }
   },
-  scr_006878_brainmaps_atlas: {
-    label: 'BrainMaps',
-    description: 'A high_resolution brain atlas of primate and non-primate brains.',
-    type: 'anatomy'
-  },
-  scr_002187_integrated_connectivity: {
-    label: 'Integrated',
-    description: 'An aggregated dataset of connectivity statements from CoCoMac,Connectome Wiki, the Hippocampal-Parahippocampal Table of Temporal-Lobe.com and Avian Brain Circuitry Database. Connectome Wiki, CoCoMac, and Avian Brain Circuitry Database are no longer in service, so the links may not be functional.',
-    type: 'anatomy'
-  },
+  // scr_006878_brainmaps_atlas: {
+  //   label: 'BrainMaps',
+  //   description: 'A high_resolution brain atlas of primate and non-primate brains.',
+  //   type: 'anatomy'
+  // },
+  // scr_002187_integrated_connectivity: {
+  //   label: 'Integrated',
+  //   description: 'An aggregated dataset of connectivity statements from CoCoMac,Connectome Wiki, the Hippocampal-Parahippocampal Table of Temporal-Lobe.com and Avian Brain Circuitry Database. Connectome Wiki, CoCoMac, and Avian Brain Circuitry Database are no longer in service, so the links may not be functional.',
+  //   type: 'anatomy'
+  // },
   scr_006274_neuroelectro_ephys: {
     label: 'NeuroElectro',
     description: 'A database of elecrophysiological properties text-mined from the biomedical literature as a function of neuron type.',
