@@ -53,8 +53,6 @@ router.get('/all-data-by-entity', async function (req, res) {
 
 })
 router.get('/source-data-by-entity', function (req, res) {
-    console.log("check data query for index" + req.query.source);
-    console.log(req.query.body);
     let esclientToUse = esDataSpaceClient;
     esclientToUse.search({
         index: req.query.source,

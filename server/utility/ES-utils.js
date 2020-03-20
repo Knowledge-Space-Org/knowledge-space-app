@@ -78,7 +78,6 @@ const esUtils = {
         })
     },
     findBySlug: async (slug) => {
-        console.error("finding slug main");
         return esDataSpaceClient.get({
             index: 'scigraph',
             type: '_doc',
@@ -110,8 +109,7 @@ const esUtils = {
                 }
             }
         }
-
-        console.error(body);
+        
         return esDataSpaceClient.search({
             index: 'scr*',
             body

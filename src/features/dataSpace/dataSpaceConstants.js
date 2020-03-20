@@ -107,11 +107,11 @@ export const DATASPACE_SOURCES = {
     aggs: { 'dc.subject.keyword': 'Cell', 'region_term.keyword': 'Region' },
     columns: { 'dc.title': 'Title', 'dc.subject': 'Cell', 'region_term': 'Region' }
   },
-  scr_ebrains_new: {
+  scr_017612_ebrains: {
     label: 'EBRAINS',
     description: 'EBRAINS web platform is the entry point for researchers to discover EBRAINS services. The services were developed by, and are powered by the EU-funded Human Brain Project',
     type: 'Uncategorized',
     columns: { 'item.name': "Title", 'item.description': 'Description', 'subjects.sex.value':'Sex' },
-    aggs: { 'subjects.nested.sex.value.keyword': 'Sex', 'organisms.subject': "Species", 'protocol.methods.keyword': 'Methods' }
+    aggs: { 'subjects.sex.value.raw': 'Sex', 'organisms.subject.species.name.raw': "Species", 'protocol.methods.name.raw': 'Methods' }
   }
 }
