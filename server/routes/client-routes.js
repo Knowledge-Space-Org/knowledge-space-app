@@ -3,7 +3,6 @@ const router = app.Router();
 
 const esUtils = require('../utility/ES-utils');
 
-const esclient = esUtils.getESClient();
 const esDataSpaceClient = esUtils.getDataSpaceESClient();
 
 // autosuggest

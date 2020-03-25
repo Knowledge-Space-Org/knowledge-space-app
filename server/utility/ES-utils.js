@@ -7,10 +7,6 @@ const esDataSpaceClient = new elasticsearch.Client({
     httpAuth: process.env.REACT_APP_ES_DATASPACE_USER + ":" + process.env.REACT_APP_ES_DATASPACE_PASS,
 });
 
-const esclient = new elasticsearch.Client({
-    host: process.env.REACT_APP_ES_URL,
-});
-
 const filterBuilder = filters => {
     return flatten(Object.keys(filters).map(key => {
         return map([...filters[key]], val => {
@@ -55,9 +51,6 @@ const prepareDataSetDetails = (slug,dataSetsAggs) => {
 }
 
 const esUtils = {
-    getESClient: function () {
-        return esclient;
-    },
     getDataSpaceESClient: function () {
         return esDataSpaceClient;
     },

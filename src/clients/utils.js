@@ -4,7 +4,7 @@ import {toString, omitBy, isUndefined, isEmpty, has, map, flatten, find} from 'l
 export const filterBuilder = filters => {
   return flatten(Object.keys(filters).map(key => {
     return map([...filters[key]], val => {
-      return {term: {[key]: val}}
+      return {term: {[key+".keyword"]: val}}
     })
   }))
 }
