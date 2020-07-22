@@ -61,11 +61,9 @@ class DataSpaceSearch extends Component {
 
   render() {
     const {classes,  entity, sourceConfig, filters, facets, results, page} = this.props
-    console.debug("check facets in render");
-    console.debug(facets);
     const { slug, category, name } = entity;
-    const {columns, label ,aggs} = sourceConfig
-
+    const {columns, label ,aggs,id} = sourceConfig
+   
     return (
       <Grid container direction="row" justify="flex-start" alignItems="flex-start" spacing={16}>
         <Grid item xs={12} sm={3}>
@@ -80,7 +78,7 @@ class DataSpaceSearch extends Component {
               </Link>
             </Typography>
             <Divider classes={{root: classes.divider}}/>
-            <DataSpaceResults hits={results} columns={columns} page={page || 0} handlePageChange={this.handlePageChange.bind(this)} linkCol="dc.identifier"/>
+            <DataSpaceResults index={id} hits={results} columns={columns} page={page || 0} handlePageChange={this.handlePageChange.bind(this)} linkCol="dc.identifier"/>
           </Paper>
         </Grid>
       </Grid>

@@ -108,6 +108,7 @@ export const DATASPACE_SOURCES = {
     columns: { 'dc.title': 'Title', 'dc.subject': 'Cell', 'region_term': 'Region' }
   },
   scr_017612_ebrains: {
+    id:"scr_017612_ebrains",
     label: 'EBRAINS',
     description: 'EBRAINS web platform is the entry point for researchers to discover EBRAINS services. The services were developed by, and are powered by the EU-funded Human Brain Project',
     type: 'Uncategorized',

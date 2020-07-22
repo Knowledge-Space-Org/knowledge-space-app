@@ -1,6 +1,5 @@
 import { toString, omitBy, isEmpty, has, map, flatten, merge } from 'lodash'
 import { API_END_POINT } from './ESClient'
-import { filterBuilder } from './utils'
 import axios from 'axios';
 const LITERATURE_RESULTS_PER_PAGE = 25
 
@@ -60,24 +59,21 @@ export const queryLiteratureByCuriePaths = ({ curie_paths, page = 1, q, filters 
     body.query.bool.must.push(queryBuilder(q))
   }
 
+  const filterBuilder = filters => {
+    return flatten(Object.keys(filters).map(key => {
+      return map([...filters[key]], val => {
+        return {term: {[key+".keyword"]: val}}
+      })
+    }))
+  }
+
   const queryFilters = omitBy(filters, isEmpty)
   if (!isEmpty(queryFilters)) {
     body.query.bool.filter = filterBuilder(queryFilters)
   }
 
-  // return esclient.search({
-  //   index: 'pubmed-19',
-  //   type: 'publication',
-  //   body
-  // }).then(response => ({
-  //   results: response.hits,
-  //   facets: response.aggregations,
-  //   page, q, filters
-  // }))
 
   return axios.get(API_END_POINT + 'entity/literature-by-curie-paths', { params: { body } }).then(res => {
-    console.debug("response return from server literature-by-curie-paths");
-    console.debug(res.data);
     const response = res.data;
     return {
       results: response.hits,

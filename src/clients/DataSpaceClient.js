@@ -17,8 +17,6 @@ export const queryAllByEntity = ({ labels }) => {
   }
 
   return axios.get(API_END_POINT + 'entity/all-data-by-entity', { params: { labels } }).then(res => {
-    console.debug("response return from server all-data-by-entity");
-    console.debug(res.data);
     const response = res.data;
     return response.aggregations.sources.buckets
   });
@@ -60,8 +58,6 @@ export const querySourceByEntity = ({ source, entity, page = 0, q = '', filters 
 
 
   return axios.get(API_END_POINT + 'entity/source-data-by-entity', { params: { body, source } }).then(res => {
-    console.debug("response return from server source-data-by-entity'");
-    console.debug(res.data);
     const response = res.data;
     return {
       results: response.hits,
