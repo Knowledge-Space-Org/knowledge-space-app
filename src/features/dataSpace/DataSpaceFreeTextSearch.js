@@ -15,12 +15,13 @@ import Divider from "@material-ui/core/Divider";
 import SearchBox from "common/components/search/SearchBox";
 import Facets from "common/components/search/Facets";
 import Pagination from "common/components/search/Pagination";
-import DataSpaceResults from "./components/DataSpaceResults";
+import DataSpaceFreeTextResults from "./components/DataSpaceFreeTextResults";
 import {
   updateEntityAndSource,
   submitSearch,
   paginateSearch,
   updateDataByFreeTextDataSearch,
+  submitFreeTextSearch,
 } from "./dataSpaceActions";
 
 import { DATASPACE_SOURCES } from "./dataSpaceConstants";
@@ -51,6 +52,11 @@ class DataSpaceFreeTextSearch extends Component {
     this.props.dispatch(updateDataByFreeTextDataSearch({ slug }));
   }
 
+  componentDidUpdate() {
+    const { slug } = this.props;
+    this.props.dispatch(updateDataByFreeTextDataSearch({ slug }));
+  }
+
   handleFacetToggle(facet, selected) {
     const { q, filters, entity, source } = this.props;
     filters[facet] = selected;
@@ -58,10 +64,16 @@ class DataSpaceFreeTextSearch extends Component {
   }
 
   handlePageChange(event, newPage) {
-    const { entity, filters, source, q, page } = this.props;
+    const { entity, filters, source, slug, page } = this.props;
     if (newPage != page) {
       this.props.dispatch(
-        submitSearch({ q, filters, entity, source, page: newPage })
+        submitFreeTextSearch({
+          slug,
+          filters,
+          entity,
+          source,
+          page: newPage,
+        })
       );
     }
   }
@@ -77,26 +89,16 @@ class DataSpaceFreeTextSearch extends Component {
         alignItems="flex-start"
         spacing={16}
       >
-        <Grid item xs={12} sm={3}>
-          {/* {facets && (
-            <Facets
-              aggs={aggs}
-              facets={facets}
-              selected={filters}
-              handleFacetToggle={this.handleFacetToggle.bind(this)}
-            />
-          )} */}
-        </Grid>
-        <Grid item xs={12} sm={9}>
+        <Grid item xs={11} sm={11}>
           <Paper elevation={1}>
-            <Typography variant="h3" classes={{ root: classes.root }}>
-              {label} Results:
+            <Typography variant="h6" classes={{ root: classes.root }}>
+              {label} Results: {this.props.slug}
               {/* <Link className={classes.entityLink} to={`/wiki/#${slug}`}>
                 {name}
               </Link> */}
             </Typography>
             <Divider classes={{ root: classes.divider }} />
-            <DataSpaceResults
+            <DataSpaceFreeTextResults
               index={"scr*"}
               hits={results}
               columns={{ "dc.title": "title", "dc.description": "description" }}

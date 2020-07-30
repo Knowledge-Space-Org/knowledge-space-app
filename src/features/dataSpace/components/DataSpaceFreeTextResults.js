@@ -43,7 +43,7 @@ const createDataURLForEbrains = (source) => {
   return "https://kg.ebrains.eu/search/instances/Dataset/" + id;
 };
 
-const DataSpaceResults = ({
+const DataSpaceFreeTextResults = ({
   hits,
   classes,
   columns,
@@ -131,4 +131,4 @@ const DataSpaceResults = ({
   );
 };
 
-export default withStyles(styles)(DataSpaceResults);
+export default withStyles(styles)(DataSpaceFreeTextResults);

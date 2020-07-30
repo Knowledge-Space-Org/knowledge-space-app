@@ -1,9 +1,12 @@
-import React from "react";
+import React, { useEffect } from "react";
 import Tabs from "@material-ui/core/Tabs";
 import Tab from "@material-ui/core/Tab";
 import EntitySearch from "features/entitySearch/EntitySearch";
 import querystring from "querystring";
 import DataSpaceFreeTextSearch from "../features/dataSpace/DataSpaceFreeTextSearch";
+import FreeTextParent from "../features/freeTextSearch/freeTextParentSearch";
+import { searchStyles } from "./HomePage";
+import { withStyles } from "@material-ui/core";
 function TabPanel(props) {
   const { children, ...other } = props;
 
@@ -14,28 +17,44 @@ function TabPanel(props) {
   );
 }
 
-export default function SearchPage(props) {
+function SearchPage(props) {
   const query = querystring.parse(props.location.search.replace("?", ""));
   const { q } = query;
   const [value, setValue] = React.useState(0);
+  const [searchText, setSearchText] = React.useState(q);
+
+  useEffect(() => {
+    const oldValue = value;
+    setValue(-1);
+    setValue(oldValue);
+  }, [searchText]);
 
   const handleChange = (event, newValue) => {
     setValue(newValue);
   };
 
-  const handleChangeIndex = (index) => {
-    setValue(index);
+  const handleSubmit = (event, searchText) => {
+    event.preventDefault();
+    setSearchText(searchText);
   };
-
+  const history = { pathname: "/search", search: `q=${q}` };
   return (
     <div>
+      <div className={props.classes.searchContainer}>
+        <FreeTextParent
+          classes={props.classes}
+          handleSubmit={handleSubmit}
+          history={history}
+          searchText={q}
+        />
+      </div>
       <Tabs
         value={value}
+        slug={searchText}
         onChange={handleChange}
         indicatorColor="primary"
         textColor="primary"
-        variant="fullWidth"
-        aria-label="full width tabs example"
+        className="free-text-tabs-parent"
       >
         <Tab label="Datasources" />
         <Tab label="Publications" />
@@ -44,16 +63,18 @@ export default function SearchPage(props) {
       <div index={value}>
         {value === 0 && (
           <TabPanel>
-            <DataSpaceFreeTextSearch slug={q} dataSpace={{}} />;
+            <DataSpaceFreeTextSearch slug={searchText} dataSpace={{}} />;
           </TabPanel>
         )}
-        {value === 1 && <TabPanel>Item Two</TabPanel>}
+        {value === 1 && <TabPanel>Publication search will come here</TabPanel>}
         {value === 2 && (
           <TabPanel>
-            <EntitySearch q={q} history={props.history} />
+            <EntitySearch q={searchText} history={props.history} />
           </TabPanel>
         )}
       </div>
     </div>
   );
 }
+
+export default withStyles(searchStyles)(SearchPage);

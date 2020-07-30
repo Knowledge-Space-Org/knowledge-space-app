@@ -25,3 +25,8 @@ export const submitSearch = (query) => ({
   type: DS_SEARCH_SUBMITTED,
   payload: query,
 });
+
+export const submitFreeTextSearch = (query) => ({
+  type: DS_FREE_TEXT_SEARCH,
+  payload: query,
+});
