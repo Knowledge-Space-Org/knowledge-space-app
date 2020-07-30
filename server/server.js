@@ -11,7 +11,7 @@ const app = express();
 const dotenv = require("dotenv");
 dotenv.config();
 // allow cross domain access
-var allowCrossDomain = function(req, res, next) {
+var allowCrossDomain = function (req, res, next) {
   res.header("Access-Control-Allow-Origin", "*");
   res.header("Access-Control-Allow-Methods", "GET");
   res.header("Access-Control-Allow-Headers", "Content-Type");
@@ -57,9 +57,9 @@ app.get("/external/:external_id/:type", async (req, res) => {
 });
 
 // eveything else will be served to the client
-// app.get("/*", function(req, res) {
-//   res.sendFile(path.join(path.resolve(__dirname, "../build"), "index.html"));
-// });
+app.get("/*", function (req, res) {
+  res.sendFile(path.join(path.resolve(__dirname, "../build"), "index.html"));
+});
 
 app.listen(5000, (req) => {
   // console.debug(app.address());
