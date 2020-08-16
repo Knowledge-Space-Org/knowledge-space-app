@@ -5,6 +5,7 @@ import EntitySearch from "features/entitySearch/EntitySearch";
 import querystring from "querystring";
 import DataSpaceFreeTextSearch from "../features/dataSpace/DataSpaceFreeTextSearch";
 import FreeTextParent from "../features/freeTextSearch/freeTextParentSearch";
+import LiteratureSearch from "../features/literature/LiteratureSearch";
 import { searchStyles } from "./HomePage";
 import { withStyles } from "@material-ui/core";
 function TabPanel(props) {
@@ -66,7 +67,11 @@ function SearchPage(props) {
             <DataSpaceFreeTextSearch slug={searchText} dataSpace={{}} />;
           </TabPanel>
         )}
-        {value === 1 && <TabPanel>Publication search will come here</TabPanel>}
+        {value === 1 && (
+          <TabPanel>
+            <LiteratureSearch slug={searchText} />
+          </TabPanel>
+        )}
         {value === 2 && (
           <TabPanel>
             <EntitySearch q={searchText} history={props.history} />

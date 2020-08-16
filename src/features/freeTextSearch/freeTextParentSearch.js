@@ -1,20 +1,7 @@
 import React, { Component, useState } from "react";
 import { connect } from "react-redux";
-import { withStyles } from "@material-ui/core/styles";
-
-import PropTypes from "prop-types";
-import { isEmpty, deburr } from "lodash";
-import keycode from "keycode";
-import Downshift from "downshift";
-import Grid from "@material-ui/core/Grid";
-import Popper from "@material-ui/core/Popper";
-import Paper from "@material-ui/core/Paper";
-import MenuItem from "@material-ui/core/MenuItem";
-import SearchIcon from "@material-ui/icons/Search";
 import InputBase from "@material-ui/core/InputBase";
-import { fade } from "@material-ui/core/styles/colorManipulator";
-
-import { Button, TextField, Input } from "@material-ui/core";
+import { Button } from "@material-ui/core";
 
 class FreeTextParent extends Component {
   constructor(props) {
@@ -40,16 +27,6 @@ class FreeTextParent extends Component {
     const renderInput = this.renderInput;
 
     return (
-      // <Downshift id="autosuggest" onSelect={onSelect}>
-      //   {({
-      //     getInputProps,
-      //     getItemProps,
-      //     getMenuProps,
-      //     highlightedIndex,
-      //     inputValue,
-      //     isOpen,
-      //     selectedItem,
-      //   }) => (
       <div className={classes.search}>
         <form onSubmit={this.handleSubmit}>
           <div
@@ -85,8 +62,6 @@ class FreeTextParent extends Component {
           </div>
         </form>
       </div>
-      //   )}
-      // </Downshift>
     );
   }
 }

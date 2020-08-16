@@ -52,9 +52,11 @@ class DataSpaceFreeTextSearch extends Component {
     this.props.dispatch(updateDataByFreeTextDataSearch({ slug }));
   }
 
-  componentDidUpdate() {
+  componentDidUpdate(prev) {
     const { slug } = this.props;
-    this.props.dispatch(updateDataByFreeTextDataSearch({ slug }));
+    if (prev.slug !== slug) {
+      this.props.dispatch(updateDataByFreeTextDataSearch({ slug }));
+    }
   }
 
   handleFacetToggle(facet, selected) {
