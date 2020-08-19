@@ -82,7 +82,6 @@ class DataSpaceFreeTextSearch extends Component {
 
   render() {
     const { classes, entity, filters, facets, results, page } = this.props;
-    const label = "Data";
     return (
       <Grid
         container
@@ -92,23 +91,16 @@ class DataSpaceFreeTextSearch extends Component {
         spacing={16}
       >
         <Grid item xs={11} sm={11}>
-          <Paper elevation={1}>
-            <Typography variant="h6" classes={{ root: classes.root }}>
-              {label} Results: {this.props.slug}
-              {/* <Link className={classes.entityLink} to={`/wiki/#${slug}`}>
-                {name}
-              </Link> */}
-            </Typography>
-            <Divider classes={{ root: classes.divider }} />
-            <DataSpaceFreeTextResults
-              index={"scr*"}
-              hits={results}
-              columns={{ "dc.title": "title", "dc.description": "description" }}
-              page={page || 0}
-              handlePageChange={this.handlePageChange.bind(this)}
-              linkCol="dc.identifier"
-            />
-          </Paper>
+          <DataSpaceFreeTextResults
+            slug={this.props.slug}
+            index={"scr*"}
+            hits={results}
+            columns={{ "dc.title": "title", "dc.description": "description" }}
+            page={page || 0}
+            handlePageChange={this.handlePageChange.bind(this)}
+            linkCol="dc.identifier"
+          />
+          {/* </Paper> */}
         </Grid>
       </Grid>
     );

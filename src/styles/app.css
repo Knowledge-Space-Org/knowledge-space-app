@@ -22,3 +22,13 @@
     padding: 0 15% 20px 15%;
     /* same as search box*/
 }
+
+.tabIcon {
+    height: 24px;
+    width: 24px;
+}
+
+.tabLabel {
+    vertical-align: text-bottom;
+    margin-left: 5px;
+}

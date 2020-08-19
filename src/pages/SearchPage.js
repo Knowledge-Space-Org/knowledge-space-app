@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, Suspense, useState } from "react";
 import Tabs from "@material-ui/core/Tabs";
 import Tab from "@material-ui/core/Tab";
 import EntitySearch from "features/entitySearch/EntitySearch";
@@ -8,6 +8,10 @@ import FreeTextParent from "../features/freeTextSearch/freeTextParentSearch";
 import LiteratureSearch from "../features/literature/LiteratureSearch";
 import { searchStyles } from "./HomePage";
 import { withStyles } from "@material-ui/core";
+import dataSource from "../imgs/datasource.svg";
+import publications from "../imgs/publications.svg";
+import terms from "../imgs/terms.svg";
+
 function TabPanel(props) {
   const { children, ...other } = props;
 
@@ -39,6 +43,24 @@ function SearchPage(props) {
     setSearchText(searchText);
   };
   const history = { pathname: "/search", search: `q=${q}` };
+
+  const LoadLiteratureSearch = (props) => {
+    const [loadCmp, setLoading] = useState(false);
+    useEffect(() => {
+      setTimeout(() => {
+        setLoading(true);
+      }, 400);
+    }, [loadCmp]);
+
+    return (
+      loadCmp && (
+        <LiteratureSearch
+          slug={props.searchText}
+          fromSearch={true}
+        ></LiteratureSearch>
+      )
+    );
+  };
   return (
     <div>
       <div className={props.classes.searchContainer}>
@@ -57,9 +79,30 @@ function SearchPage(props) {
         textColor="primary"
         className="free-text-tabs-parent"
       >
-        <Tab label="Datasources" />
-        <Tab label="Publications" />
-        <Tab label="Terms" />
+        <Tab
+          label={
+            <>
+              <img className="tabIcon" src={dataSource}></img>
+              <label className="tabLabel">Datasources</label>
+            </>
+          }
+        ></Tab>
+        <Tab
+          label={
+            <>
+              <img className="tabIcon" src={publications}></img>
+              <label className="tabLabel">Publications</label>
+            </>
+          }
+        />
+        <Tab
+          label={
+            <>
+              <img className="tabIcon" src={terms}></img>
+              <label className="tabLabel">Terms</label>
+            </>
+          }
+        />
       </Tabs>
       <div index={value}>
         {value === 0 && (
@@ -69,7 +112,11 @@ function SearchPage(props) {
         )}
         {value === 1 && (
           <TabPanel>
-            <LiteratureSearch slug={searchText} />
+            {
+              <LoadLiteratureSearch
+                searchText={searchText}
+              ></LoadLiteratureSearch>
+            }
           </TabPanel>
         )}
         {value === 2 && (

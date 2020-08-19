@@ -123,9 +123,11 @@ class LiteratureSearch extends Component {
         spacing={16}
       >
         <Grid item xs={12} sm={3}>
-          <KeywordSearch
-            handleKeywordSearch={this.handleKeywordSearch.bind(this)}
-          />
+          {!this.props.fromSearch && (
+            <KeywordSearch
+              handleKeywordSearch={this.handleKeywordSearch.bind(this)}
+            />
+          )}
           <Facets
             facets={facets}
             selected={filters}
