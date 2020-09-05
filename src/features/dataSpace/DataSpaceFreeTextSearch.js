@@ -60,9 +60,9 @@ class DataSpaceFreeTextSearch extends Component {
   }
 
   handleFacetToggle(facet, selected) {
-    const { q, filters, entity, source } = this.props;
+    const { slug, filters } = this.props;
     filters[facet] = selected;
-    this.props.dispatch(submitSearch({ q, filters, page: 0, entity, source }));
+    this.props.dispatch(updateDataByFreeTextDataSearch({ slug, filters }));
   }
 
   handlePageChange(event, newPage) {
@@ -82,6 +82,8 @@ class DataSpaceFreeTextSearch extends Component {
 
   render() {
     const { classes, entity, filters, facets, results, page } = this.props;
+    console.debug("check filters");
+    console.debug(facets);
     return (
       <Grid
         container
@@ -90,7 +92,14 @@ class DataSpaceFreeTextSearch extends Component {
         alignItems="flex-start"
         spacing={16}
       >
-        <Grid item xs={11} sm={11}>
+        <Grid item xs={12} sm={3}>
+          <Facets
+            facets={facets}
+            selected={filters}
+            handleFacetToggle={this.handleFacetToggle.bind(this)}
+          />
+        </Grid>
+        <Grid item item xs={12} sm={9} classes={{}}>
           <DataSpaceFreeTextResults
             slug={this.props.slug}
             index={"scr*"}

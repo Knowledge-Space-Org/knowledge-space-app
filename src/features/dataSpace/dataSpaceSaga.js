@@ -40,8 +40,6 @@ export function* searchDSByEntity({ payload }) {
 export function* searchDSByFreeText({ payload }) {
   try {
     const { slug, filters, page } = payload;
-    console.debug("call kr beey");
-    console.debug(payload);
     const results = yield call(queryDataSourceByFreeText, {
       freeText: slug,
       filters,

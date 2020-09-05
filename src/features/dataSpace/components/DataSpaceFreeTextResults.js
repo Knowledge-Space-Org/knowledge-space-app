@@ -61,8 +61,6 @@ const DataSpaceFreeTextResults = ({
   slug,
 }) => {
   const results = has(hits, "hits") ? hits.hits : [];
-  console.debug("final results");
-  console.debug(results);
   const total = has(hits, "total") ? hits.total.value : 0;
   let elem = null;
   if (hits && hits.total) {

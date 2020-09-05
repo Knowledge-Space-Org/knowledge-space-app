@@ -126,7 +126,8 @@ const esUtils = {
         },
       },
     };
-
+    console.debug("check all data request");
+    console.debug(JSON.stringify(body));
     return esDataSpaceClient
       .search({
         index: "scr*",

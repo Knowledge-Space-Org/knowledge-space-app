@@ -62,14 +62,22 @@ class LiteratureSearch extends Component {
   componentDidMount() {
     const { slug } = this.props;
     console.debug("Slug on publication is" + slug);
-    this.props.dispatch(updateSlug(slug));
+    if (this.props.fromSearch) {
+      this.props.dispatch(submitSearch({ q: slug }));
+    } else {
+      this.props.dispatch(updateSlug(slug));
+    }
   }
 
   componentDidUpdate(prev) {
     const { slug } = this.props;
     if (prev.slug !== slug) {
       console.debug("Slug on publication is" + slug);
-      this.props.dispatch(updateSlug(slug));
+      if (this.props.fromSearch) {
+        this.props.dispatch(submitSearch({ q: slug }));
+      } else {
+        this.props.dispatch(updateSlug(slug));
+      }
     }
   }
 

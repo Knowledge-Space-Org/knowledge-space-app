@@ -11,9 +11,9 @@ export const updateEntityAndSource = ({ slug, source }) => ({
   payload: { slug, source },
 });
 
-export const updateDataByFreeTextDataSearch = ({ slug }) => ({
+export const updateDataByFreeTextDataSearch = ({ slug, filters = {} }) => ({
   type: DS_FREE_TEXT_SEARCH,
-  payload: { slug },
+  payload: { slug, filters },
 });
 
 export const paginateSearch = (query) => ({

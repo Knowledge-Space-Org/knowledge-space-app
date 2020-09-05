@@ -82,6 +82,8 @@ export const querySourceByEntity = ({
     })
     .then((res) => {
       const response = res.data;
+      console.debug("Check all data by entity");
+      console.debug(response);
       return {
         results: response.hits,
         facets: response.aggregations,
@@ -99,42 +101,49 @@ export const queryDataSourceByFreeText = ({
   q = "",
   filters = {},
 }) => {
-  console.debug("calling api res");
-  console.debug(freeText);
+  console.debug("check filters in free text search");
+  console.debug(filters);
+  let index = "scr*";
+  if (filters["sources"]) {
+    index = [...filters["sources"]][0];
+  }
+  console.debug(index);
   const labels = [freeText];
-  // const aggs = aggParameters(DATASPACE_SOURCES[source].aggs);
-  console.debug("freeText");
   const query = queryString(labels);
 
   if (isNull(labels)) {
     console.debug("returnng");
     return {};
   }
-  console.debug("check body");
   const body = {
-    // aggs,
     query: {
       bool: {
         must: { query_string: { query } },
       },
     },
   };
-  const filterFields = omitBy(filters, isEmpty);
-  if (!isEmpty(filterFields)) {
-    body.query.bool.filter = filterBuilder(filterFields);
-  }
+  // const filterFields = omitBy(filters, isEmpty);
+  // if (!isEmpty(filterFields)) {
+  //   body.query.bool.filter = filterBuilder(filterFields);
+  // }
 
   // Now set pagination
   body.size = 25;
   body.from = page * 25;
-  console.debug("going to call rest api");
+
+  body.aggs = {
+    sources: {
+      terms: {
+        field: "_index",
+        size: 20,
+      },
+    },
+  };
   return axios
     .get(API_END_POINT + "entity/all-data-by-free-text", {
-      params: { body },
+      params: { body, index },
     })
     .then((res) => {
-      console.debug("check free text data response");
-      console.debug(res);
       const response = res.data;
       return {
         results: response.hits,
