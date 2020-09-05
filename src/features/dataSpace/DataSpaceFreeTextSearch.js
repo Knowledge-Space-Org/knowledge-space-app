@@ -47,26 +47,40 @@ const styles = (theme) => ({
 });
 
 class DataSpaceFreeTextSearch extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      facets: {},
+    };
+  }
+
   componentDidMount() {
     const { slug } = this.props;
     this.props.dispatch(updateDataByFreeTextDataSearch({ slug }));
   }
 
   componentDidUpdate(prev) {
-    const { slug } = this.props;
+    const { slug, facets, filters } = this.props;
     if (prev.slug !== slug) {
       this.props.dispatch(updateDataByFreeTextDataSearch({ slug }));
     }
+    // else if (!filters || !filters["sources"]) {
+    //   this.setState({
+    //     facets,
+    //   });
+    // }
   }
 
   handleFacetToggle(facet, selected) {
-    const { slug, filters } = this.props;
+    const { slug, filters, facets } = this.props;
     filters[facet] = selected;
-    this.props.dispatch(updateDataByFreeTextDataSearch({ slug, filters }));
+    this.props.dispatch(
+      updateDataByFreeTextDataSearch({ slug, filters, facets })
+    );
   }
 
   handlePageChange(event, newPage) {
-    const { entity, filters, source, slug, page } = this.props;
+    const { entity, filters, source, facets, slug, page } = this.props;
     if (newPage != page) {
       this.props.dispatch(
         submitFreeTextSearch({
@@ -74,6 +88,7 @@ class DataSpaceFreeTextSearch extends Component {
           filters,
           entity,
           source,
+          facets,
           page: newPage,
         })
       );
@@ -117,6 +132,9 @@ class DataSpaceFreeTextSearch extends Component {
 }
 
 const mapStateToProps = ({ dataSpace, entity }, ownProps) => {
+  console.debug("Data space");
+  console.debug(dataSpace);
+  console.debug(ownProps);
   //   const { source } = ownProps;
   //   // const sourceConfig = DATASPACE_SOURCES[ownProps.source] || {};
 

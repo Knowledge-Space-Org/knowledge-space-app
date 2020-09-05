@@ -39,11 +39,12 @@ export function* searchDSByEntity({ payload }) {
 
 export function* searchDSByFreeText({ payload }) {
   try {
-    const { slug, filters, page } = payload;
+    const { slug, filters, page, facets } = payload;
     const results = yield call(queryDataSourceByFreeText, {
       freeText: slug,
       filters,
       page,
+      facets,
     });
     yield put({ type: DS_FREE_TEXT_RESULTS_FOUND, payload: results });
   } catch (err) {

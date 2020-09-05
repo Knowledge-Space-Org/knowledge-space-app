@@ -100,19 +100,18 @@ export const queryDataSourceByFreeText = ({
   page = 0,
   q = "",
   filters = {},
+  facets = {},
 }) => {
-  console.debug("check filters in free text search");
-  console.debug(filters);
   let index = "scr*";
   if (filters["sources"]) {
-    index = [...filters["sources"]][0];
+    index = [...filters["sources"]];
   }
-  console.debug(index);
+  // console.debug(index);
   const labels = [freeText];
   const query = queryString(labels);
 
   if (isNull(labels)) {
-    console.debug("returnng");
+    // console.debug("returnng");
     return {};
   }
   const body = {
@@ -147,7 +146,7 @@ export const queryDataSourceByFreeText = ({
       const response = res.data;
       return {
         results: response.hits,
-        facets: response.aggregations,
+        facets: index === "scr*" ? response.aggregations : facets,
         page,
         q,
         filters,
