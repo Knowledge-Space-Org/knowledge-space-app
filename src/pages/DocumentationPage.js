@@ -12,7 +12,6 @@ const styles = (theme) => ({
     textAlign: "left",
     "& li": {
       padding: 5,
-      fontSize: theme.typography.body1.fontSize,
     },
   },
   body: { marginBottom: "1.5em" },
@@ -144,33 +143,19 @@ class DocumentationPage extends Component {
             What can I do with KnowledgeSpace?
           </Typography>
           <div>
-            <ul className={classes.listItemParent}>
-              <li>
-                <Typography variant="body1">
-                  >Download and use data for analysis
-                </Typography>
-              </li>
-              <li>
-                <Typography variant="body1">
-                  >Use as a source of sample datasets for courses
-                </Typography>
-              </li>
-              <li>
-                <Typography variant="body1">
-                  Expose your datasets to the world
-                </Typography>
-              </li>
-              <li>
-                <Typography variant="body1">
-                  Embed KnowledgeSpace into your own website
-                </Typography>
-              </li>
-            </ul>
+            <Typography
+              variant="body1"
+              align="justify"
+              className={classes.body}
+            >
+              <ul className={classes.listItemParent}>
+                <li>Download and use data for analysis</li>
+                <li>Use as a source of sample datasets for courses</li>
+                <li>Expose your datasets to the world</li>
+                <li>Embed KnowledgeSpace into your own website</li>
+              </ul>
+            </Typography>
           </div>
-          <Typography variant="body1" align="justify" className={classes.body}>
-            Users are able to download and reuse the data found within
-            KnowledgeSpace for analysis and as sample data for education.
-          </Typography>
         </Grid>
         <Grid item xs={12} md={8}>
           <Typography variant="h4" className={classes.title}>
@@ -208,7 +193,11 @@ class DocumentationPage extends Component {
             definitions for terms, relationships, and assertions. To have your
             dataset's metadata index in KnowledgeSpace, we can provide
             assistance in the “extract, transform, and load” process that is
-            needed to curate the data and improve search discoverability.
+            needed to curate the data and improve search discoverability. For
+            more details{" "}
+            <a href="mailto:support@incf.org?subject=KnowledgeSpace support">
+              Contact Us
+            </a>
           </Typography>
         </Grid>
       </Grid>
