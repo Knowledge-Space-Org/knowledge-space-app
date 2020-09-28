@@ -11,8 +11,7 @@ const styles = theme => ({
   listItemParent:{
     textAlign:'left',
     '& li':{
-      padding:5,
-      fontSize: theme.typography.body1.fontSize,
+      padding:5
     }
   },
   body: { marginBottom: '1.5em' }
@@ -89,8 +88,7 @@ class DocumentationPage extends Component {
             </ul>
           </div>
           <Typography variant="body1" align='justify' className={classes.body}>
-
-            Users are able to download and reuse the data found within KnowledgeSpace for analysis and as sample data for education.
+.
 
           </Typography>
         </Grid>
@@ -111,6 +109,7 @@ class DocumentationPage extends Component {
           <Typography variant="h4" className={classes.title}>How do I connect my resources to KnowledgeSpace?</Typography>
           <Typography variant="body1" align='justify' className={classes.body}>
             For ontological entities, we rely on the NIF Ontology to provide definitions for terms, relationships, and assertions. To have your dataset's metadata index in KnowledgeSpace, we can provide assistance in the “extract, transform, and load” process that is needed to curate the data and improve search discoverability.
+            For more details <a href="mailto:support@incf.org?subject=KnowledgeSpace support">Contact Us</a>
           </Typography>
         </Grid>
       </Grid>
