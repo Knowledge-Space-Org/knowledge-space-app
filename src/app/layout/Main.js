@@ -67,7 +67,7 @@ const Main = (props) => {
       <AppRoute exact path="/search" component={SearchPage} />
       <AppRoute
         exact
-        path="/wiki/:slug/dataspace/:source"
+        path="/wiki/dataspace/:source"
         component={DataSpacePage}
       />
       <AppRoute

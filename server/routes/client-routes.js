@@ -59,8 +59,6 @@ router.get("/all-data-by-entity", async function (req, res) {
 
 router.get("/all-data-by-free-text", async function (req, res) {
   let esclientToUse = esDataSpaceClient;
-  console.debug("check free text request");
-  console.debug(req.query.body);
   const index = req.query.index || "scr*";
   esclientToUse
     .search({

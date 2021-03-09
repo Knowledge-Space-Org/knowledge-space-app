@@ -41,7 +41,7 @@
   },
   "scripts": {
     "server": "npx nodemon server/server.js",
-    "start": "PORT=3007 react-scripts start",
+    "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject"

@@ -52,13 +52,13 @@ export const querySourceByEntity = ({
   q = "",
   filters = {},
 }) => {
-  const { labels } = entity;
-  const aggs = aggParameters(DATASPACE_SOURCES[source].aggs);
-  const query = queryString(labels);
-
-  if (isNull(labels)) {
+  const labels  = [entity];
+  if (isNull(labels) || !labels) {
     return {};
   }
+  const aggs = aggParameters(DATASPACE_SOURCES[source].aggs);
+  const query = queryString(labels);
+ 
   const body = {
     aggs,
     query: {
@@ -75,15 +75,15 @@ export const querySourceByEntity = ({
   // Now set pagination
   body.size = 25;
   body.from = page * 25;
-
+  console.debug("check free text request");
+  console.debug(body);
+  console.debug(source)
   return axios
     .get(API_END_POINT + "entity/source-data-by-entity", {
       params: { body, source },
     })
     .then((res) => {
       const response = res.data;
-      console.debug("Check all data by entity");
-      console.debug(response);
       return {
         results: response.hits,
         facets: response.aggregations,
@@ -138,6 +138,9 @@ export const queryDataSourceByFreeText = ({
       },
     },
   };
+  console.debug("check data text request");
+  console.debug(body);
+  console.debug(index)
   return axios
     .get(API_END_POINT + "entity/all-data-by-free-text", {
       params: { body, index },

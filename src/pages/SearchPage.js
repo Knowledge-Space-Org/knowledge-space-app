@@ -23,8 +23,10 @@ function TabPanel(props) {
 }
 
 function SearchPage(props) {
-  const query = querystring.parse(props.location.search.replace("?", ""));
-  const { q } = query;
+  const params = new URLSearchParams(props.location.search); 
+  const q = params.get('q'); // bar
+  // const query = querystring.parse(props.location.search.replace("?", ""));
+  // const { q } = query;
   const [value, setValue] = React.useState(0);
   const [searchText, setSearchText] = React.useState(q);
 

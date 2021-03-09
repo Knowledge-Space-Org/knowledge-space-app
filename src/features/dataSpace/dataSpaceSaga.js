@@ -1,5 +1,5 @@
 import { findBySlug } from "clients/EntityClient";
-import { querySourceByEntity } from "clients/DataSpaceClient";
+import { querySourceByEntity, queryDataSourceByFreeText } from "clients/DataSpaceClient";
 
 import { ENTITY_FOUND } from "../entity/entityConstants";
 import {
@@ -9,14 +9,13 @@ import {
   DS_FREE_TEXT_RESULTS_FOUND,
 } from "./dataSpaceConstants";
 import { put, call } from "redux-saga/effects";
-import { queryDataSourceByFreeText } from "../../clients/DataSpaceClient";
 
 export function* updateEntityAndSearchDS({ payload }) {
   try {
     const { slug, source } = payload;
-    const entity = yield call(findBySlug, slug);
-    yield put({ type: ENTITY_FOUND, payload: entity });
-    yield put({ type: DS_ENTITY_FOUND, payload: { entity, source } });
+    // const entity = yield call(findBySlug, slug);
+    // yield put({ type: ENTITY_FOUND, payload: entity });
+    yield put({ type: DS_ENTITY_FOUND, payload: { entity:slug, source } });
   } catch (err) {
     yield put({ type: "DATASPACE_ERROR", err });
   }

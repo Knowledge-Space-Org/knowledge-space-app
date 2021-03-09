@@ -46,7 +46,7 @@ const DataSpaceCategory = ({ label, sources, doc_count, entity, classes }) => {
               secondary={<span>{source.description}</span>}
               primary={
                 <React.Fragment>
-                  <Link to={`/wiki/${slug}/dataspace/${source.id}`}>
+                  <Link to={`/wiki/dataspace/${source.id}?q=${slug}&term=${slug}`}>
                     {`${source.label}`}
                   </Link>
                   <Typography color="textSecondary" variant="subtitle2">{`${source.doc_count} results`}</Typography>
