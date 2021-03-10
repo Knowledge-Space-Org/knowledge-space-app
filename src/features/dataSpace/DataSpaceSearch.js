@@ -51,16 +51,16 @@ class DataSpaceSearch extends Component {
   }
 
   handleFacetToggle(facet, selected) {
-    const { q, filters, entity, source } = this.props;
+    const { q, filters, entity, source, slug } = this.props;
     filters[facet] = selected;
-    this.props.dispatch(submitSearch({ q, filters, page: 0, entity, source }));
+    this.props.dispatch(submitSearch({ q, filters, page: 0, entity:slug, source }));
   }
 
   handlePageChange(event, newPage) {
-    const { entity, filters, source, q, page } = this.props;
+    const { entity, filters, source, q, page, slug } = this.props;
     if (newPage != page) {
       this.props.dispatch(
-        submitSearch({ q, filters, entity, source, page: newPage })
+        submitSearch({ q, filters, entity:slug, source, page: newPage })
       );
     }
   }
@@ -74,8 +74,9 @@ class DataSpaceSearch extends Component {
       facets,
       results,
       page,
+      slug,
     } = this.props;
-    const { slug, category, name } = entity;
+    const { category, name } = entity;
     const { columns, label, aggs, id } = sourceConfig;
 
     return (
@@ -101,7 +102,7 @@ class DataSpaceSearch extends Component {
             <Typography variant="h3" classes={{ root: classes.root }}>
               {label} Results:
               <Link className={classes.entityLink} to={`/wiki/#${slug}`}>
-                {name}
+                {slug}
               </Link>
             </Typography>
             <Divider classes={{ root: classes.divider }} />

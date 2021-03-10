@@ -13,7 +13,7 @@ import Card from "@material-ui/core/Card";
 import Divider from "@material-ui/core/Divider";
 
 import SearchBox from "common/components/search/SearchBox";
-import Facets from "common/components/search/Facets";
+import FacetLinks from "common/components/search/FacetLinks";
 import Pagination from "common/components/search/Pagination";
 import DataSpaceFreeTextResults from "./components/DataSpaceFreeTextResults";
 import {
@@ -96,7 +96,7 @@ class DataSpaceFreeTextSearch extends Component {
   }
 
   render() {
-    const { classes, entity, filters, facets, results, page } = this.props;
+    const {slug, classes, entity, filters, facets, results, page } = this.props;
     console.debug("check filters");
     console.debug(facets);
     return (
@@ -108,10 +108,11 @@ class DataSpaceFreeTextSearch extends Component {
         spacing={16}
       >
         <Grid item xs={12} sm={3}>
-          <Facets
+          <FacetLinks
             facets={facets}
             selected={filters}
             handleFacetToggle={this.handleFacetToggle.bind(this)}
+            slug={this.props.slug}
           />
         </Grid>
         <Grid item item xs={12} sm={9} classes={{}}>

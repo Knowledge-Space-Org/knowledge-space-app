@@ -52,6 +52,8 @@ export const querySourceByEntity = ({
   q = "",
   filters = {},
 }) => {
+  console.debug("check entity");
+  console.debug(entity);
   const labels  = [entity];
   if (isNull(labels) || !labels) {
     return {};

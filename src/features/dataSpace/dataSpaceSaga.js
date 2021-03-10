@@ -14,7 +14,7 @@ export function* updateEntityAndSearchDS({ payload }) {
   try {
     const { slug, source } = payload;
     // const entity = yield call(findBySlug, slug);
-    // yield put({ type: ENTITY_FOUND, payload: entity });
+    // yield put({ type: ENTITY_FOUND, payload:slug});
     yield put({ type: DS_ENTITY_FOUND, payload: { entity:slug, source } });
   } catch (err) {
     yield put({ type: "DATASPACE_ERROR", err });
