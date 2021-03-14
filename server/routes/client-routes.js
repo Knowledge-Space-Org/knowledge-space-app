@@ -78,6 +78,8 @@ router.get("/all-data-by-free-text", async function (req, res) {
 
 router.get("/source-data-by-entity", function (req, res) {
   let esclientToUse = esDataSpaceClient;
+  console.debug("check source data by entity request");
+  console.debug(JSON.stringify(req.query));
   esclientToUse
     .search({
       index: req.query.source,
@@ -88,7 +90,7 @@ router.get("/source-data-by-entity", function (req, res) {
     })
     .catch((exp) => {
       console.error("error occured in source-data-by-entity");
-      console.error(req.query.body);
+      // console.error(req.query.body);
       console.error(exp);
       res.send([]);
     });

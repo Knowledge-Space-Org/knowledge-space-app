@@ -5,7 +5,8 @@ const DataSpacePage = (props) => {
   const {source } = props.match.params;
   const params = new URLSearchParams(props.location.search); 
   const slug = params.get('q'); // bar
-  return <DataSpaceSearch slug={slug} source={source} dataSpace={{}} />;
+  const term = params.get('term');
+  return <DataSpaceSearch slug={slug} term={term} source={source} dataSpace={{}} />;
 };
 
 export default DataSpacePage;

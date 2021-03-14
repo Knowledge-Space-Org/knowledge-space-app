@@ -16,6 +16,7 @@ import SearchBox from "common/components/search/SearchBox";
 import Facets from "common/components/search/Facets";
 import Pagination from "common/components/search/Pagination";
 import DataSpaceResults from "./components/DataSpaceResults";
+import FreeTextParent from "../freeTextSearch/freeTextParentSearch";
 import {
   updateEntityAndSource,
   submitSearch,
@@ -46,21 +47,29 @@ const styles = (theme) => ({
 
 class DataSpaceSearch extends Component {
   componentDidMount() {
-    const { slug, source } = this.props;
+    const { slug, term, source } = this.props;
     this.props.dispatch(updateEntityAndSource({ slug, source }));
   }
 
   handleFacetToggle(facet, selected) {
     const { q, filters, entity, source, slug } = this.props;
     filters[facet] = selected;
-    this.props.dispatch(submitSearch({ q, filters, page: 0, entity:slug, source }));
+    this.props.dispatch(
+      submitSearch({ q, filters, page: 0, entity, slug, source })
+    );
   }
+
+  onSearchInputChange = (newValue) => {
+    const {term, source } = this.props;
+    this.props.dispatch(updateEntityAndSource({ slug: newValue, source }));
+  }
+
 
   handlePageChange(event, newPage) {
     const { entity, filters, source, q, page, slug } = this.props;
     if (newPage != page) {
       this.props.dispatch(
-        submitSearch({ q, filters, entity:slug, source, page: newPage })
+        submitSearch({ q, filters, entity, slug, source, page: newPage })
       );
     }
   }
@@ -87,6 +96,15 @@ class DataSpaceSearch extends Component {
         alignItems="flex-start"
         spacing={16}
       >
+        <Grid item xs={12} sm={12}>
+            <div className={classes.searchContainer}>
+              <FreeTextParent
+                hideSubmitButton={true}
+                searchText={slug}
+                onSearchInputChange = {this.onSearchInputChange}
+              />
+            </div>
+        </Grid>
         <Grid item xs={12} sm={3}>
           {facets && (
             <Facets
@@ -99,13 +117,6 @@ class DataSpaceSearch extends Component {
         </Grid>
         <Grid item xs={12} sm={9}>
           <Paper elevation={1}>
-            <Typography variant="h3" classes={{ root: classes.root }}>
-              {label} Results:
-              <Link className={classes.entityLink} to={`/wiki/#${slug}`}>
-                {slug}
-              </Link>
-            </Typography>
-            <Divider classes={{ root: classes.divider }} />
             <DataSpaceResults
               index={id}
               hits={results}
@@ -113,6 +124,8 @@ class DataSpaceSearch extends Component {
               page={page || 0}
               handlePageChange={this.handlePageChange.bind(this)}
               linkCol="dc.identifier"
+              label = {label}
+              slug = {slug}
             />
           </Paper>
         </Grid>

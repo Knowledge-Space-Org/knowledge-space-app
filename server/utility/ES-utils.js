@@ -21,7 +21,7 @@ const filterBuilder = (filters) => {
 };
 
 const queryString = (labels) => {
-  if (labels.length > 1) {
+  if (labels && labels.length > 1) {
     return labels.map((label) => `(${label})`).join(" OR ");
   } else {
     return head(labels);
@@ -103,7 +103,7 @@ const esUtils = {
       })
       .catch((err) => {
         console.error("Error in finding entity details by slug  " + slug);
-        console.error(err);
+       // console.error(err);
         return [];
       });
   },
@@ -138,8 +138,8 @@ const esUtils = {
       })
       .catch((exp) => {
         console.error("error occured in all-data-by-entity");
-        console.error(body);
-        console.error(exp);
+        // console.error(body);
+        // console.error(exp);
         return [];
       });
   },

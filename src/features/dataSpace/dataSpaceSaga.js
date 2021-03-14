@@ -13,9 +13,13 @@ import { put, call } from "redux-saga/effects";
 export function* updateEntityAndSearchDS({ payload }) {
   try {
     const { slug, source } = payload;
-    // const entity = yield call(findBySlug, slug);
-    // yield put({ type: ENTITY_FOUND, payload:slug});
-    yield put({ type: DS_ENTITY_FOUND, payload: { entity:slug, source } });
+    const entity = yield call(findBySlug, slug);
+    console.debug("check entity");
+    console.debug(entity);
+    const labels  = {entity};
+   
+    yield put({ type: ENTITY_FOUND, payload:slug});
+    yield put({ type: DS_ENTITY_FOUND, payload: { entity, slug, source } });
   } catch (err) {
     yield put({ type: "DATASPACE_ERROR", err });
   }
@@ -23,12 +27,13 @@ export function* updateEntityAndSearchDS({ payload }) {
 
 export function* searchDSByEntity({ payload }) {
   try {
-    const { entity, source, filters, page } = payload;
+    const { entity, source, slug, filters, page } = payload;
     const results = yield call(querySourceByEntity, {
       entity,
       source,
       filters,
-      page,
+      slug,
+      page
     });
     yield put({ type: DS_RESULTS_FOUND, payload: results });
   } catch (err) {

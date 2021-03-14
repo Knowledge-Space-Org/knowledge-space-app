@@ -49,13 +49,22 @@ export const querySourceByEntity = ({
   source,
   entity,
   page = 0,
-  q = "",
+  slug = "",
   filters = {},
 }) => {
-  console.debug("check entity");
-  console.debug(entity);
-  const labels  = [entity];
-  if (isNull(labels) || !labels) {
+
+ let labels = null;
+ 
+ if(entity) {
+  labels = entity.labels 
+ }
+ 
+ // if entity(Specific term) not found from entered search then make labels from free text so that data source page still workd as free text search inside indexes 
+  if(!labels){
+    labels = [slug];
+  }  
+  // If no entity found and no text present to search then return empty 
+  if (!labels) {
     return {};
   }
   const aggs = aggParameters(DATASPACE_SOURCES[source].aggs);
@@ -90,7 +99,7 @@ export const querySourceByEntity = ({
         results: response.hits,
         facets: response.aggregations,
         page,
-        q,
+        slug,
         filters,
       };
     });
