@@ -114,9 +114,7 @@ class FacetLink extends Component {
                 button
               >
                 <a target="_blank" href={`/dataspace/${value.key}?q=${slug}&term=${slug}`}>
-                  {`${this.getValueLabel(value.key)} (${
-                    value.doc_count
-                  })`}
+                  {`${this.getValueLabel(value.key)}`}
                 </a>
               </ListItem>
             ))}

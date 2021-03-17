@@ -14,9 +14,10 @@ import Divider from "@material-ui/core/Divider";
 
 import SearchBox from "common/components/search/SearchBox";
 import Facets from "common/components/search/Facets";
-import Pagination from "common/components/search/Pagination";
+
+import Autosuggest from "../autosuggest/Autosuggest";
 import DataSpaceResults from "./components/DataSpaceResults";
-import FreeTextParent from "../freeTextSearch/freeTextParentSearch";
+import { searchStyles } from "../../pages/HomePage";
 import {
   updateEntityAndSource,
   submitSearch,
@@ -25,25 +26,42 @@ import {
 
 import { DATASPACE_SOURCES } from "./dataSpaceConstants";
 
-const styles = (theme) => ({
-  root: {
-    paddingRight: theme.mixins.gutters().paddingRight * 1.5,
-    paddingLeft: theme.mixins.gutters().paddingLeft * 1.5,
-    paddingTop: 10,
-    textAlign: "left",
-  },
-  entityLink: {
-    paddingRight: theme.mixins.gutters().paddingRight,
-    paddingLeft: theme.mixins.gutters().paddingLeft,
-    paddingBottom: 10,
-    textDecoration: "none",
-  },
-  divider: {
-    marginRight: theme.mixins.gutters().paddingRight * 1.5,
-    marginLeft: theme.mixins.gutters().paddingLeft * 1.5,
-    marginTop: 2,
-  },
-});
+const styles = (theme) => {
+  const pageStyle = {
+    root: {
+      paddingRight: theme.mixins.gutters().paddingRight * 1.5,
+      paddingLeft: theme.mixins.gutters().paddingLeft * 1.5,
+      paddingTop: 10,
+      textAlign: "left",
+    },
+    entityLink: {
+      paddingRight: theme.mixins.gutters().paddingRight,
+      paddingLeft: theme.mixins.gutters().paddingLeft,
+      paddingBottom: 20,
+      textDecoration: "none",
+    },
+    divider: {
+      marginRight: theme.mixins.gutters().paddingRight * 1.5,
+      marginLeft: theme.mixins.gutters().paddingLeft * 1.5,
+      marginTop: 2,
+    },
+    searchAreaWrapper: {
+      // marginTop: '30px',
+      marginTop: '-10px',
+      paddingBottom: '20px !important'
+    },
+    autoCompleteResult: {
+      marginTop: "-7px",
+      margingLeft: "1px",
+      position:  'absolute',
+      zIndex:99
+    },
+  };
+  const searchPageStyles = searchStyles(theme)
+  return { ...searchPageStyles, ...pageStyle };
+};
+
+// const searchPageStyles = { ...searchStyles, ...styles };
 
 class DataSpaceSearch extends Component {
   componentDidMount() {
@@ -60,10 +78,9 @@ class DataSpaceSearch extends Component {
   }
 
   onSearchInputChange = (newValue) => {
-    const {term, source } = this.props;
+    const { term, source } = this.props;
     this.props.dispatch(updateEntityAndSource({ slug: newValue, source }));
-  }
-
+  };
 
   handlePageChange(event, newPage) {
     const { entity, filters, source, q, page, slug } = this.props;
@@ -96,14 +113,21 @@ class DataSpaceSearch extends Component {
         alignItems="flex-start"
         spacing={16}
       >
-        <Grid item xs={12} sm={12}>
-            <div className={classes.searchContainer}>
-              <FreeTextParent
-                hideSubmitButton={true}
-                searchText={slug}
-                onSearchInputChange = {this.onSearchInputChange}
-              />
-            </div>
+        <Grid
+          container
+          className={classes.searchAreaWrapper}
+          justify="center"
+          alignItems="center"
+          item
+        >
+          <div className={classes.searchContainer}>
+          <Autosuggest 
+            onSelectItem = {this.onSearchInputChange}
+            onSubmit = {this.onSearchInputChange}
+            source = {this.props.source}
+            placeholder = {"Search"}
+            classes={classes} />
+          </div>
         </Grid>
         <Grid item xs={12} sm={3}>
           {facets && (
@@ -124,8 +148,8 @@ class DataSpaceSearch extends Component {
               page={page || 0}
               handlePageChange={this.handlePageChange.bind(this)}
               linkCol="dc.identifier"
-              label = {label}
-              slug = {slug}
+              label={label}
+              slug={slug}
             />
           </Paper>
         </Grid>
@@ -144,4 +168,6 @@ const mapStateToProps = ({ dataSpace, entity }, ownProps) => {
   return { ...dataSpace, source, entity, sourceConfig };
 };
 
-export default withStyles(styles)(connect(mapStateToProps)(DataSpaceSearch));
+export default withStyles(styles)(
+  connect(mapStateToProps)(DataSpaceSearch)
+);

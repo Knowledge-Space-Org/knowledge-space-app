@@ -13,7 +13,6 @@ import { Link } from "react-router-dom";
 
 import DataSpaceDialogeResult from "./DataSpaceResultDialog";
 
-
 import { values, keys, get, isArray, has } from "lodash";
 
 const styles = (theme) => ({
@@ -26,20 +25,20 @@ const styles = (theme) => ({
     minWidth: 1020,
   },
   total: {
-    marginLeft:'auto',
+    marginLeft: "auto",
     paddingTop: 10,
     textAlign: "right",
     paddingRight: theme.mixins.gutters().paddingRight * 1.5,
     paddingLeft: theme.mixins.gutters().paddingLeft * 1.5,
   },
-  searchHeading:{
-    display: 'flex',
-    justifyContent: 'flex-start'
+  searchHeading: {
+    display: "flex",
+    justifyContent: "flex-start",
   },
-  searchHeadingTitle:{
+  searchHeadingTitle: {
     paddingTop: 5,
-    marginLeft:10
-  }
+    marginLeft: 10,
+  },
 });
 
 const cellValue = (value = "", source = null, key = null) => {
@@ -63,7 +62,7 @@ const DataSpaceResults = ({
   handlePageChange,
   index,
   label,
-  slug
+  slug,
 }) => {
   const results = has(hits, "hits") ? hits.hits : [];
   const total = has(hits, "total") ? hits.total.value : 0;
@@ -73,25 +72,28 @@ const DataSpaceResults = ({
   } else {
     elem = get(hits, "total") || 0;
   }
-  console.debug("check results on data source page")
+  console.debug("check results on data source page");
   console.debug(results[0]);
-  const [dialogState, setDialogState] = React.useState({isDialgueOpen: false, entityData: null });
+  const [dialogState, setDialogState] = React.useState({
+    isDialgueOpen: false,
+    entityData: null,
+  });
 
   const handleClickOpen = (data) => {
-    setDialogState({isDialgueOpen: true, entityData: data });
+    setDialogState({ isDialgueOpen: true, entityData: data });
   };
   const handleClose = () => {
-    setDialogState({isDialgueOpen: false, entityData: null });
+    setDialogState({ isDialgueOpen: false, entityData: null });
   };
   return (
     <div className={classes.root}>
-      <div className = {classes.searchHeading}>
-      <Typography variant="h5"  className={classes.searchHeadingTitle}>
-            {label} Results
+      <div className={classes.searchHeading}>
+        <Typography variant="h5" className={classes.searchHeadingTitle}>
+          {label} Results
         </Typography>
-      <Typography variant="subtitle1" className={classes.total}>
-        {elem} records found
-      </Typography>
+        <Typography variant="subtitle1" className={classes.total}>
+          {elem} records found
+        </Typography>
       </div>
       <Divider />
       <Table className={classes.table} aria-labelledby="tableTitle">
@@ -120,6 +122,18 @@ const DataSpaceResults = ({
                       {cellValue(get(hit._source, key), hit._source, key)}
                     </TableCell>
                   ))}
+                  <TableCell>
+                    <a
+                      href="#"
+                      onClick={(ev) => {
+                        ev.preventDefault();
+                        ev.stopPropagation();
+                        handleClickOpen(hit);
+                      }}
+                    >
+                      View more{" "}
+                    </a>
+                  </TableCell>
                 </TableRow>
               ))
             : results.map((hit) => (
@@ -137,11 +151,19 @@ const DataSpaceResults = ({
                       {cellValue(get(hit._source, key))}
                     </TableCell>
                   ))}
-                  <TableCell><a href="#" onClick={(ev) => {
-                    ev.preventDefault();
-                    ev.stopPropagation();
-                    handleClickOpen(hit)}
-                    }> View more </a></TableCell>
+                  <TableCell>
+                    <a
+                      href="#"
+                      onClick={(ev) => {
+                        ev.preventDefault();
+                        ev.stopPropagation();
+                        handleClickOpen(hit);
+                      }}
+                    >
+                      {" "}
+                      View more{" "}
+                    </a>
+                  </TableCell>
                 </TableRow>
               ))}
         </TableBody>
@@ -161,14 +183,14 @@ const DataSpaceResults = ({
         onChangePage={handlePageChange}
         onChangeRowsPerPage={() => {}}
       />
-    {dialogState.isDialgueOpen && 
-     <DataSpaceDialogeResult
-     isOpen = {dialogState.isDialgueOpen}
-     onClose = {handleClose}
-     entityData = {dialogState.entityData}
-     >
-     </DataSpaceDialogeResult>
-    }
+      {dialogState.isDialgueOpen && (
+        <DataSpaceDialogeResult
+          isOpen={dialogState.isDialgueOpen}
+          onClose={handleClose}
+          index = {index}
+          entityData={dialogState.entityData}
+        ></DataSpaceDialogeResult>
+      )}
     </div>
   );
 };

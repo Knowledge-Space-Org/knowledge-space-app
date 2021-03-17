@@ -20,7 +20,7 @@ import { Button, TextField, Input } from "@material-ui/core";
 class Autosuggest extends Component {
   handleChange(value) {
     if (!isEmpty(value) && value !== this.props.q) {
-      this.props.dispatch(submitAutosuggest({ q: value }));
+      this.props.dispatch(submitAutosuggest({ q: value, source: this.props.source }));
     }
     return true;
   }
@@ -29,8 +29,12 @@ class Autosuggest extends Component {
     // const [name, myName] = useState();
     event.preventDefault();
     const q = document.getElementById("autosuggest-input").value;
-    this.props.dispatch(submitAutosuggest({ q }));
-    this.props.history.push({ pathname: "/search", search: `q=${q}` });
+    if(this.props.onSubmit){
+        this.props.onSubmit(q);
+    }{
+      this.props.dispatch(submitAutosuggest({ q }));
+      this.props.history.push({ pathname: "/search", search: `q=${q}` });
+    }
   }
 
   renderSuggestion({
@@ -67,7 +71,11 @@ class Autosuggest extends Component {
   }
 
   onSelect(selectedItem) {
-    this.props.history.push({ pathname: `/wiki/#${selectedItem}` });
+    if(this.props.onSelectItem){
+      this.props.onSelectItem(selectedItem);
+    }else{
+      this.props.history.push({ pathname: `/wiki/#${selectedItem}` });
+    }
   }
 
   render() {
@@ -108,7 +116,7 @@ class Autosuggest extends Component {
                     "aria-label": "naked",
                     classes: { input: classes.SearchInput },
                     className: classes.SearchInput,
-                    placeholder: "Search KnowledgeSpace",
+                    placeholder: this.props.placeholder||"Search KnowledgeSpace",
                   }),
                 })}
                 {/* <SearchIcon onClick={handleSubmit} classes={{root: classes.searchIcon}}/> */}
