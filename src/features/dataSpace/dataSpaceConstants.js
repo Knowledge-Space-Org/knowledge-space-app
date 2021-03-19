@@ -80,11 +80,11 @@ export const DATASPACE_SOURCES = {
     description:
       "A genome_wide database of gene expression in the mouse brain.",
     type: "expression",
-    columns: { "dc.title": "Gene", organism: "Organism", species: "Species" },
+    columns: { "gene_symbol": "Gene Symbol", "gene_name": "Gene Name", "structure_name": "Structure Name", "expression_level": "Expression level", "expression_density": "Expression density" },
     aggs: {
-      "gene_name.keyword": "Gene",
-      "organism.keyword": "Organism",
-      "species.keyword": "Species",
+      "gene_name.keyword": "Gene Name",
+      "gene_symbol.keyword": "Gene Symbol",
+      "structure_name.keyword": "Structure Name",
     },
   },
   scr_002978_aba_celltypeephysdata: {
