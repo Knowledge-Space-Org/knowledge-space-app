@@ -38,6 +38,12 @@ const styles = (theme) => ({
   }
 });
 
+const fieldsToExclude = ["dc"]
+
+const shouldDisplayField = (field) => {
+  return !fieldsToExclude.includes(field);
+}
+
 const isEbrains = index => index === "scr_017612_ebrains";
 
  const DataSpaceDialogeResult = ({isOpen,onClose,entityData, index, fullScreen, classes}) => {
@@ -45,9 +51,9 @@ const isEbrains = index => index === "scr_017612_ebrains";
   console.debug(entityData);
   const isEbrainIndex =  isEbrains(index);
 
-  const titleKey = isEbrainIndex ? "item.name" : "dc.title";
-  const descKey = isEbrainIndex ? "item.description" : "dc.description";
-  const link = isEbrainIndex ? createDataURLForEbrains(entityData._source) : cellValue(get(entityData._source, "dc.identifier"), entityData._source,  "dc.identifier")
+  const titleKey = "dc.title";
+  const descKey =  "dc.description";
+  const link =  cellValue(get(entityData._source, "dc.identifier"), entityData._source,  "dc.identifier")
   return (
     <Dialog
       fullWidth={true}
@@ -75,7 +81,7 @@ const isEbrains = index => index === "scr_017612_ebrains";
         </Typography>
         <Table>
             <TableBody>
-            {keys(entityData._source).sort().map((key, i) => (
+            {keys(entityData._source).sort().filter((key) => shouldDisplayField(key)).map((key, i) => (
 
               <TableRow key={i}>
                 <TableCell>

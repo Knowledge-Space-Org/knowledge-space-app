@@ -35,6 +35,7 @@ router.get("/find-by-slug", async function (req, res) {
   res.send(slugDetails);
 });
 
+
 router.get("/details", function (req, res) {
   esDataSpaceClient
     .search({

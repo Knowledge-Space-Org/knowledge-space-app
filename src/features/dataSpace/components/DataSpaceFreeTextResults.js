@@ -8,6 +8,8 @@ import { Link } from "react-router-dom";
 import { values, keys, get, isArray, has } from "lodash";
 import { Card, CardContent, CardActions, CardHeader } from "@material-ui/core";
 
+import DataSpaceDialogeResult from "./DataSpaceResultDialog";
+
 const styles = (theme) => ({
   root: {},
   cardParent: {
@@ -28,6 +30,13 @@ const styles = (theme) => ({
   total: {
     marginLeft: "auto",
   },
+  cardHeader : {
+    display: "flex",
+  },
+  cardHeaderLink : {
+    position: "absolute",
+    right: "15px"
+  }
 });
 
 const cellValue = (value = "", source = null, key = null) => {
@@ -38,11 +47,11 @@ const cellValue = (value = "", source = null, key = null) => {
 };
 
 const getDataSourceUrl = (hit) => {
-  if (hit.index === "scr_017612_ebrains") {
-    return createDataURLForEbrains(hit._source);
-  } else {
+  // if (hit.index === "scr_017612_ebrains") {
+  //   return createDataURLForEbrains(hit._source);
+  // } else {
     return get(hit._source, "dc.identifier");
-  }
+ // }
 };
 
 // fix: Specific to EBRAINS
@@ -50,6 +59,14 @@ const createDataURLForEbrains = (source) => {
   const id = source.item ? source.item.id : null;
   return "https://kg.ebrains.eu/search/instances/Dataset/" + id;
 };
+
+const setDialogState = (dialogState) => {
+  this.setState({
+    dialogState,
+    ...this.state
+  })
+}
+
 
 const DataSpaceFreeTextResults = ({
   hits,
@@ -69,7 +86,36 @@ const DataSpaceFreeTextResults = ({
     elem = get(hits, "total") || 0;
   }
 
+  const getCardTitle = (hit) => {
+      return (
+           <a className = {classes.cardHeaderLink}
+           href="#"
+           onClick={(ev) => {
+             ev.preventDefault();
+             ev.stopPropagation();
+             handleClickOpen(hit);
+           }}
+         >
+           {" "}
+           View more{" "}
+         </a>
+      )
+  }
+
+  const [dialogState, setDialogState] = React.useState({
+    isDialgueOpen: false,
+    entityData: null,
+  });
+
+  const handleClickOpen = (data) => {
+    setDialogState({ isDialgueOpen: true, entityData: data });
+  };
+  const handleClose = () => {
+    setDialogState({ isDialgueOpen: false, entityData: null });
+  };
+
   return (
+    <>
     <div className={classes.root}>
       <div variant="subtitle1" className={classes.heading}>
         <Typography variant="h4">Data Results: {slug}</Typography>
@@ -83,13 +129,17 @@ const DataSpaceFreeTextResults = ({
           variant="outlined"
         >
           <CardHeader
+            component = "div"
+            className={classes.cardTitle}
             title={cellValue(
               get(hit._source, "dc.title"),
               hit._source,
               "dc.title"
             )}
+            action = {
+              getCardTitle(hit)
+            }
           >
-            Date item
           </CardHeader>
           <CardContent>
             <Typography
@@ -121,6 +171,14 @@ const DataSpaceFreeTextResults = ({
         onChangeRowsPerPage={() => {}}
       />
     </div>
+     {dialogState.isDialgueOpen && (
+      <DataSpaceDialogeResult
+        isOpen={dialogState.isDialgueOpen}
+        onClose={handleClose}
+        entityData={dialogState.entityData}
+      ></DataSpaceDialogeResult>
+    )}
+    </>
   );
 };
 

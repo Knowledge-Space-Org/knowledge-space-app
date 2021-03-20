@@ -51,6 +51,10 @@ class DataSpaceFreeTextSearch extends Component {
     super(props);
     this.state = {
       facets: {},
+      dialogState: {
+        isDialgueOpen: false,
+        entityData: null,
+      }
     };
   }
 
@@ -64,11 +68,6 @@ class DataSpaceFreeTextSearch extends Component {
     if (prev.slug !== slug) {
       this.props.dispatch(updateDataByFreeTextDataSearch({ slug }));
     }
-    // else if (!filters || !filters["sources"]) {
-    //   this.setState({
-    //     facets,
-    //   });
-    // }
   }
 
   handleFacetToggle(facet, selected) {
@@ -97,8 +96,6 @@ class DataSpaceFreeTextSearch extends Component {
 
   render() {
     const {slug, classes, entity, filters, facets, results, page } = this.props;
-    console.debug("check filters");
-    console.debug(facets);
     return (
       <Grid
         container

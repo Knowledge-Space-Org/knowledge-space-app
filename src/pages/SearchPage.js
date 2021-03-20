@@ -83,7 +83,7 @@ function SearchPage(props) {
           label={
             <>
               <img className="tabIcon" src={dataSource}></img>
-              <label className="tabLabel">Datasources</label>
+              <label className="tabLabel">Datasets</label>
             </>
           }
         ></Tab>
@@ -91,7 +91,7 @@ function SearchPage(props) {
           label={
             <>
               <img className="tabIcon" src={publications}></img>
-              <label className="tabLabel">Publications</label>
+              <label className="tabLabel">Literature</label>
             </>
           }
         />
@@ -99,7 +99,7 @@ function SearchPage(props) {
           label={
             <>
               <img className="tabIcon" src={terms}></img>
-              <label className="tabLabel">Terms</label>
+              <label className="tabLabel">Encyclopedia</label>
             </>
           }
         />

@@ -19,8 +19,13 @@ import { Button, TextField, Input } from "@material-ui/core";
 
 class Autosuggest extends Component {
   handleChange(value) {
+    if (this.props.onSearchInputChange) {
+      this.props.onSearchInputChange(value);
+    }
     if (!isEmpty(value) && value !== this.props.q) {
-      this.props.dispatch(submitAutosuggest({ q: value, source: this.props.source }));
+      this.props.dispatch(
+        submitAutosuggest({ q: value, source: this.props.source })
+      );
     }
     return true;
   }
@@ -29,9 +34,9 @@ class Autosuggest extends Component {
     // const [name, myName] = useState();
     event.preventDefault();
     const q = document.getElementById("autosuggest-input").value;
-    if(this.props.onSubmit){
-        this.props.onSubmit(q);
-    }{
+    if (this.props.onSubmit) {
+      this.props.onSubmit(q);
+    } else {
       this.props.dispatch(submitAutosuggest({ q }));
       this.props.history.push({ pathname: "/search", search: `q=${q}` });
     }
@@ -67,14 +72,19 @@ class Autosuggest extends Component {
   }
 
   renderInput({ classes, inputProps }) {
+    if (!inputProps.value) {
+      delete inputProps.value;
+    }
     return <InputBase classes={classes} inputProps={inputProps} />;
   }
 
   onSelect(selectedItem) {
-    if(this.props.onSelectItem){
-      this.props.onSelectItem(selectedItem);
-    }else{
-      this.props.history.push({ pathname: `/wiki/#${selectedItem}` });
+    if (selectedItem) {
+      if (this.props.onSelectItem) {
+        this.props.onSelectItem(selectedItem);
+      } else {
+        this.props.history.push({ pathname: `/wiki/#${selectedItem}` });
+      }
     }
   }
 
@@ -116,7 +126,9 @@ class Autosuggest extends Component {
                     "aria-label": "naked",
                     classes: { input: classes.SearchInput },
                     className: classes.SearchInput,
-                    placeholder: this.props.placeholder||"Search KnowledgeSpace",
+                    placeholder:
+                      this.props.placeholder || "Search KnowledgeSpace",
+                    value: this.props.value || "",
                   }),
                 })}
                 {/* <SearchIcon onClick={handleSubmit} classes={{root: classes.searchIcon}}/> */}

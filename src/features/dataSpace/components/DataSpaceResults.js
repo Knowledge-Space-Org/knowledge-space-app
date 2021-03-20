@@ -72,8 +72,6 @@ const DataSpaceResults = ({
   } else {
     elem = get(hits, "total") || 0;
   }
-  console.debug("check results on data source page");
-  console.debug(results[0]);
   const [dialogState, setDialogState] = React.useState({
     isDialgueOpen: false,
     entityData: null,
@@ -106,37 +104,7 @@ const DataSpaceResults = ({
           </TableRow>
         </TableHead>
         <TableBody>
-          {index === "scr_017612_ebrains"
-            ? results.map((hit) => (
-                <TableRow
-                  key={hit._id}
-                  hover
-                  onClick={(event) =>
-                    window.open(createDataURLForEbrains(hit._source), "_blank")
-                  }
-                  role="checkbox"
-                  tabIndex={-1}
-                >
-                  {keys(columns).map((key, i) => (
-                    <TableCell key={i}>
-                      {cellValue(get(hit._source, key), hit._source, key)}
-                    </TableCell>
-                  ))}
-                  <TableCell>
-                    <a
-                      href="#"
-                      onClick={(ev) => {
-                        ev.preventDefault();
-                        ev.stopPropagation();
-                        handleClickOpen(hit);
-                      }}
-                    >
-                      View more{" "}
-                    </a>
-                  </TableCell>
-                </TableRow>
-              ))
-            : results.map((hit) => (
+          {results.map((hit) => (
                 <TableRow
                   key={hit._id}
                   hover
@@ -151,13 +119,16 @@ const DataSpaceResults = ({
                       {cellValue(get(hit._source, key))}
                     </TableCell>
                   ))}
-                  <TableCell>
+                  <TableCell 
+                        onClick={(ev) => {
+                        ev.preventDefault();
+                        ev.stopPropagation();
+                        handleClickOpen(hit);
+                      }}>
                     <a
                       href="#"
                       onClick={(ev) => {
                         ev.preventDefault();
-                        ev.stopPropagation();
-                        handleClickOpen(hit);
                       }}
                     >
                       {" "}
