@@ -80,11 +80,11 @@ export const DATASPACE_SOURCES = {
     description:
       "A genome_wide database of gene expression in the mouse brain.",
     type: "expression",
-    columns: { "dc.title": "Gene", organism: "Organism", species: "Species" },
+    columns: { "gene_symbol": "Gene Symbol", "gene_name": "Gene Name", "structure_name": "Structure Name", "expression_level": "Expression level", "expression_density": "Expression density" },
     aggs: {
-      "gene_name.keyword": "Gene",
-      "organism.keyword": "Organism",
-      "species.keyword": "Species",
+      "gene_name.keyword": "Gene Name",
+      "gene_symbol.keyword": "Gene Symbol",
+      "structure_name.keyword": "Structure Name",
     },
   },
   scr_002978_aba_celltypeephysdata: {
@@ -202,19 +202,10 @@ export const DATASPACE_SOURCES = {
   },
   scr_017612_ebrains: {
     id: "scr_017612_ebrains",
-    label: "EBRAINS",
-    description:
-      "EBRAINS web platform is the entry point for researchers to discover EBRAINS services. The services were developed by, and are powered by the EU-funded Human Brain Project",
-    type: "Uncategorized",
-    columns: {
-      "item.name": "Title",
-      "item.description": "Description",
-      "subjects.sex.value": "Sex",
-    },
-    aggs: {
-      "subjects.sex.value.raw": "Sex",
-      "organisms.subject.species.name.raw": "Species",
-      "protocol.methods.name.raw": "Methods",
-    },
+    label: 'EBRAINS',
+    description: 'EBRAINS web platform is the entry point for researchers to discover EBRAINS services. The services were developed by, and are powered by the EU- funded Human Brain Project',
+    type: 'Uncategorized',
+    columns: { 'dc.title': "Title", 'dc.description': 'Description' },
+    aggs: { 'sex.keyword': 'Sex', 'species.keyword': "Species", 'methods.keyword': 'Methods' }
   },
 };
