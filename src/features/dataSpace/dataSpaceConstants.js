@@ -8,38 +8,40 @@ export const DS_SEARCH_RESULTS_PAGINATED = "DS_SEARCH_RESULTS_PAGINATED";
 export const DS_FREE_TEXT_RESULTS_FOUND = "DS_FREE_TEXT_RESULTS_FOUND";
 
 export const DATASPACE_SOURCES = {
-  scr_0137950_neuroml_models: {
+  scr_013705_neuroml_models: {//done
     label: "NeuroML Database",
     description:
       "Curated relational database that provides for the storage and retrieval of computational neuroscience model.",
     type: "models",
     columns: {
-      "dc.title": "Model Name",
-      model_type: "Model Type",
-      "dc.creator": "Authors",
-      "dc.subject": "Keywords",
+      "model_id": "Model ID",
+      "model_name": "Model Name",
+      "model_type": "Model Type",
+      "publication.pubmed_title": "Publication"
     },
     aggs: {
       "model_type.keyword": "Model Type",
-      "dc.creator.keyword": "Authors",
-      "dc.subject.keyword": "Keywords",
+      "neurolex_terms.keyword": "Neurolex Terms",
+      "keywords.keyword": "Keywords",
     },
   },
-  scr_002145_neuromorpho_modelimage: {
+  scr_002145_neuromorpho_modelimage: {//Done
     label: "NeuroMorpho",
     description: "A curated repository of digitally reconstructed neurons.",
     type: "morphology",
     columns: {
-      "dc.title": "Model Name",
-      "dc.subject": "Subjects",
-      age: "Age",
-      gender: "Gender",
-      strain_name: "Strain",
+      "neuron_name": "Neuron Name",
+      "strain_name": "Strain",
+      "age": "Age",
+      "brain_region": "Brain Region"
     },
     aggs: {
-      "species.keyword": "Model Name",
+      "species.keyword": "Species",
       "strain_name.keyword": "Strain",
-      "dc.subject.keyword": "Subject",
+      "staining_method.keyword": "Staining Method",
+      "brain_region.keyword": "Brain Region",
+      "age.keyword": "Age group",
+      "gender.keyword": "Gender"
     },
   },
   scr_007271_modeldb_models: {
@@ -75,7 +77,7 @@ export const DATASPACE_SOURCES = {
       "brain_view.keyword": "Brain View",
     },
   },
-  scr_002978_aba_expression: {
+  scr_002978_aba_expression: {//Done
     label: "Allen Brain Atlas Mouse Brain - Expression",
     description:
       "A genome_wide database of gene expression in the mouse brain.",
@@ -85,6 +87,7 @@ export const DATASPACE_SOURCES = {
       "gene_name.keyword": "Gene Name",
       "gene_symbol.keyword": "Gene Symbol",
       "structure_name.keyword": "Structure Name",
+      "species.keyword": "Species"
     },
   },
   scr_002978_aba_celltypeephysdata: {
@@ -93,7 +96,7 @@ export const DATASPACE_SOURCES = {
       "Provides a database of neuronal cell types based on multimodal characterization of single cells to enable data_driven approaches to classification. For more details about the experiments, please refer to the technical white paper.",
     type: "physiology",
   },
-  scr_002721_gensat_geneexpression: {
+  scr_002721_gensat_geneexpression: {//Done, todo re-index
     label: "GENSAT",
     description:
       "Contains gene expression data and maps of the mouse brain and spinal cord.",
@@ -108,23 +111,27 @@ export const DATASPACE_SOURCES = {
       "gene_name.keyword": "Gene",
       "structure_name.keyword": "Structure",
       "stain.keyword": "Stain",
+      "acquisition_technique.keyword": "Acquisition Technique",
+      "age.keyword": "Age Group",
+      "expression_level.keyword": "Expression Level",
     },
   },
-  scr_014194_icg_ionchannels: {
+  scr_014194_icg_ionchannels: {//DONE
     label: "IonChannelGenealogy",
     description:
       "Provides a quantitative assay of publicly available ion channel models.",
     type: "models",
     columns: {
       "dc.title": "Title",
-      "dc.subject": "Species",
-      brain_area: "Brain Area",
-      neuron_type: "Neuron",
+      "animal_model": "Animal Model",
+      "neuron_type": "Neuron Type",
     },
     aggs: {
-      "dc.subject.keyword": "Species",
-      "brain_area.keyword": "Brain Area",
       "neuron_type.keyword": "Neuron",
+      "animal_model.keyword": "Animal Model",
+      "brain_area.keyword": "Brain Area",
+      "age.keyword": "Age group",
+      "neuron_type.keyword": "Neuron Type",
     },
   },
   scr_003105_neurondb_currents: {
