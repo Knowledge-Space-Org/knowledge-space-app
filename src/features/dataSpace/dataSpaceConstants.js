@@ -197,18 +197,25 @@ export const DATASPACE_SOURCES = {
   scr_017612_ebrains: {//DONE
     label: 'EBRAINS',
     description: 'EBRAINS web platform is the entry point for researchers to discover EBRAINS services. The services were developed by, and are powered by the EU- funded Human Brain Project',
-    type: 'Latest',
+    type: 'General',
     columns: { 'dc.title': "Title", 'dc.description': 'Description' },
     aggs: { 'sex.keyword': 'Sex', 'species.keyword': "Species", 'methods.keyword': 'Methods' }
   },
 
-
-
   scr_017041_sparc: {//DONE
     label: 'SPARC',
     description: "Stimulating Peripheral Activity to Relieve Conditions (SPARC)",
-    type: 'Latest',
+    type: 'General',
     columns: { 'dc.title': "Title", 'dc.description': 'Description', "item.modalities": "Modalities" },
     aggs: { "anatomy.organ.name.keyword": "Organ", "item.modalities.keyword": "Modalities", "item.keywords.keyword": "Keywords", "item.techniques.keyword": "Techniques", "organisms.primary.species.name.keyword": "Species", "protocols.keyword": "Protocol" }
   },
+
+  scr_005031_openneuro: {//DONE
+    label: 'OpenNEURO',
+    description: "A free and open platform for sharing MRI, MEG, EEG, iEEG, ECoG, and ASL data",
+    type: 'General',
+    columns: { 'dc.title': "Title", 'dc.description': 'Description' },
+    aggs: { "Authors.keyword": "Authors", "License.keyword": "License" }
+  },
+
 };
