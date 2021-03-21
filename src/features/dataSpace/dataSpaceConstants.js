@@ -17,7 +17,7 @@ export const DATASPACE_SOURCES = {
       "model_id": "Model ID",
       "model_name": "Model Name",
       "model_type": "Model Type",
-      "publication.pubmed_title": "Publication"
+      "pubmed_title": "Publication"
     },
     aggs: {
       "model_type.keyword": "Model Type",
