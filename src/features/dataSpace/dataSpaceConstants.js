@@ -17,7 +17,6 @@ export const DATASPACE_SOURCES = {
       "model_id": "Model ID",
       "model_name": "Model Name",
       "model_type": "Model Type",
-      "pubmed_title": "Publication"
     },
     aggs: {
       "model_type.keyword": "Model Type",
@@ -33,7 +32,7 @@ export const DATASPACE_SOURCES = {
       "neuron_name": "Neuron Name",
       "strain_name": "Strain",
       "age": "Age",
-      "brain_region": "Brain Region"
+      "brain_region": "Brain Region",
     },
     aggs: {
       "species.keyword": "Species",
@@ -41,7 +40,7 @@ export const DATASPACE_SOURCES = {
       "staining_method.keyword": "Staining Method",
       "brain_region.keyword": "Brain Region",
       "age.keyword": "Age group",
-      "gender.keyword": "Gender"
+      "gender.keyword": "Gender",
     },
   },
   scr_007271_modeldb_models: {
@@ -150,17 +149,7 @@ export const DATASPACE_SOURCES = {
       "compartment.keyword": "Compartment",
     },
   },
-  // scr_006878_brainmaps_atlas: {
-  //   label: 'BrainMaps',
-  //   description: 'A high_resolution brain atlas of primate and non-primate brains.',
-  //   type: 'anatomy'
-  // },
-  // scr_002187_integrated_connectivity: {
-  //   label: 'Integrated',
-  //   description: 'An aggregated dataset of connectivity statements from CoCoMac,Connectome Wiki, the Hippocampal-Parahippocampal Table of Temporal-Lobe.com and Avian Brain Circuitry Database. Connectome Wiki, CoCoMac, and Avian Brain Circuitry Database are no longer in service, so the links may not be functional.',
-  //   type: 'anatomy'
-  // },
-  scr_006274_neuroelectro_ephys: {
+  scr_006274_neuroelectro_ephys: {//To index directly
     label: "NeuroElectro",
     description:
       "A database of elecrophysiological properties text-mined from the biomedical literature as a function of neuron type.",
@@ -172,47 +161,56 @@ export const DATASPACE_SOURCES = {
     },
     aggs: { "property_name.keyword": "property_name" },
   },
-  scr_003510_cil_images: {
+  scr_003510_cil_images: {//DONE
     label: "Cell Image Library",
     description:
       "Provides annotated images, videos and animations of cellular processes.",
     type: "morphology",
+    columns: {
+      "dc.title": "Title",
+      "dc.description": "Description",
+      "biological_prcoess": "Biological Process",
+      "cell_type": "Cell Type",
+    },
     aggs: {
       "species.keyword": "Species",
-      "celltype.keyword": "Cell Type",
-      "biologicalprocess.keyword": "Biological Process",
-    },
-    columns: {
-      image_url: "Image",
-      species: "Species",
-      "dc.creator": "Authors",
-      biologicalprcoess: "Biological Process",
-      celltype: "Cell Type",
+      "cell_type.keyword": "Cell Type",
+      "biological_process.keyword": "Biological Process",
+      "imaging_mode.keyword": "Imaging Mode",
+      "dimension_units.keyword": "Dimension Units",
     },
   },
-  scr_002978_aba_celltypemorphodata: {
-    label: "Allen Brain Atlas Mouse Brain - CellType MorphoData",
-    description:
-      "Provides a database of neuronal cell types based on multimodal characterization of single cells to enable data_driven approaches to classification.",
-    type: "morphology",
-  },
-  scr_014306_bbp_cellmorphology: {
+  scr_014306_bbp_cellmorphology: {//Looks okay
     label: "Blue Brain Project Cell Morphology",
     description: "3D Models of rat neuronal morphologies.",
     type: "morphology",
-    aggs: { "dc.subject.keyword": "Cell", "region_term.keyword": "Region" },
     columns: {
       "dc.title": "Title",
       "dc.subject": "Cell",
       region_term: "Region",
     },
+    aggs: {
+      "dc.subject.keyword": "Cell",
+      "region_term.keyword": "Region"
+    },
   },
-  scr_017612_ebrains: {
+  scr_017612_ebrains: {//DONE
     id: "scr_017612_ebrains",
     label: 'EBRAINS',
     description: 'EBRAINS web platform is the entry point for researchers to discover EBRAINS services. The services were developed by, and are powered by the EU- funded Human Brain Project',
-    type: 'Uncategorized',
+    type: 'Latest',
     columns: { 'dc.title': "Title", 'dc.description': 'Description' },
     aggs: { 'sex.keyword': 'Sex', 'species.keyword': "Species", 'methods.keyword': 'Methods' }
+  },
+
+
+
+  scr_017041_sparc: {//DONE
+    id: "scr_017612_ebrains",
+    label: 'SPARC',
+    description: "Stimulating Peripheral Activity to Relieve Conditions (SPARC)",
+    type: 'Latest',
+    columns: { 'dc.title': "Title", 'dc.description': 'Description', "item.modalities": "Modalities" },
+    aggs: { "anatomy.organ.name.keyword": "Organ", "item.modalities.keyword": "Modalities", "item.keywords.keyword": "Keywords", "item.techniques.keyword": "Techniques", "organisms.primary.species.name.keyword": "Species", "protocols.keyword": "Protocol" }
   },
 };
