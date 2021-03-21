@@ -195,7 +195,6 @@ export const DATASPACE_SOURCES = {
     },
   },
   scr_017612_ebrains: {//DONE
-    id: "scr_017612_ebrains",
     label: 'EBRAINS',
     description: 'EBRAINS web platform is the entry point for researchers to discover EBRAINS services. The services were developed by, and are powered by the EU- funded Human Brain Project',
     type: 'Latest',
@@ -206,7 +205,6 @@ export const DATASPACE_SOURCES = {
 
 
   scr_017041_sparc: {//DONE
-    id: "scr_017612_ebrains",
     label: 'SPARC',
     description: "Stimulating Peripheral Activity to Relieve Conditions (SPARC)",
     type: 'Latest',
