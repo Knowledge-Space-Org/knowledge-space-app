@@ -215,7 +215,24 @@ export const DATASPACE_SOURCES = {
     description: "A free and open platform for sharing MRI, MEG, EEG, iEEG, ECoG, and ASL data",
     type: 'General',
     columns: { 'dc.title': "Title", 'dc.description': 'Description' },
-    aggs: { "Authors.keyword": "Authors", "License.keyword": "License" }
+    aggs: { "BIDSVersion.keyword": "BIDS Version", "Authors.keyword": "Authors", "License.keyword": "License" }
+  },
+  scr_005069_brainminds: {//DONE
+    label: 'Brain/MINDS',
+    description: "For sharing the data and knowledge being produced in the Brain/MINDS project. The portal aims to provide integrated knowledge for public use and original data for open research and collaboration.",
+    type: 'General',
+    columns: { 'dc.title': "Title", 'dc.description': 'Description' },
+    aggs: { "keywords.keyword": "Keywords" }
+  },
+  scr_017571_dandi: {
+    label: 'DANDI Archive',
+    description: "The BRAIN Initiative archive for publishing and sharing cellular neurophysiology data.",
+    type: 'physiology',
+    columns: { 'dc.title': "Title", 'dc.description': 'Description', "species": "Species" },
+    aggs: {
+      "keywords.keyword": "Keywords", "species.keyword": "Species", "license.keyword": "License", "subjects_age.minimum.keyword": "Minimum subject age",
+      "subjects_age.maximum": "Maximum subject age",
+    }
   },
 
 };
