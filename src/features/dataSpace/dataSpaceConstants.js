@@ -229,6 +229,6 @@ export const DATASPACE_SOURCES = {
     description: 'The BRAIN Initiative archive for publishing and sharing cellular neurophysiology data.',
     type: 'General',
     columns: { 'dc.title': 'Title', 'dc.description': 'Description', 'species': 'Species' },
-    aggs: { 'keywords.keyword': 'Keywords', 'species.keyword': 'Species', 'license.keyword': 'License' }
+    aggs: { 'keywords.keyword': 'Keywords', 'species.keyword': 'Species', 'license.keyword': 'License', 'subjects_age.minimum.keyword': 'Minimum subject age', 'subjects_age.maximum.keyword': 'Maximum subject age', }
   },
 };
