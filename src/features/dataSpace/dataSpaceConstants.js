@@ -231,4 +231,13 @@ export const DATASPACE_SOURCES = {
     columns: { 'dc.title': 'Title', 'dc.description': 'Description', 'species': 'Species' },
     aggs: { 'keywords.keyword': 'Keywords', 'species.keyword': 'Species', 'license.keyword': 'License', 'subjects_age.minimum.keyword': 'Minimum subject age', 'subjects_age.maximum.keyword': 'Maximum subject age', }
   },
+  scr_016433_conp: {//DONE
+    label: 'CONP Portal',
+    description: 'Canadian Open Neuroscience Platform',
+    type: 'General',
+    columns: { 'dc.title': 'Title', 'dc.description': 'Description', 'keywords': 'Keywords' },
+    aggs: {
+      'keywords.keyword': 'Keywords', 'isAbout.keyword': 'Is About', 'license.keyword': 'License', 'formats.keyword': 'Formats', "creators.keyword": "Creators"
+    }
+  },
 };
