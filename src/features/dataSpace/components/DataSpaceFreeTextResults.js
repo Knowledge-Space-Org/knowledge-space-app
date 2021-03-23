@@ -30,6 +30,9 @@ const styles = (theme) => ({
   total: {
     marginLeft: "auto",
   },
+  cardContent : {
+    textAlign: "left",
+  },
   cardHeader : {
     display: "flex",
   },
@@ -114,6 +117,11 @@ const DataSpaceFreeTextResults = ({
     setDialogState({ isDialgueOpen: false, entityData: null });
   };
 
+  const shortenDesc = (str, maxLen, separator = ' ') => {
+    if (str.length <= maxLen) return str;
+    return str.substr(0, str.lastIndexOf(separator, maxLen)) + '...'; 
+  }
+
   return (
     <>
     <div className={classes.root}>
@@ -141,7 +149,14 @@ const DataSpaceFreeTextResults = ({
             }
           >
           </CardHeader>
-          <CardContent>
+          <CardContent className={classes.cardContent}>
+          <Typography variant="body2" component="p">
+            {shortenDesc(cellValue(
+              get(hit._source, "dc.description"),
+              hit._source,
+              "dc.description"
+            ),500)}
+            </Typography>
             <Typography
               className={classes.title}
               color="textSecondary"
@@ -151,7 +166,6 @@ const DataSpaceFreeTextResults = ({
                 {getDataSourceUrl(hit)}
               </a>
             </Typography>
-            <Typography variant="body2" component="p"></Typography>
           </CardContent>
         </Card>
       ))}
