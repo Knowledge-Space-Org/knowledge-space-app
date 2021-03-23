@@ -64,6 +64,12 @@ const styles = (theme) => {
 // const searchPageStyles = { ...searchStyles, ...styles };
 
 class DataSpaceSearch extends Component {
+
+  constructor(props){
+    super(props)
+    this.state = {inputValue: props.slug}
+  }
+
   componentDidMount() {
     const { slug, term, source } = this.props;
     this.props.dispatch(updateEntityAndSource({ slug, source }));
@@ -78,8 +84,16 @@ class DataSpaceSearch extends Component {
   }
 
   onSearchInputChange = (newValue) => {
+    this.setState({
+      inputValue: newValue
+    })
+  };
+
+  onSearchSubmit = (newValue) => {
     const { term, source } = this.props;
-    this.props.dispatch(updateEntityAndSource({ slug: newValue, source }));
+    this.onSearchInputChange(newValue)
+    // this.props.dispatch(updateEntityAndSource({ slug: newValue, source }));
+    window.location = `/dataspace/${source}?q=${newValue}&term=${newValue}`;
   };
 
   handlePageChange(event, newPage) {
@@ -123,13 +137,14 @@ class DataSpaceSearch extends Component {
         >
           <div className={classes.searchContainer}>
           <Autosuggest 
-            onSelectItem = {this.onSearchInputChange}
-            onSubmit = {this.onSearchInputChange}
+            value = {this.state.inputValue}
+            onSearchInputChange = {this.onSearchInputChange}
+            onSelectItem = {this.onSearchSubmit}
+            onSubmit = {this.onSearchSubmit}
             source = {this.props.source}
+            history = {this.props.history}
             placeholder = {"Search"}
-            classes={classes} 
-            value = {slug}
-            />
+            classes={classes} />
           </div>
         </Grid>
         <Grid item xs={12} sm={3}>
