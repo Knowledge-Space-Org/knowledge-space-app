@@ -4,7 +4,7 @@ import { filterBuilder, combineAggsAndFilters } from './utils'
 import axios from 'axios';
 
 
-export const search = ({ q = '' }) => {
+export const search = ({ q = '', source = '' }) => {
   console.debug("coming in auto suggest");
   const body = {
     'suggest': {
@@ -19,7 +19,7 @@ export const search = ({ q = '' }) => {
   }
 
   console.debug(API_END_POINT);
-  return axios.get(API_END_POINT + 'entity/auto-suggest', { params: { body } }).then(res => {
+  return axios.get(API_END_POINT + 'entity/auto-suggest', { params: {index:source, body } }).then(res => {
     const response = res.data;
     const suggestions = flatten(response.suggest.suggestions.map(suggestion => {
       return suggestion.options.map(o => ({ name: o.text, slug: o._id }))
