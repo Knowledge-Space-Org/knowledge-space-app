@@ -28,6 +28,11 @@ import bbp from "imgs/partners/bbp.png";
 import cli from "imgs/partners/cli.png";
 import allen from "imgs/partners/allen.png";
 import neuroml from "imgs/partners/neuroml.png";
+import brainminds from "imgs/partners/brainminds.png";
+import conp from "imgs/partners/conp.png";
+import dandi from "imgs/partners/dandi.png";
+import openneuro from "imgs/partners/openneuro.png";
+import sparc from "imgs/partners/sparc.png";
 
 import banner from "imgs/ks-banner.png";
 
@@ -123,6 +128,36 @@ const partner_logos = [
     href: "https://neuroml-db.org/",
     name: "NeuroML",
     src: neuroml,
+    isSpacingRequired: true, // for large icons
+  },
+  {
+    href: "https://openneuro.org/",
+    name: "OpenNEURO ",
+    src: openneuro,
+    isSpacingRequired: true, // for large icons
+  },
+  {
+    href: "https://www.dandiarchive.org/",
+    name: "DANDI",
+    src: dandi,
+    isSpacingRequired: true, // for large icons
+  },
+  {
+    href: "https://conp.ca/",
+    name: "CONP ",
+    src: conp,
+    isSpacingRequired: true, // for large icons
+  },
+  {
+    href: "https://sparcopen.org/",
+    name: "SPARC",
+    src: sparc,
+    isSpacingRequired: true, // for large icons
+  },
+  {
+    href: "https://brainminds.jp/en/",
+    name: "Brain/MINDS",
+    src: brainminds,
     isSpacingRequired: true, // for large icons
   },
 ];
@@ -451,14 +486,7 @@ class HomePage extends Component {
               gutterBottom
             >
               {/* A community encyclopedia linking brain research concepts to data, models, and literature. */}
-              KnowledgeSpace is a community-based encyclopedia that links brain
-              research concepts to data, models, and literature. It provides
-              users with access to anatomy, gene expression, models, morphology,
-              and physiology data from over 15 different neuroscience data/model
-              repositories, such as Allen Institute for Brain Science and the
-              Human Brain Project. It is an open project and welcomes
-              participation and contributions from members of the global
-              research community.
+              KnowledgeSpace is a community-based encyclopedia that links brain research concepts to data, models, and literature. It provides users with access to anatomy, gene expression, models, morphology, and physiology data from different neuroscience data/model repositories, such as Allen Brain Map and the Human Brain Project. It is an open project and welcomes participation and contributions from members of the global research community.
             </Typography>
           </div>
           <img src={banner} className={classes.bannerImg} />
@@ -481,7 +509,7 @@ class HomePage extends Component {
             variant="subtitle1"
             gutterBottom
           >
-            Over 1678580 pieces of data collected from 14 sources.
+           Thousands of datasets indexed from the world's leading neuroscience data repositories.
           </Typography>
         </Grid>
         <Grid item xs={12} sm={12} className={classes.infoLinkWraper}>
