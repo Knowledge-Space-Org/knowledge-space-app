@@ -108,6 +108,12 @@ const partner_logos = [
     isSpacingRequired: true, // for large icons
   },
   {
+    href: "https://brainminds.jp/en/",
+    name: "Brain/MINDS",
+    src: brainminds,
+    isSpacingRequired: true, // for large icons
+  },
+  {
     href: "https://senselab.med.yale.edu/ModelDB/",
     name: "ModelDB",
     src: modeldb,
@@ -143,23 +149,17 @@ const partner_logos = [
     isSpacingRequired: true, // for large icons
   },
   {
-    href: "https://conp.ca/",
+    href: "https://portal.conp.ca/",
     name: "CONP ",
     src: conp,
     isSpacingRequired: true, // for large icons
   },
   {
-    href: "https://sparcopen.org/",
+    href: " https://sparc.science/",
     name: "SPARC",
     src: sparc,
     isSpacingRequired: true, // for large icons
-  },
-  {
-    href: "https://brainminds.jp/en/",
-    name: "Brain/MINDS",
-    src: brainminds,
-    isSpacingRequired: true, // for large icons
-  },
+  }
 ];
 
 // disable sort in order to maintain space between logos
