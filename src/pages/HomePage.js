@@ -14,20 +14,20 @@ import incf from "imgs/incf-logo.svg";
 
 import ebrains from "imgs/partners/ebrains.png";
 //import brainmaps from 'imgs/partners/brainmaps.png';
-import brainmaps from "imgs/partners/brainmaps_new_1.png";
+import brainmaps from "imgs/partners/brainmaps_new.png";
 import neuromorpho from "imgs/partners/neuromorpho.png";
 import opensourcebrain from "imgs/partners/opensourcebrain.png";
 import icg from "imgs/partners/icg.png";
 import pubmed from "imgs/partners/pubmed.png";
-import neurolex from "imgs/partners/neurolex.png";
+import interlex from "imgs/partners/interlex.png";
 import modeldb from "imgs/partners/modeldb.png";
 import gensat from "imgs/partners/gensat.png";
 import neurondb from "imgs/partners/neurondb.png";
 import neuroelectro from "imgs/partners/neuroelectro.png";
 import bbp from "imgs/partners/bbp.png";
-import cli from "imgs/partners/cli.png";
+import cli from "imgs/partners/cil.png";
 import allen from "imgs/partners/allen.png";
-import neuroml from "imgs/partners/neuroml.png";
+import neuroml from "imgs/partners/neuroml-db.png";
 import brainminds from "imgs/partners/brainminds.png";
 import conp from "imgs/partners/conp.png";
 import dandi from "imgs/partners/dandi.png";
@@ -51,115 +51,122 @@ const partner_logos = [
     href: "http://portal.brain-map.org/",
     name: "Allen Brain Map",
     src: allen,
+
   },
   {
     href: "http://neuromorpho.org/",
     name: "Neuromorpho",
     src: neuromorpho,
-    isSpacingRequired: true, // for large icons
+    // for large icons
   },
   {
     href: "https://www.ncbi.nlm.nih.gov/pubmed",
     name: "PubMed",
     src: pubmed,
+
   },
   {
     href: "https://icg.neurotheory.ox.ac.uk/",
     name: "IonChannelGenealogy",
     src: icg,
-    isSpacingRequired: true, // for large icons
+    // for large icons
   },
   {
-    href: "http://neurolex.org",
-    name: "NeuroLex",
-    src: neurolex,
+    href: "http://interlex.org",
+    name: "InterLex",
+    src: interlex,
+
   },
   {
     href: "https://senselab.med.yale.edu/neurondb",
     name: "NeuronDB",
     src: neurondb,
-    isSpacingRequired: true, // for large icons
+    // for large icons
   },
   {
     href: "https://bluebrain.epfl.ch/",
     name: "Blue Brain Project",
     src: bbp,
+
   },
   {
     href: "http://www.gensat.org/daily_showcase.jsp",
     name: "GENSAT",
     src: gensat,
-    isSpacingRequired: true, // for large icons
+    // for large icons
   },
   {
     href: "https://msu.edu/~brains/brains/human/index.html",
     name: "BrainMaps",
     src: brainmaps,
+
   },
   {
     href: "http://cellimagelibrary.org/",
     name: "Cell Image Library",
     src: cli,
+
   },
   {
     href: "https://neuroelectro.org/",
     name: "NeuroElectro",
     src: neuroelectro,
-    isSpacingRequired: true, // for large icons
-  },
-  {
-    href: "https://brainminds.jp/en/",
-    name: "Brain/MINDS",
-    src: brainminds,
-    isSpacingRequired: true, // for large icons
+    // for large icons
   },
   {
     href: "https://senselab.med.yale.edu/ModelDB/",
     name: "ModelDB",
     src: modeldb,
-    isSpacingRequired: true, // for large icons
+    // for large icons
   },
   {
     href: "https://ebrains.eu/",
     name: "EBRAINS",
     src: ebrains,
+
   },
   {
     href: "http://www.opensourcebrain.org/",
     name: "Open Source Brain",
     src: opensourcebrain,
-    isSpacingRequired: true, // for large icons
+    // for large icons
   },
   {
     href: "https://neuroml-db.org/",
     name: "NeuroML",
     src: neuroml,
-    isSpacingRequired: true, // for large icons
+    // for large icons
   },
   {
     href: "https://openneuro.org/",
     name: "OpenNEURO ",
     src: openneuro,
-    isSpacingRequired: true, // for large icons
+    // for large icons
   },
   {
     href: "https://www.dandiarchive.org/",
     name: "DANDI",
     src: dandi,
-    isSpacingRequired: true, // for large icons
+    // for large icons
   },
   {
-    href: "https://portal.conp.ca/",
+    href: "https://conp.ca/",
     name: "CONP ",
     src: conp,
-    isSpacingRequired: true, // for large icons
+    // for large icons
   },
   {
-    href: " https://sparc.science/",
+    href: "https://sparcopen.org/",
     name: "SPARC",
     src: sparc,
-    isSpacingRequired: true, // for large icons
-  }
+    // for large icons
+  },
+  {
+    href: "https://brainminds.jp/en/",
+    name: "Brain/MINDS",
+    src: brainminds,
+    // for large icons
+  },
 ];
 
 // disable sort in order to maintain space between logos
@@ -509,7 +516,7 @@ class HomePage extends Component {
             variant="subtitle1"
             gutterBottom
           >
-           Thousands of datasets indexed from the world's leading neuroscience data repositories.
+            Thousands of datasets indexed from the world's leading neuroscience data repositories.
           </Typography>
         </Grid>
         <Grid item xs={12} sm={12} className={classes.infoLinkWraper}>
@@ -643,7 +650,7 @@ class HomePage extends Component {
           </Grid>
           <Grid className={classes.copyrightText} container alignItems="center">
             <Typography className={classes.copyrightText} gutterBottom>
-              Copyright 2020 KnowledgeSpace.org
+              Copyright 2021 KnowledgeSpace.org
             </Typography>
           </Grid>
         </Grid>
