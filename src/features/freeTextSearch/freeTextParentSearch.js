@@ -71,7 +71,7 @@ class FreeTextParent extends Component {
                 className={classes.searchButton}
                 onClick={this.handleSubmit}
               >
-                Search
+                Go
               </Button>
             )}
           </div>

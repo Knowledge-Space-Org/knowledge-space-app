@@ -185,7 +185,7 @@ class Nav extends React.Component {
         onClose={this.handleMenuClose}
       >
         <MenuItem onClick={this.handleAboutClick}>
-          About knowledgeSpace
+          About KnowledgeSpace
         </MenuItem>
         <MenuItem onClick={this.handleContactClick}>Contact us</MenuItem>
         <MenuItem
