@@ -3,6 +3,7 @@ ks-stage-deploy:
     - ks-stage
   script:
     - hostname
+    - whoami
     - cd /opt/knowledge-space-new/
     - git checkout stage
     - git pull
