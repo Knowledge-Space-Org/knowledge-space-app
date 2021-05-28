@@ -1,5 +1,11 @@
-print_host:
+ks-stage-deploy:
   tags:
     - ks-stage
   script:
     - hostname
+    - cd /opt/knowledge-space-new/
+    - git checkout stage
+    - git pull
+    - npm run build
+    - sudo service application restart
+    - sudo service nginx restart
