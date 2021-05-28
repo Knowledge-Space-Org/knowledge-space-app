@@ -1,0 +1,5 @@
+test_job_1:
+  tags:
+    - ks-stage
+  script:
+    - hostname
