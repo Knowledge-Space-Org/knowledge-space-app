@@ -4,8 +4,7 @@ ks-stage-deploy:
   script:
     - hostname
     - cd /opt/knowledge-space-new/
-    - sudo git checkout stage
-    - sudo git pull
-    - sudo npm run build
+    - git pull
+    - npm run build
     - sudo service application restart
     - sudo service nginx restart
