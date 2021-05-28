@@ -1,4 +1,4 @@
-test_job_1:
+print_host:
   tags:
     - ks-stage
   script:
