@@ -4,7 +4,6 @@ ks-stage-deploy:
   script:
     - hostname
     - whoami
-    - sudo su visakh
     - cd /opt/knowledge-space-new/
     - git checkout stage
     - git pull
