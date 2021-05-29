@@ -8,10 +8,10 @@ const styles = theme => ({
     marginBottom: '.5em',
     textAlign: 'left',
   },
-  listItemParent:{
-    textAlign:'left',
-    '& li':{
-      padding:5,
+  listItemParent: {
+    textAlign: 'left',
+    '& li': {
+      padding: 5,
       fontSize: theme.typography.body1.fontSize,
     }
   },
@@ -34,20 +34,20 @@ class DocumentationPage extends Component {
           </Typography>
           <Typography variant="body1" align='justify' className={classes.body}>
             Neuroscience repositories with data currently available through KnowledgeSpace:
-              Allen Institute for Brain Science,
-              Blue Brain Project,
-              Cell Image Library,
-              Channelpedia.net,
-              GENSAT,
-              Human Brain Project,
-              Ion Channel Genealogy,
-              ModelDB,
-              NeuroElectro.org,
-              NeuroMorpho.org,
-              NeuroLex,
-              NIF Integrated Connectivity,
-              Open Source Brain,
-              PubMed
+            Allen Institute for Brain Science,
+            Blue Brain Project,
+            Cell Image Library,
+            Channelpedia.net,
+            GENSAT,
+            Human Brain Project,
+            Ion Channel Genealogy,
+            ModelDB,
+            NeuroElectro.org,
+            NeuroMorpho.org,
+            NeuroLex,
+            NIF Integrated Connectivity,
+            Open Source Brain,
+            PubMed
             </Typography>
         </Grid>
 
@@ -101,7 +101,7 @@ class DocumentationPage extends Component {
           </Typography>
           <div>
             <ul className={classes.listItemParent}>
-              <li><a target="_blank" href='https://ebrains.eu/'>Human Brain Project Tools and Resources</a></li>
+              <li><a target="_blank" href='https://ebrains.eu/'>EBRAINS Tools and Resource</a></li>
               <li><a target="_blank" href='https://www.incf.org/resources/sbps'>INCF Network Tools and resources</a></li>
               <li><a target="_blank" href='https://www.nitrc.org/'>NeuroImaging Tools and Resources Collaboratory (NITRC)</a></li>
             </ul>
