@@ -9,10 +9,11 @@ const styles = (theme) => ({
     textAlign: "left",
   },
   listItemParent: {
-    textAlign: "left",
-    "& li": {
+    textAlign: 'left',
+    '& li': {
       padding: 5,
-    },
+      fontSize: theme.typography.body1.fontSize,
+    }
   },
   body: { marginBottom: "1.5em" },
 });
@@ -26,33 +27,27 @@ class DocumentationPage extends Component {
     return (
       <Grid container justify="center" alignItems="center">
         <Grid item xs={12} md={8}>
-          <Typography id="what_is_ks" variant="h4" className={classes.title}>
-            What Is KnowledgeSpace?
+          <Typography id="what_is_ks" variant="h4" className={classes.title}>What Is KnowledgeSpace?</Typography>
+          <Typography variant="body1" align='justify' className={classes.body}>
+            KnowledgeSpace aims to be a globally-used, community-based, data-driven encyclopedia for neuroscience that links brain research concepts to data, models, and the literature that support them. Further it aims to serve as a framework where large-scale neuroscience projects can expose their data to the neuroscience community-at-large. KnowledgeSpace is a framework that combines general descriptions of neuroscience concepts found in wikipedia with more detailed content from NeuroLex. It then integrates the content from those two sources with the latest neuroscience citations found in PubMed and data found in some of the world’s leading neuroscience repositories. KnowledgeSpace is a joint development between the Human Brain Project (HBP), the International Neuroinformatics Coordinating Facility (INCF), and the Neuroscience Information Framework (NIF).
           </Typography>
-          <Typography variant="body1" align="justify" className={classes.body}>
-            KnowledgeSpace aims to be a globally-used, community-based,
-            data-driven encyclopedia for neuroscience that links brain research
-            concepts to data, models, and the literature that support them.
-            Further it aims to serve as a framework where large-scale
-            neuroscience projects can expose their data to the neuroscience
-            community-at-large. KnowledgeSpace is a framework that combines
-            general descriptions of neuroscience concepts found in wikipedia
-            with more detailed content from NeuroLex. It then integrates the
-            content from those two sources with the latest neuroscience
-            citations found in PubMed and data found in some of the world’s
-            leading neuroscience repositories. KnowledgeSpace is a joint
-            development between the Human Brain Project (HBP), the International
-            Neuroinformatics Coordinating Facility (INCF), and the Neuroscience
-            Information Framework (NIF).
-          </Typography>
-          <Typography variant="body1" align="justify" className={classes.body}>
-            Neuroscience repositories with data currently available through
-            KnowledgeSpace: Allen Institute for Brain Science, Blue Brain
-            Project, Cell Image Library, Channelpedia.net, GENSAT, Human Brain
-            Project, Ion Channel Genealogy, ModelDB, NeuroElectro.org,
-            NeuroMorpho.org, NeuroLex, NIF Integrated Connectivity, Open Source
-            Brain, PubMed
-          </Typography>
+          <Typography variant="body1" align='justify' className={classes.body}>
+            Neuroscience repositories with data currently available through KnowledgeSpace:
+            Allen Institute for Brain Science,
+            Blue Brain Project,
+            Cell Image Library,
+            Channelpedia.net,
+            GENSAT,
+            Human Brain Project,
+            Ion Channel Genealogy,
+            ModelDB,
+            NeuroElectro.org,
+            NeuroMorpho.org,
+            NeuroLex,
+            NIF Integrated Connectivity,
+            Open Source Brain,
+            PubMed
+            </Typography>
         </Grid>
 
         <Grid item xs={12} md={8}>
@@ -166,21 +161,9 @@ class DocumentationPage extends Component {
           </Typography>
           <div>
             <ul className={classes.listItemParent}>
-              <li>
-                <a target="_blank" href="https://ebrains.eu/">
-                  Human Brain Project Tools and Resources
-                </a>
-              </li>
-              <li>
-                <a target="_blank" href="https://www.incf.org/resources/sbps">
-                  INCF Network Tools and resources
-                </a>
-              </li>
-              <li>
-                <a target="_blank" href="https://www.nitrc.org/">
-                  NeuroImaging Tools and Resources Collaboratory (NITRC)
-                </a>
-              </li>
+              <li><a target="_blank" href='https://ebrains.eu/'>EBRAINS Tools and Resource</a></li>
+              <li><a target="_blank" href='https://www.incf.org/resources/sbps'>INCF Network Tools and resources</a></li>
+              <li><a target="_blank" href='https://www.nitrc.org/'>NeuroImaging Tools and Resources Collaboratory (NITRC)</a></li>
             </ul>
           </div>
         </Grid>
