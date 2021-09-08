@@ -97,8 +97,9 @@ class DataSpaceFreeTextSearch extends Component {
 
   render() {
     const {slug, classes, entity, filters, facets, results, page } = this.props;
-    console.debug("check filters");
-    console.debug(facets);
+    if(!facets || !slug || !results ) {
+      return null
+    }
     return (
       <Grid
         container
