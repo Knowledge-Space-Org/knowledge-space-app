@@ -86,9 +86,6 @@ export const querySourceByEntity = ({
   // Now set pagination
   body.size = 25;
   body.from = page * 25;
-  console.debug("check free text request");
-  console.debug(body);
-  console.debug(source)
   return axios
     .get(API_END_POINT + "entity/source-data-by-entity", {
       params: { body, source },
@@ -98,6 +95,7 @@ export const querySourceByEntity = ({
       return {
         results: response.hits,
         facets: response.aggregations,
+        total_count: response.total_count,
         page,
         slug,
         filters,
@@ -149,9 +147,6 @@ export const queryDataSourceByFreeText = ({
       },
     },
   };
-  console.debug("check data text request");
-  console.debug(body);
-  console.debug(index)
   return axios
     .get(API_END_POINT + "entity/all-data-by-free-text", {
       params: { body, index },
@@ -164,6 +159,7 @@ export const queryDataSourceByFreeText = ({
         page,
         q,
         filters,
+        total_count: response.total_count
       };
     });
   // return request

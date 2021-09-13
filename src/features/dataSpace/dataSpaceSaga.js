@@ -14,8 +14,6 @@ export function* updateEntityAndSearchDS({ payload }) {
   try {
     const { slug, source } = payload;
     const entity = yield call(findBySlug, slug);
-    console.debug("check entity");
-    console.debug(entity);
     const labels  = {entity};
    
     yield put({ type: ENTITY_FOUND, payload:slug});
@@ -33,7 +31,7 @@ export function* searchDSByEntity({ payload }) {
       source,
       filters,
       slug,
-      page
+      page,
     });
     yield put({ type: DS_RESULTS_FOUND, payload: results });
   } catch (err) {

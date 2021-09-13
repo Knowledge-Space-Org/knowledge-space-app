@@ -60,32 +60,14 @@ router.get("/all-data-by-entity", async function (req, res) {
 router.get("/all-data-by-free-text", async function (req, res) {
   let esclientToUse = esDataSpaceClient;
   const index = req.query.index || "scr*";
-  esclientToUse
+  const handleCountResponse = (res, total_count) => {
+    esclientToUse
     .search({
       index,
       body: req.query.body,
     })
     .then((response) => {
-      res.send(response);
-    })
-    .catch((exp) => {
-      console.error("error occured in all-data-by-free-text");
-      console.error(req.query.body);
-      console.error(exp);
-      res.send([]);
-    });
-});
-
-router.get("/source-data-by-entity", function (req, res) {
-  let esclientToUse = esDataSpaceClient;
-  console.debug("check source data by entity request");
-  console.debug(JSON.stringify(req.query));
-  esclientToUse
-    .search({
-      index: req.query.source,
-      body: req.query.body,
-    })
-    .then((response) => {
+      response.total_count = total_count;
       res.send(response);
     })
     .catch((exp) => {
@@ -94,6 +76,59 @@ router.get("/source-data-by-entity", function (req, res) {
       console.error(exp);
       res.send([]);
     });
+  } 
+  const query = JSON.parse(req.query.body);
+  esclientToUse
+  .count({
+    index,
+    body: {
+    query:  query.query
+    },
+  }).then((response) => {
+    console.debug("check free data response")
+    console.debug(response)
+    handleCountResponse(res, response.count)
+  }).catch((exp)  => {
+    console.debug("check free data exp")
+    console.debug(response)
+    handleCountResponse(res)
+  }) 
+});
+
+
+router.get("/source-data-by-entity", function (req, res) {
+
+  const handleCountResponse = (res, total_count) => {
+    esclientToUse
+    .search({
+      index: req.query.source,
+      body: req.query.body,
+    })
+    .then((response) => {
+      response.total_count = total_count;
+      res.send(response);
+    })
+    .catch((exp) => {
+      console.error("error occured in source-data-by-entity");
+      // console.error(req.query.body);
+      console.error(exp);
+      res.send([]);
+    });
+  } 
+
+  let esclientToUse = esDataSpaceClient;
+  const query = JSON.parse(req.query.body);
+  esclientToUse
+  .count({
+    index: req.query.source,
+    body: {
+    query:  query.query
+    },
+  }).then((response) => {
+    handleCountResponse(res, response.count)
+  }).catch((exp)  => {
+    handleCountResponse(res)
+  }) 
 });
 
 //Literature

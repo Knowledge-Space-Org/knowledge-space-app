@@ -31,10 +31,11 @@ class Autosuggest extends Component {
     const q = document.getElementById("autosuggest-input").value;
     if(this.props.onSubmit){
         this.props.onSubmit(q);
-    }{
+    }else{
       this.props.dispatch(submitAutosuggest({ q }));
       this.props.history.push({ pathname: "/search", search: `q=${q}` });
     }
+    
   }
 
   renderSuggestion({
@@ -66,8 +67,10 @@ class Autosuggest extends Component {
     );
   }
 
-  renderInput({ classes, inputProps }) {
-    return <InputBase classes={classes} inputProps={inputProps} />;
+  renderInput({ classes, inputProps, value }) {
+    console.debug("check render input")
+    console.debug(value)
+    return <InputBase classes={classes} inputProps={inputProps} value={value} />;
   }
 
   onSelect(selectedItem) {
@@ -112,11 +115,13 @@ class Autosuggest extends Component {
                     root: classes.inputRoot,
                     input: classes.inputInput,
                   },
+                  value: this.props.value || null,
                   inputProps: getInputProps({
                     "aria-label": "naked",
                     classes: { input: classes.SearchInput },
                     className: classes.SearchInput,
                     placeholder: this.props.placeholder||"Search KnowledgeSpace",
+                    value: inputValue || this.props.value || null,
                   }),
                 })}
                 {/* <SearchIcon onClick={handleSubmit} classes={{root: classes.searchIcon}}/> */}

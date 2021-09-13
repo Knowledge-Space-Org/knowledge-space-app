@@ -63,17 +63,17 @@ const DataSpaceResults = ({
   index,
   label,
   slug,
+  total_count,
 }) => {
   const results = has(hits, "hits") ? hits.hits : [];
-  const total = has(hits, "total") ? hits.total.value : 0;
+  const total = total_count || ( has(hits, "total") ? hits.total.value : 0 )
   let elem = null;
   if (hits && hits.total) {
-    elem = get(hits.total, "value") || 0;
+    elem = total_count || get(hits.total, "value") || 0;
   } else {
-    elem = get(hits, "total") || 0;
+    elem = total_count || get(hits, "total") || 0;
   }
-  console.debug("check results on data source page");
-  console.debug(results[0]);
+
   const [dialogState, setDialogState] = React.useState({
     isDialgueOpen: false,
     entityData: null,

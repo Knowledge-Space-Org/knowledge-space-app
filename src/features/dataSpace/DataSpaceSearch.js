@@ -101,6 +101,7 @@ class DataSpaceSearch extends Component {
       results,
       page,
       slug,
+      total_count
     } = this.props;
     const { category, name } = entity;
     const { columns, label, aggs, id } = sourceConfig;
@@ -126,7 +127,9 @@ class DataSpaceSearch extends Component {
             onSubmit = {this.onSearchInputChange}
             source = {this.props.source}
             placeholder = {"Search"}
-            classes={classes} />
+            classes={classes} 
+            value = {slug}
+            />
           </div>
         </Grid>
         <Grid item xs={12} sm={3}>
@@ -150,6 +153,7 @@ class DataSpaceSearch extends Component {
               linkCol="dc.identifier"
               label={label}
               slug={slug}
+              total_count = {total_count}
             />
           </Paper>
         </Grid>

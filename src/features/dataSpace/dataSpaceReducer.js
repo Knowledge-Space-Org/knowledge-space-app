@@ -27,20 +27,22 @@ export function loadEntity(state = {}, { source }) {
 }
 
 export function loadDataSpace(state = {}, payload) {
-  const { page, results, filters, facets } = payload;
+  const { page, results, filters, facets, total_count } = payload;
   state.results = results;
   state.filters = mapValues(filters, (v) => new Set(v));
   state.page = page || 0;
   state.facets = facets;
+  state.total_count = total_count;
   return { ...state };
 }
 
 export function loadDataSpaceFreeText(state = {}, payload) {
-  const { page, results, filters, facets } = payload;
+  const { page, results, filters, facets, total_count } = payload;
   state.results = results;
   state.filters = mapValues(filters, (v) => new Set(v));
   state.page = page || 0;
   state.facets = facets;
+  state.total_count = total_count;
   return { ...state };
 }
 

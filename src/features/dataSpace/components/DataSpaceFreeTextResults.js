@@ -59,14 +59,15 @@ const DataSpaceFreeTextResults = ({
   handlePageChange,
   index,
   slug,
+  total_count
 }) => {
-  const results = has(hits, "hits") ? hits.hits : [];
-  const total = has(hits, "total") ? hits.total.value : 0;
+  const results =  has(hits, "hits") ? hits.hits : [];
+  const total = total_count || (has(hits, "total") ? hits.total.value : 0);
   let elem = null;
   if (hits && hits.total) {
-    elem = get(hits.total, "value") || 0;
+    elem = total_count || get(hits.total, "value") || 0;
   } else {
-    elem = get(hits, "total") || 0;
+    elem = total_count || get(hits, "total") || 0;
   }
 
   return (
