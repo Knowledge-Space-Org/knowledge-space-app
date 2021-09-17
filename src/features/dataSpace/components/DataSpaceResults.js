@@ -63,14 +63,15 @@ const DataSpaceResults = ({
   index,
   label,
   slug,
+  total_count,
 }) => {
   const results = has(hits, "hits") ? hits.hits : [];
-  const total = has(hits, "total") ? hits.total.value : 0;
+  const total = total_count || (has(hits, "total") ? hits.total.value : 0)
   let elem = null;
   if (hits && hits.total) {
-    elem = get(hits.total, "value") || 0;
+    elem = total_count || get(hits.total, "value") || 0;
   } else {
-    elem = get(hits, "total") || 0;
+    elem = total_count || get(hits, "total") || 0;
   }
   const [dialogState, setDialogState] = React.useState({
     isDialgueOpen: false,
@@ -105,38 +106,38 @@ const DataSpaceResults = ({
         </TableHead>
         <TableBody>
           {results.map((hit) => (
-                <TableRow
-                  key={hit._id}
-                  hover
-                  onClick={(event) =>
-                    window.open(get(hit._source, "dc.identifier"), "_blank")
-                  }
-                  role="checkbox"
-                  tabIndex={-1}
-                >
-                  {keys(columns).map((key, i) => (
-                    <TableCell key={i}>
-                      {cellValue(get(hit._source, key))}
-                    </TableCell>
-                  ))}
-                  <TableCell 
-                        onClick={(ev) => {
-                        ev.preventDefault();
-                        ev.stopPropagation();
-                        handleClickOpen(hit);
-                      }}>
-                    <a
-                      href="#"
-                      onClick={(ev) => {
-                        ev.preventDefault();
-                      }}
-                    >
-                      {" "}
-                      View more{" "}
-                    </a>
-                  </TableCell>
-                </TableRow>
+            <TableRow
+              key={hit._id}
+              hover
+              onClick={(event) =>
+                window.open(get(hit._source, "dc.identifier"), "_blank")
+              }
+              role="checkbox"
+              tabIndex={-1}
+            >
+              {keys(columns).map((key, i) => (
+                <TableCell key={i}>
+                  {cellValue(get(hit._source, key))}
+                </TableCell>
               ))}
+              <TableCell
+                onClick={(ev) => {
+                  ev.preventDefault();
+                  ev.stopPropagation();
+                  handleClickOpen(hit);
+                }}>
+                <a
+                  href="#"
+                  onClick={(ev) => {
+                    ev.preventDefault();
+                  }}
+                >
+                  {" "}
+                  View more{" "}
+                </a>
+              </TableCell>
+            </TableRow>
+          ))}
         </TableBody>
       </Table>
       <TablePagination
@@ -152,13 +153,13 @@ const DataSpaceResults = ({
           "aria-label": "Next Page",
         }}
         onChangePage={handlePageChange}
-        onChangeRowsPerPage={() => {}}
+        onChangeRowsPerPage={() => { }}
       />
       {dialogState.isDialgueOpen && (
         <DataSpaceDialogeResult
           isOpen={dialogState.isDialgueOpen}
           onClose={handleClose}
-          index = {index}
+          index={index}
           entityData={dialogState.entityData}
         ></DataSpaceDialogeResult>
       )}

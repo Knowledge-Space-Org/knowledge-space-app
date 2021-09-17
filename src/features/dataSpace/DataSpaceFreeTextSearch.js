@@ -95,7 +95,10 @@ class DataSpaceFreeTextSearch extends Component {
   }
 
   render() {
-    const {slug, classes, entity, filters, facets, results, page } = this.props;
+    const { slug, classes, entity, filters, facets, results, page, total_count } = this.props;
+    if (!facets || !slug || !results) {
+      return null
+    }
     return (
       <Grid
         container
@@ -121,6 +124,7 @@ class DataSpaceFreeTextSearch extends Component {
             page={page || 0}
             handlePageChange={this.handlePageChange.bind(this)}
             linkCol="dc.identifier"
+            total_count={total_count}
           />
           {/* </Paper> */}
         </Grid>
