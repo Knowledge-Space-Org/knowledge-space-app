@@ -1,0 +1,14 @@
+ks-stage-deploy:
+  tags:
+    - ks-stage
+  script:
+    - hostname
+    - whoami
+    - ps -p $$
+    - cd /opt/knowledge-space-new/
+    - git pull
+    - export CI=false
+    - npm install
+    - npm run build
+    - sudo service application restart
+    - sudo service nginx restart
