@@ -96,7 +96,7 @@ const partner_logos = [
     // for large icons
   },
   {
-    href: "https://msu.edu/~brains/brains/human/index.html",
+    href: "https://brains.anatomy.msu.edu/index.html",
     name: "BrainMaps",
     src: brainmaps,
 
