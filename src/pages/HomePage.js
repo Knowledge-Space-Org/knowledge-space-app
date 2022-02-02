@@ -19,7 +19,7 @@ import neuromorpho from "imgs/partners/neuromorpho.png";
 import opensourcebrain from "imgs/partners/opensourcebrain.png";
 import icg from "imgs/partners/icg.png";
 import pubmed from "imgs/partners/pubmed.png";
-import interlex from "imgs/partners/interlex.png";
+import nif from "imgs/partners/nif.png";
 import modeldb from "imgs/partners/modeldb.png";
 import gensat from "imgs/partners/gensat.png";
 import neurondb from "imgs/partners/neurondb.png";
@@ -72,9 +72,9 @@ const partner_logos = [
     // for large icons
   },
   {
-    href: "http://interlex.org",
-    name: "InterLex",
-    src: interlex,
+    href: "https://neuinfo.org",
+    name: "Neuroscience Information Framework",
+    src: nif,
 
   },
   {
