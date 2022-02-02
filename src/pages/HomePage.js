@@ -9,7 +9,7 @@ import { withStyles } from "@material-ui/core/styles";
 import Autosuggest from "features/autosuggest/Autosuggest";
 
 import hbp from "imgs/hbp-logo-new.png";
-import nif from "imgs/nif-logo-new.png";
+//import nif from "imgs/nif-logo-new.png";
 import incf from "imgs/incf-logo.svg";
 
 import ebrains from "imgs/partners/ebrains.png";
