@@ -2,6 +2,8 @@ import React, { Component } from 'react';
 import { withStyles } from '@material-ui/core/styles';
 import Grid from '@material-ui/core/Grid';
 import Typography from '@material-ui/core/Typography';
+import EmbedYoutube from 'features/documentation/components/EmbedYoutube.js'
+import trainingSpace from "imgs/ts-logo.png";
 
 const styles = theme => ({
   title: {
@@ -15,7 +17,18 @@ const styles = theme => ({
       fontSize: theme.typography.body1.fontSize,
     }
   },
-  body: { marginBottom: '1.5em' }
+  body: { marginBottom: '1.5em' },
+  logo: {
+    paddingLeft: "25px",
+    paddingRight: "25px",
+    marginTop: "18px",
+    // minWidth: 100
+    // height:'50px',
+    marginBottom: "0",
+  },
+  readMore: {
+    marginTop: "30px"
+  }
 })
 
 
@@ -48,7 +61,7 @@ class DocumentationPage extends Component {
             NIF Integrated Connectivity,
             Open Source Brain,
             PubMed
-            </Typography>
+          </Typography>
         </Grid>
 
         <Grid item xs={12} md={8}>
@@ -56,6 +69,13 @@ class DocumentationPage extends Component {
           <Typography variant="body1" align='justify' className={classes.body}>
             KnowledgeSpace is driven by the NIF Ontology, a community built ontology that maintains an extensive set of terms and concepts important for the domains of neuroscience and biology. KnowledgeSpace uses the NIF ontology as the foundation for the index of concepts to allow for end-user search and discovery. The “DataSpace” index is populated by taking curated dataset metadata and passing it through an ETL pipeline (extract, transform, load). The ontology also serves as the basis for a Named Entity Recognition (NER)  pipeline that automatically tags Pubmed bibliographic references with KnowledgeSpace concepts
           </Typography>
+          <EmbedYoutube embedId="PfdCd01cJhQ" />
+          <Typography variant="h6" className={classes.readMore}>
+            More lessons available in TrainingSpace
+          </Typography>
+          <a target="_blank" href="https://training.incf.org/lesson/knowledgespace">
+            <img alt="KnowledgeSpace Tutorials" className={classes.logo} src={trainingSpace} />
+          </a>
         </Grid>
         <Grid id="what_can_i_find" item xs={12} md={8}>
           <Typography variant="h4" className={classes.title}>What Can I Find?</Typography>
@@ -70,7 +90,7 @@ class DocumentationPage extends Component {
           </Typography>
           <Typography variant="body1" align='justify' className={classes.body}>
             The Summary Panel provides users with a description of neuroscience concepts and links to the ontologies in which the concept is included. Concept descriptions are derived from Wikipedia and NeuroLex. From the Summary Panel, users can link-out directly to Wikipedia and NeuroLex for more content
-           </Typography>
+          </Typography>
           <Typography variant="body1" align='justify' className={classes.body}>
             The DataSpace panel provides users with links to publicly available data related to the neuroscience concepts that the page is about. The data contained in the DataSpace is categorized by data types (anatomy, expression, models, morphology, physiology) and sub-categorized by source. A brief description of each source and the amount of data publicly available is also provided in this view. To Navigate within the DataSpace, users click on the repository of interest which directs users to a landing page that contains a list of all the publicly available data for the concept in question. To make it easier for users to find data, each entry  list contains additional descriptive metadata. Users can perform faceted searchers based on this metadata to further narrow the selection. Once users have found the data that they are interested in, they can click the entry to be directed to the entry’s source where they can download the data associated with the entry.
           </Typography>
