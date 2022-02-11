@@ -122,7 +122,6 @@ const styles = (theme) => ({
 });
 
 const AboutLink = (props) => <RouterLink to="/about" {...props} />;
-const ContactLink = (props) => <RouterLink to="/contact" {...props} />;
 
 class Nav extends React.Component {
   state = {
@@ -145,11 +144,6 @@ class Nav extends React.Component {
 
   handleAboutClick = () => {
     this.props.history.push("/about");
-    this.handleMenuClose();
-  };
-
-  handleContactClick = () => {
-    this.props.history.push("/contact");
     this.handleMenuClose();
   };
 
@@ -187,7 +181,10 @@ class Nav extends React.Component {
         <MenuItem onClick={this.handleAboutClick}>
           About KnowledgeSpace
         </MenuItem>
-        <MenuItem onClick={this.handleContactClick}>Contact us</MenuItem>
+        <MenuItem onClick={() => {
+          this.handleMenuClose();
+          window.open("https://support.incf.org");
+        }}>Contact us</MenuItem>
         <MenuItem
           onClick={() => {
             this.handleMenuClose();
@@ -292,7 +289,10 @@ class Nav extends React.Component {
         <MenuItem onClick={this.handleAboutClick}>
           About KnowledgeSpace
         </MenuItem>
-        <MenuItem onClick={this.handleContactClick}>Contact us</MenuItem>
+        <MenuItem onClick={() => {
+          this.handleMenuClose();
+          window.open("https://support.incf.org");
+        }}>Contact us</MenuItem>
         <MenuItem
           onClick={() => {
             this.handleMenuClose();

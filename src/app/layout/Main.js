@@ -11,7 +11,6 @@ import AboutPage from "pages/AboutPage";
 import WikiPage from "pages/WikiPage";
 import ExternalIdPage from "pages/ExternalIdPage";
 import MBAPage from "pages/DetailsByMBAPage";
-import ContactPage from "pages/ContactPage";
 import DocumentationPage from "pages/DocumentationPage";
 import ContributePage from "pages/ContributePage";
 import ArchitecturePage from "pages/ArchitecturePage";
@@ -58,7 +57,6 @@ const Main = (props) => {
     <Switch>
       <AppRoute exact path="/" component={HomePage} />
       <AppRoute exact path="/about" component={AboutPage} />
-      <AppRoute exact path="/contact" component={ContactPage} />
       <AppRoute exact path="/documentation" component={DocumentationPage} />
       <AppRoute exact path="/how-to-contribute" component={ContributePage} />
       <AppRoute exact path="/ks-architecture" component={ArchitecturePage} />
