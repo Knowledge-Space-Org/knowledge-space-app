@@ -9,7 +9,7 @@ import { withStyles } from "@material-ui/core/styles";
 import Autosuggest from "features/autosuggest/Autosuggest";
 
 import hbp from "imgs/hbp-logo-new.png";
-//import nif from "imgs/nif-logo-new.png";
+import nif_small from "imgs/nif-logo-new.png";
 import incf from "imgs/incf-logo.svg";
 
 import ebrains from "imgs/partners/ebrains.png";
@@ -35,6 +35,7 @@ import openneuro from "imgs/partners/openneuro.png";
 import sparc from "imgs/partners/sparc.png";
 
 import banner from "imgs/ks-banner.png";
+import tsSmall from "imgs/ts-logo-small.png";
 
 import AliceCarousel from "react-alice-carousel";
 import "react-alice-carousel/lib/alice-carousel.css";
@@ -305,8 +306,8 @@ export const searchStyles = (theme) => ({
     cursor: "pointer",
   },
   logo: {
-    paddingLeft: "25px",
-    paddingRight: "25px",
+    paddingLeft: "15px",
+    paddingRight: "15px",
     marginTop: "18px",
     // minWidth: 100
     // height:'50px',
@@ -420,6 +421,7 @@ export const searchStyles = (theme) => ({
     marginTop: "50px",
     bottom: 0,
     width: "100%",
+    position: "relative"
   },
 });
 
@@ -638,7 +640,7 @@ class HomePage extends Component {
               </Grid>
               <Grid item>
                 <a href="https://www.neuinfo.org">
-                  <img alt="NIF" className={classes.logo} src={nif} />
+                  <img alt="NIF" className={classes.logo} src={nif_small} />
                 </a>
               </Grid>
               <Grid item>
@@ -646,11 +648,16 @@ class HomePage extends Component {
                   <img alt="INCF" className={classes.logo} src={incf} />
                 </a>
               </Grid>
+              <Grid item>
+                <a href="https://training.incf.org/">
+                  <img alt="TrainingSpace" className={classes.logo} src={tsSmall} />
+                </a>
+              </Grid>
             </Grid>
           </Grid>
           <Grid className={classes.copyrightText} container alignItems="center">
             <Typography className={classes.copyrightText} gutterBottom>
-              Copyright 2021 KnowledgeSpace.org
+              Copyright 2022 KnowledgeSpace.org
             </Typography>
           </Grid>
         </Grid>
