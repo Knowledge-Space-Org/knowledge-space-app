@@ -495,7 +495,7 @@ class HomePage extends Component {
               gutterBottom
             >
               {/* A community encyclopedia linking brain research concepts to data, models, and literature. */}
-              KnowledgeSpace is a community-based encyclopedia that links brain research concepts to data, models, and literature. It provides access to anatomy, gene expression, models, morphology, and physiology data from different neuroscience data/model repositories, such as Allen Brain Map and the Human Brain Project. It is an open project and welcomes participation and contributions from the global research community.
+              Knowledgespace is a a globally-used, data-driven encyclopedia and search engine for the neuroscience community. Descriptions of neuroscience research concepts, publicly available datasets, publications, and much more can be discovered across multiple resources through KnowledgeSpace.
             </Typography>
           </div>
           <img src={banner} className={classes.bannerImg} />

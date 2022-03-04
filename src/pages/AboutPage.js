@@ -66,6 +66,9 @@ const styles = (theme) => ({
       backgroundColor: theme.palette.primary.dark,
     },
   },
+  link: {
+    color: "#000",
+  },
 });
 
 class AboutPage extends Component {
@@ -87,39 +90,15 @@ class AboutPage extends Component {
             About Us
           </Typography>
           <Typography variant="body1" align="justify" gutterBottom>
-            KnowledgeSpace aims to be a globally-used, community-based,
-            data-driven encyclopedia for neuroscience that links brain research
-            concepts to data, models, and the literature that support them.
-            Further it aims to serve as a framework where large-scale
-            neuroscience projects can expose their data to the neuroscience
-            community-at-large. KnowledgeSpace is a framework that combines
-            general descriptions of neuroscience concepts found in wikipedia
-            with more detailed content from NeuroLex. It then integrates the
-            content from those two sources with the latest neuroscience
-            citations found in PubMed and data found in some of the world’s
-            leading neuroscience repositories. KnowledgeSpace is a joint
-            development between the Human Brain Project (HBP), the International
-            Neuroinformatics Coordinating Facility (INCF), and the Neuroscience
-            Information Framework (NIF).
+            KnowledgeSpace (KS) is a joint development between the Human Brain Project (HBP), the International Neuroinformatics Coordinating Facility (INCF), and the Neuroscience Information Framework (NIF) that aims to create a globally-used, data-driven encyclopedia and search engine for the neuroscience community. Descriptions of neuroscience research concepts, publicly available datasets, publications, and much more can be discovered across multiple resources through KnowledgeSpace.
           </Typography>
           <br />
           <Typography variant="body1" align="justify" gutterBottom>
-            KnowledgeSpace is currently being developed with funding from the
-            European Union's Horizon 2020 Framework Programme for Research and
-            Innovation under the Specific Grant Agreement No. 945539 (Human
-            Brain Project SGA3), INCF, and Neuroscience Information Framework
-            (NIF). Earlier development was supported by the European Union's
-            Horizon 2020 Framework Programme for Research and Innovation under
-            the Framework Partnership Agreement No. 650003 (HBP FPA), INCF, NIF,
-            and the Blue Brain Project.
+            All content is curated and accessible from a search interface where users can perform a simple keyword search or a search based on the curated concepts. As an encyclopedia, KS provides users with curated definitions of brain research concepts found in different neuroscience ontologies, Wikipedia, and dictionaries. As a search engine, KS enables users to discover publicly available neuroscience datasets from many large-scale brain initiatives in a universally accessible and useful way. What distinguishes KS from other neuroscience encyclopedias and data catalogs is that KS links the neuroscience research concepts found in the encyclopedia to datasets found in publicly accessible data repositories and related publications indexed in PubMed. All of this information is accessible from a search interface where the community can perform a simple keyword search or a search based on the curated concepts to discover descriptions, datasets, publications, and more.
           </Typography>
           <br />
           <Typography variant="body1" align="justify" gutterBottom>
-            KS builds on a vocabulary service, populated with an integrated set
-            of neuroscience ontologies with initial content coming from the
-            Neuroscience Lexicon (NeuroLex), and the Brain Architecture
-            Management System (BAMS). It links to an expanding set of data
-            sources through the NIF federated search infrastructure.
+            The KS development team actively promotes the adherence to <a target="_blank" className={classes.link} href="https://www.incf.org/what-is-fair">FAIR Guiding Principles for scientific data management and stewardship</a> , thus ensuring that all data providers indexed in KS follow standards and best practices for data storage and publication. As more and more data publishers adhere to the FAIR Guiding Principles, the quality of data discovery through KS will improve.
           </Typography>
           <Typography variant="body1" align="center" gutterBottom>
             <Button
@@ -128,7 +107,7 @@ class AboutPage extends Component {
               color="primary"
               className={classes.button}
               onClick={() => this.props.history.push("/documentation")}
-              // href='https://docs.google.com/document/d/1cNtiwtt5uu1EjguNxU9y1FiizDi2_XRXUMZq3G8yB-Y/edit'
+            // href='https://docs.google.com/document/d/1cNtiwtt5uu1EjguNxU9y1FiizDi2_XRXUMZq3G8yB-Y/edit'
             >
               How To Documentation
             </Button>
