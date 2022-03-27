@@ -6,11 +6,13 @@ import querystring from "querystring";
 import DataSpaceFreeTextSearch from "../features/dataSpace/DataSpaceFreeTextSearch";
 import FreeTextParent from "../features/freeTextSearch/freeTextParentSearch";
 import LiteratureSearch from "../features/literature/LiteratureSearch";
+import TrainingSpaceSearch from "../features/trainingSpace/TrainingSpaceSearch";
 import { searchStyles } from "./HomePage";
 import { withStyles } from "@material-ui/core";
 import dataSource from "../imgs/datasource.svg";
 import publications from "../imgs/publications.svg";
 import terms from "../imgs/terms.svg";
+
 
 function TabPanel(props) {
   const { children, ...other } = props;
@@ -61,6 +63,25 @@ function SearchPage(props) {
       )
     );
   };
+
+  const LoadTrainingSearch = (props) => {
+    const [loadCmp, setLoading] = useState(false);
+    useEffect(() => {
+      setTimeout(() => {
+        setLoading(true);
+      }, 400);
+    }, [loadCmp]);
+
+    return (
+      loadCmp && (
+        <TrainingSpaceSearch
+          slug={props.searchText}
+          fromSearch={true}
+        ></TrainingSpaceSearch>
+      )
+    );
+  };
+
   return (
     <div>
       <div className={props.classes.searchContainer}>
@@ -103,6 +124,14 @@ function SearchPage(props) {
             </>
           }
         />
+         <Tab
+          label={
+            <>
+              <img className="tabIcon" src={terms}></img>
+              <label className="tabLabel">Training</label>
+            </>
+          }
+        />
       </Tabs>
       <div index={value}>
         {value === 0 && (
@@ -122,6 +151,15 @@ function SearchPage(props) {
         {value === 2 && (
           <TabPanel>
             <EntitySearch q={searchText} history={props.history} />
+          </TabPanel>
+        )}
+        {value === 3 && (
+          <TabPanel>
+            {
+              <LoadTrainingSearch
+                searchText={searchText}
+              ></LoadTrainingSearch>
+            }
           </TabPanel>
         )}
       </div>

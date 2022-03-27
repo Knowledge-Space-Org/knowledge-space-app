@@ -144,4 +144,23 @@ router.get("/literature-by-curie-paths", function (req, res) {
     });
 });
 
+//Training
+router.get("/training-space-by-curie-paths", function (req, res) {
+  console.debug("check query")
+  console.debug(req.query)
+  esDataSpaceClient
+    .search({
+      index: "train_scr_022036_trainingspace",
+      body: req.query.body,
+    })
+    .then((response) => {
+      console.debug("check training space response")
+      console.debug(response)
+      res.send(response);
+    }).catch((exp)  => {
+       console.debug("check error in training space search")
+       console.debug(exp)
+    }) 
+});
+
 module.exports = router;

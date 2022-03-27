@@ -17,6 +17,12 @@ import {
   paginateLiterature,
 } from "features/literature/literatureSaga";
 
+import {
+  searchTrainingSpaceByPath,
+  searchTrainingSpace,
+  paginateTrainingSpace,
+} from "features/trainingSpace/trainingSpaceSaga";
+
 // CONSTANTS
 import { ENTITY_UPDATE, ENTITY_FOUND } from "features/entity/entityConstants";
 import {
@@ -39,6 +45,11 @@ import {
   LITERATURE_SEARCH_SUBMITTED,
   LITERATURE_SEARCH_PAGINATED,
 } from "features/literature/literatureConstants";
+
+import {
+  TRAININGSPACE_SEARCH_SUBMITTED,
+  TRAININGSPACE_SEARCH_PAGINATED,
+} from "features/trainingSpace/trainingSpaceConstants";
 import { takeLatest } from "redux-saga/effects";
 import { BRAIN_REGION_SEARCH_SUBMITTED } from "../../features/brainRegion/brainRegionSearchConstants";
 import { submitBrainRegionSearch } from "../../features/brainRegion/brainRegionSearchSaga";
@@ -78,6 +89,11 @@ export function* watchDSFilter() {
 // Watches for LITERATURE_SEARCH_SUBMITTED action type asynchronously
 export function* watchLiteratureFilter() {
   yield takeLatest(LITERATURE_SEARCH_SUBMITTED, searchLiterature);
+}
+
+// Watches for TRAININGSPACE_SEARCH_SUBMITTED action type asynchronously
+export function* watchTrainingSpaceFilter() {
+  yield takeLatest(TRAININGSPACE_SEARCH_SUBMITTED, searchTrainingSpace);
 }
 
 // Watches for  action type asynchronously

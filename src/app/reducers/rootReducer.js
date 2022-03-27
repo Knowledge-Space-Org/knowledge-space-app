@@ -8,6 +8,7 @@ import entitySearchReducer from 'features/entitySearch/entitySearchReducer'
 import dataSpaceAggsReducer from 'features/dataSpaceAggs/dataSpaceAggsReducer'
 import dataSpaceReducer from 'features/dataSpace/dataSpaceReducer'
 import literatureReducer from 'features/literature/literatureReducer'
+import trainingSpaceReducer from 'features/trainingSpace/trainingSpaceReducer'
 import autosuggestReducer from 'features/autosuggest/autosuggestReducer'
 
 const combinedReducer = combineReducers({
@@ -17,6 +18,7 @@ const combinedReducer = combineReducers({
   dataSpaceAggs: dataSpaceAggsReducer,
   dataSpace: dataSpaceReducer,
   literature: literatureReducer,
+  trainingSpace: trainingSpaceReducer,
   autosuggest: autosuggestReducer
 })
 

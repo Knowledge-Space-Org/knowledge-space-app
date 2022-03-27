@@ -9,6 +9,7 @@ import {
   watchDSPaginate,
   watchAutosuggest,
   watchLiteratureFilter,
+  watchTrainingSpaceFilter,
   watchLiteraturePaginate,
   watchBrainRegionSearch,
   watchDSFreeTextSearch,
@@ -31,6 +32,7 @@ export default function* startForman() {
     watchDSPaginate(),
     watchLiteraturePaginate(),
     watchLiteratureFilter(),
+    watchTrainingSpaceFilter(),
     watchAutosuggest(),
   ]);
 }
