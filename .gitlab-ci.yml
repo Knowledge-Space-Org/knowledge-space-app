@@ -6,8 +6,8 @@ ks-stage-deploy:
     - whoami
     - ps -p $$
     - cd /opt/knowledge-space-new/
-    - git pull
     - git checkout stage
+    - git pull
     - export CI=false
     - npm install
     - npm run build
