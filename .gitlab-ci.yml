@@ -7,6 +7,7 @@ ks-stage-deploy:
     - ps -p $$
     - cd /opt/knowledge-space-new/
     - git pull
+    - git checkout stage
     - export CI=false
     - npm install
     - npm run build
