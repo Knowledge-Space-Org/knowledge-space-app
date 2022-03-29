@@ -117,7 +117,8 @@ class LiteratureSearch extends Component {
     } = this.props;
     const { slug, name } = entity;
 
-    const { hits, total } = results;
+    const { hits } = results;
+    const total = results.total ? results.total.value : 0
     const showTotal = total > 0 && !showProgress;
     const showNoResults = !showProgress && total == 0;
     const showPagination = page * 25 < total && showTotal && !showProgress;

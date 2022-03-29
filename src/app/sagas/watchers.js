@@ -96,6 +96,11 @@ export function* watchTrainingSpaceFilter() {
   yield takeLatest(TRAININGSPACE_SEARCH_SUBMITTED, searchTrainingSpace);
 }
 
+export function* watchTrainingSpacePaginate() {
+  yield takeLatest(TRAININGSPACE_SEARCH_PAGINATED, paginateTrainingSpace);
+}
+
+
 // Watches for  action type asynchronously
 export function* watchDSPaginate() {
   yield takeLatest(DS_SEARCH_PAGINATED, paginateDSSearch);

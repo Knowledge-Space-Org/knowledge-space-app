@@ -17,6 +17,7 @@ import CircularProgress from "@material-ui/core/CircularProgress";
 import SearchBox from "common/components/search/SearchBox";
 import Facets from "common/components/search/Facets";
 import KeywordSearch from "common/components/search/KeywordSearch";
+import TablePagination from "@material-ui/core/TablePagination";
 import Pagination from "common/components/search/Pagination";
 import NoSearchResults from "common/components/search/NoSearchResults";
 import Detail from "../entity/components/Detail";
@@ -32,6 +33,12 @@ const styles = (theme) => ({
     textAlign: "left",
     verticalAlign: "bottom",
   },
+  heading: {
+    display: "flex",
+    alignItems: "center",
+    paddingRight: theme.mixins.gutters().paddingRight * 1.5,
+    paddingLeft: theme.mixins.gutters().paddingLeft * 1.5,
+  },
   entityLink: {
     paddingRight: theme.mixins.gutters().paddingRight,
     paddingLeft: theme.mixins.gutters().paddingLeft,
@@ -44,10 +51,7 @@ const styles = (theme) => ({
     marginTop: 2,
   },
   total: {
-    paddingTop: 10,
-    textAlign: "right",
-    paddingRight: theme.mixins.gutters().paddingRight * 1.5,
-    paddingLeft: theme.mixins.gutters().paddingLeft * 1.5,
+    marginLeft: "auto",
   },
   resultsBox: {
     minHeight: 250,
@@ -88,11 +92,21 @@ class TrainingSpaceSearch extends Component {
     this.props.dispatch(paginateSearch({ q, curie_paths, filters, page }));
   }
 
+  handlePageChange(event, newPage) {
+    const { entity, filters, source, q, page, slug } = this.props;
+    if (newPage != page) {
+      this.props.dispatch(
+        submitSearch({ q, filters, entity, slug, source, page: newPage })
+      );
+    }
+  }
+
+
   handleFacetToggle(facet, values) {
-    const { filters, q, entity } = this.props;
+    const { filters, slug, entity } = this.props;
     const { curie_paths } = entity;
     filters[facet] = values;
-    this.props.dispatch(submitSearch({ q, filters, curie_paths }));
+    this.props.dispatch(submitSearch({ q: slug, filters, curie_paths }));
   }
 
   handleKeywordSearch(value) {
@@ -114,10 +128,12 @@ class TrainingSpaceSearch extends Component {
       classes,
       page,
       showProgress,
+      slug,
     } = this.props;
-    const { slug, name } = entity;
+    const { name } = entity;
 
-    const { hits, total } = results;
+    const { hits } = results;
+    const total = results.total ? results.total.value : 0
     const showTotal = total > 0 && !showProgress;
     const showNoResults = !showProgress && total == 0;
     const showPagination = page * 25 < total && showTotal && !showProgress;
@@ -143,19 +159,12 @@ class TrainingSpaceSearch extends Component {
           />
         </Grid>
         <Grid item xs={12} sm={9} classes={{}}>
-          <Paper elevation={1} classes={{ root: classes.resultsBox }}>
-            <Typography variant="h3" classes={{ root: classes.root }}>
-              Training Results:
-              <Link className={classes.entityLink} to={`/wiki/#${slug}`}>
-                {name}
-              </Link>
-            </Typography>
-            {showTotal && <Divider classes={{ root: classes.divider }} />}
-            {showTotal && (
-              <Typography variant="subtitle1" classes={{ root: classes.total }}>
-                {total} records found
+           <div variant="subtitle1" className={classes.heading}>
+              <Typography variant="h4"> 
+                Training Results: {slug}
               </Typography>
-            )}
+              <div className={classes.total}>{total} records found</div>
+            </div>
             <Divider classes={{ root: classes.divider }} />
             <List classes={{ container: classes.resultsList }}>
               {showProgress && (
@@ -178,7 +187,21 @@ class TrainingSpaceSearch extends Component {
             {showPagination && (
               <Pagination handlePagination={this.handlePagination.bind(this)} />
             )}
-          </Paper>
+          {/* <TablePagination
+            rowsPerPageOptions={[25]}
+            component="div"
+            count={total}
+            rowsPerPage={25}
+            page={page}
+            backIconButtonProps={{
+              "aria-label": "Previous Page",
+            }}
+            nextIconButtonProps={{
+              "aria-label": "Next Page",
+            }}
+            onChangePage={this.handlePageChange.bind(this)}
+            onChangeRowsPerPage={() => {}}
+          /> */}
         </Grid>
       </Grid>
     );
