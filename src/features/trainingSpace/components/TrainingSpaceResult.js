@@ -32,7 +32,20 @@ const styles = (theme) => ({
   cardHeaderLink : {
     position: "absolute",
     right: "15px"
+  },
+  courseParent: {
+    marginTop: '-10px',
+    marginBottom: '10px'
+  },
+  courseTitle: {
+    textDecoration: 'none'
+  },
+  courseChips: {
+    color: '#ffffff',
+    backgroundColor: '#4C9FE3',
+    cursor: 'pointer'
   }
+
 });
 
 const TrainingSpaceResult = ({classes, result, disableGutters = true}) => {
@@ -59,6 +72,9 @@ const TrainingSpaceResult = ({classes, result, disableGutters = true}) => {
     >
     </CardHeader>
     <CardContent className={classes.cardContent}>
+    <Typography variant="body2" component="p" className={classes.courseParent}>
+      <a target='_blank' className={classes.courseTitle} href={result['CourseURL']}> <Chip className={classes.courseChips} key={Course} label={Course} /></a>
+    </Typography>
     <Typography variant="body2" component="p">
       {Description}
       </Typography>
@@ -67,7 +83,6 @@ const TrainingSpaceResult = ({classes, result, disableGutters = true}) => {
         color="textSecondary"
         gutterBottom
       >
-      <a target='_blank' href={result['CourseURL']}>{Course}</a>
       </Typography>
       {Topics && Topics.map( Topic  => 
           <Chip style={chipStyles} key={Topic} label={Topic} />

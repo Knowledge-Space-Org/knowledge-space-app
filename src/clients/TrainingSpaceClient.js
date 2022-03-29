@@ -10,9 +10,9 @@ const aggsParams = () => ({
         field: "Topics.keyword",
       },
     },
-    "Difficulty level": {
+    "DifficultyLevel": {
       terms: {
-        field: "Difficulty level.keyword",
+        field: "DifficultyLevel.keyword",
       },
     },
   },
