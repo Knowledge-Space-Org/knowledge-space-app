@@ -87,7 +87,7 @@ class AboutPage extends Component {
       >
         <Grid item xs={12} md={6}>
           <Typography variant="h2" gutterBottom>
-            About Us
+            About
           </Typography>
           <Typography variant="body1" align="justify" gutterBottom>
             KnowledgeSpace (KS) is a joint development between the Human Brain Project (HBP), the International Neuroinformatics Coordinating Facility (INCF), and the Neuroscience Information Framework (NIF) that aims to create a globally-used, data-driven encyclopedia and search engine for the neuroscience community. Descriptions of neuroscience research concepts, publicly available datasets, publications, and much more can be discovered across multiple resources through KnowledgeSpace.
@@ -99,6 +99,9 @@ class AboutPage extends Component {
           <br />
           <Typography variant="body1" align="justify" gutterBottom>
             The KS development team actively promotes the adherence to <a target="_blank" className={classes.link} href="https://www.incf.org/what-is-fair">FAIR Guiding Principles for scientific data management and stewardship</a> , thus ensuring that all data providers indexed in KS follow standards and best practices for data storage and publication. As more and more data publishers adhere to the FAIR Guiding Principles, the quality of data discovery through KS will improve.
+          </Typography>
+          <Typography variant="body1" align="justify" gutterBottom>
+            This project/research has received funding from the European Union’s Horizon 2020 Framework Programme for Research and Innovation under the Specific Grant Agreement No. 945539 (Human Brain Project SGA3).
           </Typography>
           <Typography variant="body1" align="center" gutterBottom>
             <Button
