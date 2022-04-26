@@ -62,37 +62,37 @@ router.get("/all-data-by-free-text", async function (req, res) {
   const index = req.query.index || "scr*";
   const handleCountResponse = (res, total_count) => {
     esclientToUse
-    .search({
-      index,
-      body: req.query.body,
-    })
-    .then((response) => {
-      response.total_count = total_count;
-      res.send(response);
-    })
-    .catch((exp) => {
-      console.error("error occured in source-data-by-entity");
-      // console.error(req.query.body);
-      console.error(exp);
-      res.send([]);
-    });
-  } 
+      .search({
+        index,
+        body: req.query.body,
+      })
+      .then((response) => {
+        response.total_count = total_count;
+        res.send(response);
+      })
+      .catch((exp) => {
+        console.error("error occured in source-data-by-entity");
+        // console.error(req.query.body);
+        console.error(exp);
+        res.send([]);
+      });
+  }
   const query = JSON.parse(req.query.body);
   esclientToUse
-  .count({
-    index,
-    body: {
-    query:  query.query
-    },
-  }).then((response) => {
-    console.debug("check free data response")
-    console.debug(response)
-    handleCountResponse(res, response.count)
-  }).catch((exp)  => {
-    console.debug("check free data exp")
-    console.debug(response)
-    handleCountResponse(res)
-  }) 
+    .count({
+      index,
+      body: {
+        query: query.query
+      },
+    }).then((response) => {
+      console.debug("check free data response")
+      console.debug(response)
+      handleCountResponse(res, response.count)
+    }).catch((exp) => {
+      console.debug("check free data exp")
+      console.debug(response)
+      handleCountResponse(res)
+    })
 });
 
 
@@ -100,42 +100,42 @@ router.get("/source-data-by-entity", function (req, res) {
 
   const handleCountResponse = (res, total_count) => {
     esclientToUse
-    .search({
-      index: req.query.source,
-      body: req.query.body,
-    })
-    .then((response) => {
-      response.total_count = total_count;
-      res.send(response);
-    })
-    .catch((exp) => {
-      console.error("error occured in source-data-by-entity");
-      // console.error(req.query.body);
-      console.error(exp);
-      res.send([]);
-    });
-  } 
+      .search({
+        index: req.query.source,
+        body: req.query.body,
+      })
+      .then((response) => {
+        response.total_count = total_count;
+        res.send(response);
+      })
+      .catch((exp) => {
+        console.error("error occured in source-data-by-entity");
+        // console.error(req.query.body);
+        console.error(exp);
+        res.send([]);
+      });
+  }
 
   let esclientToUse = esDataSpaceClient;
   const query = JSON.parse(req.query.body);
   esclientToUse
-  .count({
-    index: req.query.source,
-    body: {
-    query:  query.query
-    },
-  }).then((response) => {
-    handleCountResponse(res, response.count)
-  }).catch((exp)  => {
-    handleCountResponse(res)
-  }) 
+    .count({
+      index: req.query.source,
+      body: {
+        query: query.query
+      },
+    }).then((response) => {
+      handleCountResponse(res, response.count)
+    }).catch((exp) => {
+      handleCountResponse(res)
+    })
 });
 
 //Literature
 router.get("/literature-by-curie-paths", function (req, res) {
   esDataSpaceClient
     .search({
-      index: "pubmed-19",
+      index: "test_pubmed",
       type: "_doc", // 'publication',
       body: req.query.body,
     })
@@ -157,10 +157,10 @@ router.get("/training-space-by-curie-paths", function (req, res) {
       console.debug("check training space response")
       console.debug(response)
       res.send(response);
-    }).catch((exp)  => {
-       console.debug("check error in training space search")
-       console.debug(exp)
-    }) 
+    }).catch((exp) => {
+      console.debug("check error in training space search")
+      console.debug(exp)
+    })
 });
 
 module.exports = router;
