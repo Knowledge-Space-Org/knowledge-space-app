@@ -12,6 +12,7 @@ import { withStyles } from "@material-ui/core";
 import dataSource from "../imgs/datasource.svg";
 import publications from "../imgs/publications.svg";
 import terms from "../imgs/terms.svg";
+import training from "../imgs/training.svg";
 
 
 function TabPanel(props) {
@@ -25,8 +26,8 @@ function TabPanel(props) {
 }
 
 function SearchPage(props) {
-  const params = new URLSearchParams(props.location.search); 
-  const q = params.get('q'); 
+  const params = new URLSearchParams(props.location.search);
+  const q = params.get('q');
   const [value, setValue] = React.useState(0);
   const [searchText, setSearchText] = React.useState(q);
 
@@ -124,10 +125,10 @@ function SearchPage(props) {
             </>
           }
         />
-         <Tab
+        <Tab
           label={
             <>
-              <img className="tabIcon" src={terms}></img>
+              <img className="tabIcon" src={training}></img>
               <label className="tabLabel">Training</label>
             </>
           }
