@@ -48,18 +48,14 @@ const cellValue = (value = "", source = null, key = null) => {
 };
 
 const getDataSourceUrl = (hit) => {
-  if (hit.index === "scr_017612_ebrains") {
-    return createDataURLForEbrains(hit._source);
-  } else {
     return get(hit._source, "dc.identifier");
-  }
 };
 
-// fix: Specific to EBRAINS
-const createDataURLForEbrains = (source) => {
+/*const createDataURLForEbrains = (source) => {
   const id = source.item ? source.item.id : null;
   return "https://kg.ebrains.eu/search/instances/Dataset/" + id;
 };
+*/
 
 const DataSpaceFreeTextResults = ({
   hits,

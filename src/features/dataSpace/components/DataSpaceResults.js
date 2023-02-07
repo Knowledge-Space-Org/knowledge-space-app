@@ -48,11 +48,13 @@ const cellValue = (value = "", source = null, key = null) => {
   return value;
 };
 
+/*
 // fix: Specific to EBRAINS
 const createDataURLForEbrains = (source) => {
   const id = source.item ? source.item.id : null;
   return "https://kg.ebrains.eu/search/instances/Dataset/" + id;
 };
+*/
 
 const DataSpaceResults = ({
   hits,
@@ -106,7 +108,7 @@ const DataSpaceResults = ({
           </TableRow>
         </TableHead>
         <TableBody>
-          {index === "scr_017612_ebrains"
+          {index === "REMOVED_EBRAINS" //TODO review and remove
             ? results.map((hit) => (
                 <TableRow
                   key={hit._id}
