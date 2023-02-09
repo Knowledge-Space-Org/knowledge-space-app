@@ -23,10 +23,12 @@ const cellValue = (value = "", source = null, key = null) => {
   return isString(value) ? value : JSON.stringify(value);
 };
 
+/*
 const createDataURLForEbrains = (source) => {
   const id = source.item ? source.item.id : null;
   return "https://kg.ebrains.eu/search/instances/Dataset/" + id;
 };
+*/
 
 const styles = (theme) => ({
   dialogHeading: {
@@ -38,16 +40,16 @@ const styles = (theme) => ({
   }
 });
 
-const isEbrains = index => index === "scr_017612_ebrains";
+//const isEbrains = index => index === "scr_017612_ebrains";
 
  const DataSpaceDialogeResult = ({isOpen,onClose,entityData, index, fullScreen, classes}) => {
   console.debug("Check entity data");
   console.debug(entityData);
-  const isEbrainIndex =  isEbrains(index);
+  //const isEbrainIndex =  isEbrains(index);
 
-  const titleKey = isEbrainIndex ? "item.name" : "dc.title";
-  const descKey = isEbrainIndex ? "item.description" : "dc.description";
-  const link = isEbrainIndex ? createDataURLForEbrains(entityData._source) : cellValue(get(entityData._source, "dc.identifier"), entityData._source,  "dc.identifier")
+  const titleKey = "dc.title";
+  const descKey = "dc.description";
+  const link = "dc.identifier";
   return (
     <Dialog
       fullWidth={true}
@@ -67,7 +69,7 @@ const isEbrains = index => index === "scr_017612_ebrains";
             {cellValue(get(entityData._source, descKey), entityData._source,  descKey)}
         </Typography>
         <a href={link} target="_blank">
-            {link}
+            {cellValue(get(entityData._source, link), entityData._source,  link)}
         </a>
         <Divider className={classes.divider}/>
         <Typography variant="h6">
