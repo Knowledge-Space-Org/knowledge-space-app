@@ -114,7 +114,7 @@ const DataSpaceResults = ({
                   key={hit._id}
                   hover
                   onClick={(event) =>
-                    window.open(createDataURLForEbrains(hit._source), "_blank")
+                    window.open(hit._source, "_blank")
                   }
                   role="checkbox"
                   tabIndex={-1}

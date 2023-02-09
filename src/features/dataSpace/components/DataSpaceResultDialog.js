@@ -45,7 +45,7 @@ const styles = (theme) => ({
  const DataSpaceDialogeResult = ({isOpen,onClose,entityData, index, fullScreen, classes}) => {
   console.debug("Check entity data");
   console.debug(entityData);
-  const isEbrainIndex =  isEbrains(index);
+  //const isEbrainIndex =  isEbrains(index);
 
   const titleKey = "dc.title";
   const descKey = "dc.description";
