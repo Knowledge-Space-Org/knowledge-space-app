@@ -1,4 +1,9 @@
+stages:
+  - ks-stage-deploy
+  - ks-master-deploy
+
 ks-stage-deploy:
+  stage: ks-stage-deploy
   tags:
     - ks-stage
   script:
@@ -15,6 +20,7 @@ ks-stage-deploy:
     - sudo service nginx restart
 
 ks-master-deploy:
+  stage: ks-master-deploy
   tags:
     - ks-master
   script:
@@ -30,7 +36,3 @@ ks-master-deploy:
     - sudo service application restart
     - sudo service nginx restart
   when: manual
-
-stages:
-  - ks-stage-deploy
-  - ks-master-deploy
