@@ -27,7 +27,7 @@ ks-master-deploy:
     - hostname
     - whoami
     - ps -p $$
-    - cd /opt/knowledge-space-new/
+    - cd /opt/KnowledgeSpace
     - git checkout master
     - git pull
     - export CI=false
