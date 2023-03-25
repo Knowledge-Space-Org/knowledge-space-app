@@ -13,3 +13,24 @@ ks-stage-deploy:
     - npm run build
     - sudo service application restart
     - sudo service nginx restart
+
+ks-master-deploy:
+  tags:
+    - ks-master
+  script:
+    - hostname
+    - whoami
+    - ps -p $$
+    - cd /opt/knowledge-space-new/
+    - git checkout master
+    - git pull
+    - export CI=false
+    - npm install
+    - npm run build
+    - sudo service application restart
+    - sudo service nginx restart
+  when: manual
+
+stages:
+  - ks-stage-deploy
+  - ks-master-deploy
