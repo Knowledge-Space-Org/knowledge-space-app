@@ -199,7 +199,7 @@ export const DATASPACE_SOURCES = {
     description: 'EBRAINS web platform is the entry point for researchers to discover EBRAINS services. The services were developed by, and are powered by the EU- funded Human Brain Project',
     type: 'General',
     columns: { 'dc.title': 'Title', 'dc.description': 'Description'},
-    aggs: { 'sex': 'Sex', 'species': 'Species', 'techniques': 'Techniques', 'preparation' : 'Preparation', 'experimental_approach': 'Experimental Approach'}
+    aggs: { 'sex.keyword': 'Sex', 'species.keyword': 'Species', 'techniques.keyword': 'Techniques', 'preparation.keyword' : 'Preparation', 'experimental_approach.keyword': 'Experimental Approach'}
   },
 
   scr_017041_sparc: {//DONE
