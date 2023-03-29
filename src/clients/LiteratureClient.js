@@ -44,18 +44,18 @@ export const queryLiteratureByCuriePaths = ({
   body.sort = [{ pub_date: { order: "desc" } }];
   body.track_total_hits = true;
 
-  // In literature, we should be able to filter using the Entity's path.
-  if (!isEmpty(curie_paths)) {
-    body.query.bool = {
-      must: [
-        {
-          terms: {
-            "text_mined_entities.nlp.tagged_entities_grouped.NEURO|SCICRUNCH.reference.keyword": curie_paths,
-          },
-        },
-      ],
-    };
-  }
+  // // In literature, we should be able to filter using the Entity's path.
+  // if (!isEmpty(curie_paths)) {
+  //   body.query.bool = {
+  //     must: [
+  //       {
+  //         terms: {
+  //           "text_mined_entities.nlp.tagged_entities_grouped.NEURO|SCICRUNCH.reference.keyword": curie_paths,
+  //         },
+  //       },
+  //     ],
+  //   };
+  // }
 
   // Add a query if there's a q param
   if (!isEmpty(toString(q))) {

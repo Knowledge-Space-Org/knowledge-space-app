@@ -85,8 +85,6 @@ router.get("/all-data-by-free-text", async function (req, res) {
         query: query.query
       },
     }).then((response) => {
-      console.debug("check free data response")
-      console.debug(response)
       handleCountResponse(res, response.count)
     }).catch((exp) => {
       console.debug("check free data exp")
@@ -146,16 +144,12 @@ router.get("/literature-by-curie-paths", function (req, res) {
 
 //Training
 router.get("/training-space-by-curie-paths", function (req, res) {
-  console.debug("check query")
-  console.debug(req.query)
   esDataSpaceClient
     .search({
       index: "train_scr_022036_trainingspace",
       body: req.query.body,
     })
     .then((response) => {
-      console.debug("check training space response")
-      console.debug(response)
       res.send(response);
     }).catch((exp) => {
       console.debug("check error in training space search")
