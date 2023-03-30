@@ -133,7 +133,7 @@ router.get("/source-data-by-entity", function (req, res) {
 router.get("/literature-by-curie-paths", function (req, res) {
   esDataSpaceClient
     .search({
-      index: "pubmed_22",
+      index: "pubmed_23",
       type: "_doc", // 'publication',
       body: req.query.body,
     })
