@@ -145,11 +145,8 @@ class LiteratureSearch extends Component {
         </Grid>
         <Grid item xs={12} sm={9} classes={{}}>
           <Paper elevation={1} classes={{ root: classes.resultsBox }}>
-            <Typography variant="h3" classes={{ root: classes.root }}>
-              Literature Results: 
-             { q === name ? <Link className={classes.entityLink} to={`/wiki/#${slug}`}>
-                {name}
-              </Link> : q }
+            <Typography variant="h4" classes={{ root: classes.root }}>
+              Literature Results:
             </Typography>
             {showTotal && <Divider classes={{ root: classes.divider }} />}
             {showTotal && (
