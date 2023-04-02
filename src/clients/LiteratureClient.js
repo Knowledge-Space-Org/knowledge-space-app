@@ -41,7 +41,7 @@ export const queryLiteratureByCuriePaths = ({
   body.from = start;
   body.size = LITERATURE_RESULTS_PER_PAGE;
 
-  body.sort = [{ pub_date: { order: "desc" } }];
+  //body.sort = [{ pub_date: { order: "desc" } }];
   body.track_total_hits = true;
 
   // // In literature, we should be able to filter using the Entity's path.
