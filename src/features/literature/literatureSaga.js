@@ -7,8 +7,8 @@ import {put, call} from 'redux-saga/effects'
 
 export function * searchLiteratureByPath({payload}) {
   try {
-    const {curie_paths} = payload;
-    const results = yield call(queryLiteratureByCuriePaths, {curie_paths})
+    const {slug: q} = payload;
+    const results = yield call(queryLiteratureByCuriePaths, {q})
     yield put({type: LITERATURE_RESULTS_FOUND, payload: results})
   } catch (err) {
     yield put({type: 'LITERATURE_ERROR', err})

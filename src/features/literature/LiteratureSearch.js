@@ -114,9 +114,9 @@ class LiteratureSearch extends Component {
       classes,
       page,
       showProgress,
+      slug: q
     } = this.props;
     const { slug, name } = entity;
-
     const { hits } = results;
     const total = results.total ? results.total.value : 0
     const showTotal = total > 0 && !showProgress;
@@ -145,11 +145,8 @@ class LiteratureSearch extends Component {
         </Grid>
         <Grid item xs={12} sm={9} classes={{}}>
           <Paper elevation={1} classes={{ root: classes.resultsBox }}>
-            <Typography variant="h3" classes={{ root: classes.root }}>
+            <Typography variant="h4" classes={{ root: classes.root }}>
               Literature Results:
-              <Link className={classes.entityLink} to={`/wiki/#${slug}`}>
-                {name}
-              </Link>
             </Typography>
             {showTotal && <Divider classes={{ root: classes.divider }} />}
             {showTotal && (
