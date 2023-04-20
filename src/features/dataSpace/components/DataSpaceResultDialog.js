@@ -68,7 +68,7 @@ const styles = (theme) => ({
         <Typography variant="subtitle2">
             {cellValue(get(entityData._source, descKey), entityData._source,  descKey)}
         </Typography>
-        <a href={link} target="_blank">
+        <a href={get(entityData._source, link)}  target="_blank">
             {cellValue(get(entityData._source, link), entityData._source,  link)}
         </a>
         <Divider className={classes.divider}/>
