@@ -11,7 +11,6 @@ const rootEl = document.getElementById("root");
 
 const render = () => {
   const App = require("app/layout/App").default;
-  console.debug("render me");
   ReactDOM.render(
     <Provider store={store}>
       <BrowserRouter>

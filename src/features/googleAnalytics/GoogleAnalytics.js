@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
-import ReactGA from 'react-ga'
+import ReactGA from 'react-ga4';
 import { Route } from 'react-router-dom'
 
 class GoogleAnalytics extends Component {
@@ -29,7 +29,7 @@ class GoogleAnalytics extends Component {
             location: `${location.origin}${page}`,
             ...this.props.options
         })
-        ReactGA.pageview(page)
+        ReactGA.send({ hitType: "pageview", page});
     }
 
     render () {
