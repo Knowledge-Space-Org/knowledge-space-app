@@ -29,3 +29,9 @@ yarn-error.log*
 .idea/**/tasks.xml
 .idea/dictionaries
 .idea/deployment.xml
+
+offline-mirror
+
+.vscode
+
+.env*
